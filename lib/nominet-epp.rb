@@ -80,6 +80,15 @@ module NominetEPP
       raise "Renewed name #{renName} does not match #{name}" if renName != name
       return Time.parse(renExp)
     end
+    def delete(name)
+      resp = @client.delete do
+        domain('delete') do |node, ns|
+          node << XML::Node.new('name', name, ns)
+        end
+      end
+
+      resp.success?
+    end
 
     private
       def data_namespaces(data)
