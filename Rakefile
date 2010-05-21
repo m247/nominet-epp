@@ -12,7 +12,9 @@ begin
     gem.authors = ["Geoff Garside"]
     gem.add_development_dependency "shoulda", ">= 0"
     gem.add_development_dependency "yard", ">= 0"
+
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_dependency "epp-client", ">= 0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
