@@ -2,7 +2,7 @@ module NominetEPP
   module Operations
     module Fork
       def fork(account_num, *names)
-        resp = @client.fork do
+        resp = @client.update do
           account('fork') do |node, ns|
             node << XML::Node.new('roid', account_num, ns)
             names.each do |name|

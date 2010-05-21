@@ -2,7 +2,7 @@ module NominetEPP
   module Operations
     module Unrenew
       def unrenew(*names)
-        resp = @client.unrenew do
+        resp = @client.update do
           domain('unrenew') do |node, ns|
             names.each do |name|
               node << XML::Node.new('name', name, ns)
