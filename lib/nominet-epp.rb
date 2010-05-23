@@ -69,5 +69,9 @@ module NominetEPP
         new_node(node_name, 'contact', 'http://www.nominet.org.uk/epp/xml/nom-contact-2.0',
           "http://www.nominet.org.uk/epp/xml/nom-contact-2.0 nom-contact-1.0.xsd", &block)
       end
+      def tag(node_name, &block)
+        new_node(node_name, 'tag', 'http://www.nominet.org.uk/epp/xml/nom-tag-1.0',
+          "http://www.nominet.org.uk/epp/xml/nom-tag-1.0 nom-tag-1.0.xsd", &block)
+      end
   end
 end
