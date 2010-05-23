@@ -24,8 +24,8 @@ module NominetEPP
     # include Operations::Hello
     # include Operations::Info
     include Operations::List
-    # include Operations::Lock
-    # include Operations::Merge
+    include Operations::Lock
+    include Operations::Merge
     # include Operations::Poll
     include Operations::Renew
     # include Operations::Transfer
