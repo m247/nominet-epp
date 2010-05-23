@@ -18,6 +18,20 @@ module NominetEPP
           node.content.strip
         end
       end
+      def tag_list
+        resp = @client.info do
+          tag('list')
+        end
+
+        return false unless resp.success?
+
+        resp.data.find('//tag:infData', data_namespaces(resp.data)).map do |node|
+          { :registrar_tag => node_value(node, 'tag:registrar-tag'),
+            :name =>          node_value(node, 'tag:name'),
+            :trad_name =>     node_value(node, 'tag:trad-name'),
+            :handshake =>     node_value(node, 'tag:handshake') == 'Y' }
+        end
+      end
     end
   end
 end
