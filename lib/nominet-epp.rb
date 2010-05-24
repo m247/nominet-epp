@@ -29,7 +29,7 @@ module NominetEPP
     # include Operations::Poll
     include Operations::Renew
     # include Operations::Transfer
-    # include Operations::Unlock
+    include Operations::Unlock
     include Operations::Unrenew
     # include Operations::Update
 
