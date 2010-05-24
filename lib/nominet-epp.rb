@@ -22,7 +22,7 @@ module NominetEPP
     include Operations::Delete
     include Operations::Fork
     include Operations::Hello
-    # include Operations::Info
+    include Operations::Info
     include Operations::List
     include Operations::Lock
     include Operations::Merge
