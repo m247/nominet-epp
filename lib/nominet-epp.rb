@@ -21,7 +21,7 @@ module NominetEPP
     # include Operations::Create
     include Operations::Delete
     include Operations::Fork
-    # include Operations::Hello
+    include Operations::Hello
     # include Operations::Info
     include Operations::List
     include Operations::Lock
