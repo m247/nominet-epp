@@ -18,7 +18,7 @@ module NominetEPP
     end
 
     include Operations::Check
-    # include Operations::Create
+    include Operations::Create
     include Operations::Delete
     include Operations::Fork
     include Operations::Hello
