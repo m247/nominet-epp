@@ -32,10 +32,13 @@ module NominetEPP
         return false unless resp.success?
 
         creData = resp.data.find('/domain:creData', data_namespaces(resp.data)).first
-        { :name => node_value(creData, 'domain:name'),
+        h = { :name => node_value(creData, 'domain:name'),
           :crDate => Time.parse(node_value(creData, 'domain:crDate'))
-          :exDate => Time.parse(node_value(creData, 'domain:exDate'))
-          :account => created_account(creData.find('domain:account/account:creData', data_namespaces(resp.data)).first) }
+          :exDate => Time.parse(node_value(creData, 'domain:exDate')) }
+        unless creData.find('domain:account').first.nil?
+          h[:account] = created_account(creData.find('domain:account/account:creData', data_namespaces(resp.data)).first) }
+        end
+        h
       end
       
       private
