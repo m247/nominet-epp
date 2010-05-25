@@ -31,7 +31,7 @@ module NominetEPP
     include Operations::Merge
     include Operations::Poll
     include Operations::Renew
-    # include Operations::Transfer
+    include Operations::Transfer
     include Operations::Unlock
     include Operations::Unrenew
     include Operations::Update
@@ -75,6 +75,10 @@ module NominetEPP
       def tag(node_name, &block)
         new_node(node_name, 'tag', 'http://www.nominet.org.uk/epp/xml/nom-tag-1.0',
           "http://www.nominet.org.uk/epp/xml/nom-tag-1.0 nom-tag-1.0.xsd", &block)
+      end
+      def notification(node_name, &block)
+        new_node(node_name, 'n', 'http://www.nominet.org.uk/epp/xml/nom-notifications-2.0'
+          "http://www.nominet.org.uk/epp/xml/nom-notifications-2.0 nom-notifications-2.0.xsd", &block)
       end
   end
 end
