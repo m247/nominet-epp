@@ -21,7 +21,7 @@ module NominetEPP
             acct_xml << create_account(acct, ns)
             node << acct_xml
 
-            node << create_nameservers(nameservers, ns)
+            node << domain_ns_xml(nameservers, ns)
 
             options.each do |key, value|
               node << XML::Node.new(key.to_s.gsub('_', '-'), value, ns)
@@ -83,44 +83,6 @@ module NominetEPP
           end
 
           addr
-        end
-        def create_nameservers(nameservers, ns)
-          wrap = XML::Node.new('ns', nil, ns)
-
-          case nameservers.class
-          when String
-            wrap << (XML::Node.new('host', nil, ns) << XML::Node.new('hostName', nameservers, ns))
-          when Array
-            nameservers.each do |nameserver|
-              wrap << create_host_node(nameserver, ns)
-            end
-          else
-            raise ArgumentError, "nameservers must either be a string or array of strings"
-          end
-
-          wrap
-        end
-        def create_host_node(hostname, ns)
-          host = XML::Node.new('host', nil, ns)
-
-          case hostname.class
-          when String
-            host << XML::Node.new('hostName', hostname, ns)
-          when Hash
-            host << XML::Node.new('hostName', hostname[:name], ns)
-            if hostname[:v4]
-              n = XML::Node.new('hostAddr', hostname[:v4], ns)
-              n['ip'] = 'v4'
-              host << n
-            end
-            if hostname[:v6]
-              n = XML::Node.new('hostAddr', hostname[:v6], ns)
-              n['ip'] = 'v6'
-              host << n
-            end
-          end
-
-          host
         end
         def created_account(creData)
           { :roid => node_value(creData, 'account:roid'),
