@@ -29,7 +29,7 @@ module NominetEPP
     include Operations::List
     include Operations::Lock
     include Operations::Merge
-    # include Operations::Poll
+    include Operations::Poll
     include Operations::Renew
     # include Operations::Transfer
     include Operations::Unlock
