@@ -34,7 +34,7 @@ module NominetEPP
     # include Operations::Transfer
     include Operations::Unlock
     include Operations::Unrenew
-    # include Operations::Update
+    include Operations::Update
 
     private
       def data_namespaces(data)
