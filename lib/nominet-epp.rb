@@ -2,6 +2,7 @@ require 'epp-client'
 require 'time'
 
 require File.dirname(__FILE__) + '/operations'
+require File.dirname(__FILE__) + '/helpers'
 
 module NominetEPP
   class Client
@@ -16,6 +17,8 @@ module NominetEPP
     def inspect
       "#<#{self.class} #{@tag}@#{@server}>"
     end
+
+    include Helpers
 
     include Operations::Check
     include Operations::Create
