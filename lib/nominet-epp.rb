@@ -58,10 +58,10 @@ module NominetEPP
         n = node.find(xpath, xpath, namespaces).first
         n && n.content.strip
       end
-      def new_node(name, ns_prefix, ns_href, schema_uri, &block)
+      def new_node(name, ns_prefix, &block)
         node = XML::Node.new(name)
-        node.namespaces.namespace = XML::Namespace.new(node, ns_prefix, ns_uri)
-        node['xsi:schemaLocation'] = schema_uri
+        node.namespaces.namespace = ns = XML::Namespace.new(node, ns_prefix, namespaces[ns_prefix])
+        node['xsi:schemaLocation'] = schemaLocations[ns_prefix]
 
         case block.arity
         when 0
@@ -69,30 +69,25 @@ module NominetEPP
         when 1
           yield node
         when 2
-          yield node, node.namespaces.first
+          yield node, ns
         end
 
         node
       end
       def domain(node_name, &block)
-        new_node(node_name, 'domain', 'http://www.nominet.org.uk/epp/xml/nom-domain-2.0',
-          "http://www.nominet.org.uk/epp/xml/nom-domain-2.0 nom-domain-2.0.xsd", &block)
+        new_node(node_name, :domain, &block)
       end
       def account(node_name, &block)
-        new_node(node_name, 'account', 'http://www.nominet.org.uk/epp/xml/nom-account-2.0',
-          "http://www.nominet.org.uk/epp/xml/nom-account-2.0 nom-account-2.0.xsd", &block)
+        new_node(node_name, :account, &block)
       end
       def contact(node_name, &block)
-        new_node(node_name, 'contact', 'http://www.nominet.org.uk/epp/xml/nom-contact-2.0',
-          "http://www.nominet.org.uk/epp/xml/nom-contact-2.0 nom-contact-1.0.xsd", &block)
+        new_node(node_name, :contact, &block)
       end
       def tag(node_name, &block)
-        new_node(node_name, 'tag', 'http://www.nominet.org.uk/epp/xml/nom-tag-1.0',
-          "http://www.nominet.org.uk/epp/xml/nom-tag-1.0 nom-tag-1.0.xsd", &block)
+        new_node(node_name, :tag, &block)
       end
       def notification(node_name, &block)
-        new_node(node_name, 'n', 'http://www.nominet.org.uk/epp/xml/nom-notifications-2.0'
-          "http://www.nominet.org.uk/epp/xml/nom-notifications-2.0 nom-notifications-2.0.xsd", &block)
+        new_node(node_name, :n, &block)
       end
   end
 end
