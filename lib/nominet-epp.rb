@@ -55,7 +55,7 @@ module NominetEPP
         data.namespaces.definitions.map(&:to_s)
       end
       def node_value(node, xpath)
-        n = node.find(xpath, xpath, node.namespaces.namespace.to_s).first
+        n = node.find(xpath, xpath, namespaces).first
         n && n.content.strip
       end
       def new_node(name, ns_prefix, ns_href, schema_uri, &block)
