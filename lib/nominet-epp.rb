@@ -52,12 +52,12 @@ module NominetEPP
 
     private
       def node_value(node, xpath)
-        n = node.find(xpath, xpath, namespaces).first
+        n = node.find(xpath, namespaces).first
         n && n.content.strip
       end
       def new_node(name, ns_prefix, &block)
         node = XML::Node.new(name)
-        node.namespaces.namespace = ns = XML::Namespace.new(node, ns_prefix, namespaces[ns_prefix])
+        node.namespaces.namespace = ns = XML::Namespace.new(node, ns_prefix.to_s, namespaces[ns_prefix])
         node['xsi:schemaLocation'] = schemaLocations[ns_prefix]
 
         case block.arity
