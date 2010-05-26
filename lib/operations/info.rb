@@ -49,7 +49,7 @@ module NominetEPP
             when 'addr'
               hash[:addr] = {}
               node.children.reject{|n| n.empty?}.each do |n|
-                hash[:addr][n.name.to_sym] = node.content.strip
+                hash[:addr][n.name.to_sym] = n.content.strip
               end
             when 'contact'
               hash[:contacts] ||= Array.new
@@ -74,9 +74,6 @@ module NominetEPP
             end
           end
           hash
-        end
-        def info_addr(node)
-          data
         end
     end
   end
