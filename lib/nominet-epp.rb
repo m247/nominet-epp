@@ -17,6 +17,20 @@ module NominetEPP
     def inspect
       "#<#{self.class} #{@tag}@#{@server}>"
     end
+    def namespaces
+      { :domain  => 'http://www.nominet.org.uk/epp/xml/nom-domain-2.0',
+        :account => 'http://www.nominet.org.uk/epp/xml/nom-account-2.0',
+        :contact => 'http://www.nominet.org.uk/epp/xml/nom-contact-2.0',
+        :tag     => 'http://www.nominet.org.uk/epp/xml/nom-tag-1.0',
+        :n       => 'http://www.nominet.org.uk/epp/xml/nom-notifications-2.0' }
+    end
+    def schemaLocations
+      { :domain  => 'http://www.nominet.org.uk/epp/xml/nom-domain-2.0 nom-domain-2.0.xsd',
+        :account => 'http://www.nominet.org.uk/epp/xml/nom-account-2.0 nom-account-2.0.xsd',
+        :contact => 'http://www.nominet.org.uk/epp/xml/nom-contact-2.0 nom-contact-1.0.xsd',
+        :tag     => 'http://www.nominet.org.uk/epp/xml/nom-tag-1.0 nom-tag-1.0.xsd',
+        :n       => 'http://www.nominet.org.uk/epp/xml/nom-notifications-2.0  nom-notifications-2.0.xsd' }
+    end
 
     include Helpers
 
