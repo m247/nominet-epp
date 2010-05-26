@@ -22,7 +22,7 @@ module NominetEPP
           return false unless resp.success?
           nCase, domainList = resp.data
           { :case_id => node_value(nCase,'//n:Case/n:case-id'),
-            :domains => domainList.find('//n:domain-name').map{|n| n.content.strip} }
+            :domains => domainList.find('//n:domain-name', namespaces).map{|n| n.content.strip} }
         end
       end
 

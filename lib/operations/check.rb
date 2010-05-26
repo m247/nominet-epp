@@ -12,7 +12,7 @@ module NominetEPP
 
         return false unless resp.success?
 
-        results = resp.data.find('//domain:name', data_namespaces(resp.data))
+        results = resp.data.find('//domain:name', namespaces)
         if results.size > 1
           hash = {}
           results.each {|node| hash[node.content.strip] = (node['avail'] == '1') }

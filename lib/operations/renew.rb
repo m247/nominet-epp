@@ -20,9 +20,8 @@ module NominetEPP
 
         return false unless resp.success?
 
-        renData = resp.data.find('//domain:renData', data_namespaces(resp.data)).first
-        renName = renData.find('domain:name', data_namespaces(resp.data)).first.content.strip
-        renExp  = renData.find('domain:exDate', data_namespaces(resp.data)).first.content.strip
+        renName = node_value(resp.data, '//domain:renData/domain:name')
+        renExp  = node_value(resp.data, '//domain:renData/domain:exDate')
 
         raise "Renewed name #{renName} does not match #{name}" if renName != name
         return Time.parse(renExp)

@@ -31,12 +31,12 @@ module NominetEPP
 
         return false unless resp.success?
 
-        creData = resp.data.find('/domain:creData', data_namespaces(resp.data)).first
+        creData = resp.data.find('/domain:creData', namespaces).first
         h = { :name => node_value(creData, 'domain:name'),
-          :crDate => Time.parse(node_value(creData, 'domain:crDate'))
+          :crDate => Time.parse(node_value(creData, 'domain:crDate')),
           :exDate => Time.parse(node_value(creData, 'domain:exDate')) }
         unless creData.find('domain:account').first.nil?
-          h[:account] = created_account(creData.find('domain:account/account:creData', data_namespaces(resp.data)).first) }
+          h[:account] = created_account(creData.find('domain:account/account:creData', namespaces).first)
         end
         h
       end
@@ -88,14 +88,13 @@ module NominetEPP
           { :roid => node_value(creData, 'account:roid'),
             :name => node_value(creData, 'account:name'),
             :contacts => created_contacts(creData.find(
-              'account:contact', creData.namespaces.find_by_prefix('account').to_s)) }
+              'account:contact', namespaces)) }
         end
         def created_contacts(account_contacts)
           account_contacts.map do |cont|
             { :type => cont['type'],
               :order => cont['order'] }.merge(
-                created_contact(cont.find('contact:creData',
-                  cont.namespaces.find_by_prefix('contact').to_s).first))
+                created_contact(cont.find('contact:creData', namespaces).first))
           end
         end
         def created_contact(creData)

@@ -13,9 +13,9 @@ module NominetEPP
         return false unless resp.success?
 
         hash = {}
-        resp.data.find('//domain:renData', data_namespaces(resp.data)).each do |node|
-          renName = node.find('domain:name', data_namespaces(resp.data)).first.content.strip
-          renExp  = node.find('domain:exDate', data_namespaces(resp.data)).first.content.strip
+        resp.data.find('//domain:renData', namespaces).each do |node|
+          renName = node_value(node, 'domain:name')
+          renExp  = node_value(node, 'domain:exDate')
           hash[renName] = Time.parse(renExp)
         end
         hash

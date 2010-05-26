@@ -14,16 +14,16 @@ module NominetEPP
         return false unless resp.success?
 
         hash = {
-          :roid => resp.data.find('//account:creData/account:roid').first.content.strip,
-          :name => resp.data.find('//account:creData/account:name').first.content.strip,
-          :crDate => resp.data.find('//account:creData/account:crDate').first.content.strip,
+          :roid => node_value(resp.data, '//account:creData/account:roid'),
+          :name => node_value(resp.data, '//account:creData/account:name'),
+          :crDate => node_value(resp.data, '//account:creData/account:crDate'),
           :contact => {
-            :roid => resp.data.find('//account:creData/account:contact/contact:creData/contact:roid').first.content.strip,
-            :name => resp.data.find('//account:creData/account:contact/contact:creData/contact:name').first.content.strip
+            :roid => node_value(resp.data, '//account:creData/account:contact/contact:creData/contact:roid'),
+            :name => node_value(resp.data, '//account:creData/account:contact/contact:creData/contact:name')
           }
         }
 
-        contact = resp.data.find('//account:creData/account:contact').first
+        contact = resp.data.find('//account:creData/account:contact', namespaces).first
         hash[:contact][:type] = contact['type']
         hash[:contact][:order] = contact['order']
 

@@ -51,9 +51,6 @@ module NominetEPP
     include Operations::Update
 
     private
-      def data_namespaces(data)
-        data.namespaces.definitions.map(&:to_s)
-      end
       def node_value(node, xpath)
         n = node.find(xpath, xpath, namespaces).first
         n && n.content.strip
