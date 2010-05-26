@@ -14,8 +14,32 @@ module NominetEPP
 
         return nil unless resp.success?
 
-        resp.data.find('//domain:name', data_namespaces(resp.data)).map do |node|
-          node.content.strip
+        if fields == 'none'
+          resp.data.find('//domain:name', namespaces).map do |node|
+            node.content.strip
+          end
+        else
+          resp.data.find('//domain:infData', namespaces).map do |infData|
+            hash = {}
+            infData.children.reject{|n| n.empty?}.each do |node|
+              key = node.name.gsub('-', '_').to_sym
+              case node.name
+              when 'account'
+                hash[:account] = info_account(node)
+              when 'ns'
+                hash[:ns] = node.find('domain:host', namespaces).map do |hostnode|
+                  { :name => node_value(hostnode, 'domain:hostName'),
+                    :v4 => node_value(hostnode, 'domain:hostAddr[@ip="v4"]'),
+                    :v6 => node_value(hostnode, 'domain:hostAddr[@ip="v6"]') }.reject{|k,v| v.nil?}
+                end
+              when /date/i
+                hash[key] = Time.parse(node.content.strip)
+              else
+                hash[key] = node.content.strip
+              end
+            end
+            hash
+          end
         end
       end
       def tag_list
