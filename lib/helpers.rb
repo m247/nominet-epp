@@ -1,5 +1,10 @@
 module NominetEPP
+  # Helper methods
   module Helpers
+    # @param [String, Array] nameservers Nameserver host name or array of host names or hashes
+    # @param [XML::Namespace] ns XML Namespace to create the elements with
+    # @return [XML::Node] +ns+ element of +host+ elements
+    # @see domain_host_xml
     def domain_ns_xml(nameservers, ns)
       ns_el = XML::Node.new('ns', nil, ns)
 
@@ -16,6 +21,10 @@ module NominetEPP
 
       ns_el
     end
+
+    # @param [String, Hash] nameserver Nameserver host name or hash of +:name+ and +:v4+ or +:v6+ address
+    # @param [XML::Namespace] ns XML Namespace to create the elements with
+    # @return [XML::Node] +host+ element with +hostName+ and optionally +ip+ subelements
     def domain_host_xml(nameserver, ns)
       host = XML::Node.new('host', nil, ns)
 
@@ -38,6 +47,12 @@ module NominetEPP
 
       host
     end
+
+    # Adds the attributes from the fields to the +node+.
+    #
+    # @param [Hash] fields Account attributes to marshal
+    # @param [XML::Node] node XML Node to add the attributes to
+    # @param [XML::Namespace] ns XML Namespace to create the elements under
     def account_fields_xml(fields, node, ns)
       fields.each do |k,v|
         case k

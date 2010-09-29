@@ -1,6 +1,11 @@
 module NominetEPP
   module Operations
+    # EPP Info Operation
     module Info
+      # @param [Symbol] entity Type of entity to get information about
+      # @param [String] id Identifier of the entity
+      # @return [false] failed
+      # @return [Hash]
       def info(entity, id)
         raise ArgumentError, "entity must be :domain, :contact or :account" unless [:domain, :contact, :account].include?(entity)
 
@@ -20,6 +25,8 @@ module NominetEPP
       end
 
       private
+        # @param [XML::Node] data Domain data
+        # @return [Hash]
         def info_domain(data)
           hash = {}
           data.find('domain:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|
@@ -41,6 +48,9 @@ module NominetEPP
           end
           hash
         end
+
+        # @param [XML::Node] data Account data
+        # @return [Hash]
         def info_account(data)
           hash = {}
           data.find('account:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|
@@ -64,6 +74,9 @@ module NominetEPP
           end
           hash
         end
+
+        # @param [XML::Node] data Contact data
+        # @return [Hash]
         def info_contact(data)
           hash = {}
           data.find('contact:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|

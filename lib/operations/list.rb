@@ -1,6 +1,17 @@
 module NominetEPP
   module Operations
+    # EPP List Operatons
     module List
+      # Obtain a list of domains, and optionally their details, which either
+      # expire or were registered in the month given.
+      #
+      # @param [Symbol] type Listing type, either +:expiry+ or +:month+
+      # @param [String, #strftime] date Date of either expiry or registration to list
+      # @param [String] fields Verbosity of the response, either 'none' or 'all'
+      # @raise [ArgumentError] type must be +:expiry+ or +:month+
+      # @return [nil] list failed
+      # @return [Array<String>] list of domains
+      # @return [Array<Hash>] list of domains with details
       def list(type, date, fields = 'none')
         raise ArgumentError, "type must be :expiry or :month" unless [:expiry, :month].include?(type)
 
@@ -42,6 +53,17 @@ module NominetEPP
           end
         end
       end
+
+      # list of all tags that accept tag changes along with their handshake settings
+      #
+      # The returned array of hashes contain the following keys
+      # - (String) +:registrar_tag+ -- TAG name
+      # - (String) +:name+ -- Name of the TAG owner
+      # - (String) +:trad_name+ -- TAG trading name
+      # - (BOOL) +:handshake+ -- Whether the TAG accepts handshakes
+      #
+      # @return [false] failure
+      # @return [Array<Hash>] tag details
       def tag_list
         resp = @client.info do
           tag('list')

@@ -1,4 +1,5 @@
 module NominetEPP
+  # Module to enclose the Operations
   module Operations
     autoload :Check,    File.dirname(__FILE__) + '/operations/check.rb'
     autoload :Create,   File.dirname(__FILE__) + '/operations/create.rb'

@@ -1,6 +1,25 @@
 module NominetEPP
   module Operations
+    # EPP Fork Operation
     module Fork
+      # Splits a selection of domains from one account into another.
+      #
+      # The returned hash contains the following keys
+      # - (String) +:roid+ -- New account ID
+      # - (String) +:name+ -- New account name
+      # - (String) +:crDate+ -- Date the account was created
+      # - (Hash) +:contact+ -- Contact details
+      #
+      # The +:contact+ hash contains the following keys
+      # - (String) +:roid+ -- Contact ID
+      # - (String) +:name+ -- Contact Name
+      # - (String) +:type+ -- Contact Type
+      # - (Integer) +:order+ -- Contact Order
+      #
+      # @param [String] account_num Account Number
+      # @param [String, ...] *names Domain names to fork from the account
+      # @return [false] fork failed
+      # @return [Hash] new account details
       def fork(account_num, *names)
         resp = @client.update do
           account('fork') do |node, ns|

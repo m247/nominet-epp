@@ -1,6 +1,15 @@
 module NominetEPP
   module Operations
+    # EPP Renew Operation
     module Renew
+      # Renew a domain name
+      #
+      # @param [String] name Domain name to renew
+      # @param [String] period Length of time to renew for. Currently has to be '2y'.
+      # @raise [ArgumentError] invalid period specified
+      # @raise [RuntimeError] renewed domain name does not match +name+
+      # @return [false] renewal failed
+      # @return [Time] domain expiration date
       def renew(name, period = '2y')
         period = '2y'  # reset period to 2 years as nominet don't currently support other options
 

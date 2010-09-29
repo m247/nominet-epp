@@ -1,6 +1,16 @@
 module NominetEPP
   module Operations
+    # EPP Merge Operation
     module Merge
+      # Merge accounts or domains into an Account
+      #
+      # @param [String] target Account ID to merge into
+      # @param [Hash] sources Account IDs to merge into the target
+      # @option sources [Array] :accounts Account numbers to merge
+      # @option sources [Array] :names Account names to merge
+      # @option sources [Array] :domains Domain names to merge
+      # @return [false] merge failed
+      # @return [Response] merge succeded
       def merge(target, sources = {})
         resp = @client.update do
           account('merge') do |node, ns|

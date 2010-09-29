@@ -1,6 +1,17 @@
 module NominetEPP
   module Operations
+    # EPP Unrenew Operation
     module Unrenew
+      # Reverse a renewal request for one or more domain names.
+      #
+      # Unrenew commands will only be processed if the renewal invoice
+      # has not yet been generated. If the operation is successful, an
+      # email will be sent to the registrant of the domain name notifying
+      # them of the renewal reversal.
+      #
+      # @param [String, ...] *names Domain names to unrenew
+      # @return [false] unrenew failed
+      # @return [Hash<String, Time>] hash of domains and expiry times 
       def unrenew(*names)
         resp = @client.update do
           domain('unrenew') do |node, ns|
