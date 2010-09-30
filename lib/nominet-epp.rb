@@ -1,8 +1,8 @@
 require 'epp-client'
 require 'time'
 
-require File.dirname(__FILE__) + '/operations'
-require File.dirname(__FILE__) + '/helpers'
+require File.dirname(__FILE__) + '/nominet-epp/operations'
+require File.dirname(__FILE__) + '/nominet-epp/helpers'
 
 # Nominet EPP Module
 module NominetEPP
