@@ -19,6 +19,7 @@ module NominetEPP
 
         return false unless resp.success?
 
+        @check_limit = check_abuse_limit(resp.data)
         results = resp.data.find('//domain:name', namespaces)
         if results.size > 1
           hash = {}
@@ -28,6 +29,11 @@ module NominetEPP
           results.first['avail'] == '1'
         end
       end
+
+      protected
+        def check_abuse_limit(data)
+          data.find('//domain:chkData/@abuse-limit', namespaces).first.value.to_i
+        end
     end
   end
 end
