@@ -29,7 +29,7 @@ module NominetEPP
         # @return [Hash]
         def info_domain(data)
           hash = {}
-          data.find('domain:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|
+          data.find('//domain:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|
             key = node.name.gsub('-', '_').to_sym
             case node.name
             when 'account'
@@ -53,7 +53,7 @@ module NominetEPP
         # @return [Hash]
         def info_account(data)
           hash = {}
-          data.find('account:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|
+          data.find('//account:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|
             key = node.name.gsub('-', '_').to_sym
             case node.name
             when 'addr'
@@ -79,7 +79,7 @@ module NominetEPP
         # @return [Hash]
         def info_contact(data)
           hash = {}
-          data.find('contact:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|
+          data.find('//contact:infData', namespaces).first.children.reject{|n| n.empty?}.each do |node|
             if node.name =~ /date/i
               hash[node.name.to_sym] = Time.parse(node.content.strip)
             else
