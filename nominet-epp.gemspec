@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Geoff Garside"]
-  s.date = %q{2010-05-26}
+  s.date = %q{2010-11-08}
   s.description = %q{Client for communicating with the Nominet EPP}
   s.email = %q{geoff@geoffgarside.co.uk}
   s.extra_rdoc_files = [
@@ -23,24 +23,24 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "lib/helpers.rb",
      "lib/nominet-epp.rb",
-     "lib/operations.rb",
-     "lib/operations/check.rb",
-     "lib/operations/create.rb",
-     "lib/operations/delete.rb",
-     "lib/operations/fork.rb",
-     "lib/operations/hello.rb",
-     "lib/operations/info.rb",
-     "lib/operations/list.rb",
-     "lib/operations/lock.rb",
-     "lib/operations/merge.rb",
-     "lib/operations/poll.rb",
-     "lib/operations/renew.rb",
-     "lib/operations/transfer.rb",
-     "lib/operations/unlock.rb",
-     "lib/operations/unrenew.rb",
-     "lib/operations/update.rb",
+     "lib/nominet-epp/helpers.rb",
+     "lib/nominet-epp/operations.rb",
+     "lib/nominet-epp/operations/check.rb",
+     "lib/nominet-epp/operations/create.rb",
+     "lib/nominet-epp/operations/delete.rb",
+     "lib/nominet-epp/operations/fork.rb",
+     "lib/nominet-epp/operations/hello.rb",
+     "lib/nominet-epp/operations/info.rb",
+     "lib/nominet-epp/operations/list.rb",
+     "lib/nominet-epp/operations/lock.rb",
+     "lib/nominet-epp/operations/merge.rb",
+     "lib/nominet-epp/operations/poll.rb",
+     "lib/nominet-epp/operations/renew.rb",
+     "lib/nominet-epp/operations/transfer.rb",
+     "lib/nominet-epp/operations/unlock.rb",
+     "lib/nominet-epp/operations/unrenew.rb",
+     "lib/nominet-epp/operations/update.rb",
      "nominet-epp.gemspec",
      "test/helper.rb",
      "test/test_nominet-epp.rb"
