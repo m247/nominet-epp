@@ -7,13 +7,13 @@ module NominetEPP
       # @param [String] name Domain name
       # @return [Boolean] success status
       def delete(name)
-        resp = @client.delete do
+        @resp = @client.delete do
           domain('delete') do |node, ns|
             node << XML::Node.new('name', name, ns)
           end
         end
 
-        resp.success?
+        @resp.success?
       end
     end
   end

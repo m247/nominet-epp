@@ -24,13 +24,13 @@ module NominetEPP
       def transfer(type, *args)
         raise ArgumentError, "type must be :release, :approve, :reject" unless [:release, :approve, :reject].include?(type)
 
-        resp = @client.transfer do |transfer|
+        @resp = @client.transfer do |transfer|
           transfer['op'] = type.to_s
           transfer << self.send(:"transfer_#{type}", *args)
         end
 
         if type == :release
-          case resp.code
+          case @resp.code
           when 1000
             { :result => true }
           when 1001
@@ -39,8 +39,8 @@ module NominetEPP
             false
           end
         else
-          return false unless resp.success?
-          nCase, domainList = resp.data
+          return false unless @resp.success?
+          nCase, domainList = @resp.data
           { :case_id => node_value(nCase,'//n:Case/n:case-id'),
             :domains => domainList.find('//n:domain-name', namespaces).map{|n| n.content.strip} }
         end

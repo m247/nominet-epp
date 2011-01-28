@@ -14,7 +14,7 @@ module NominetEPP
         raise ArgumentError, "entity must be :domain or :account" unless [:domain, :account].include?(entity)
         raise ArgumentError, "type must be 'investigation' or 'opt-out'" unless %w(investigation opt-out).include?(type)
 
-        resp = @client.update do
+        @resp = @client.update do
           case type
           when 'investigation'
             lock_investigation(entity, id)
@@ -23,7 +23,7 @@ module NominetEPP
           end
         end
 
-        return resp.success?
+        return @resp.success?
       end
       private
         # Create +account:unlock+ XML element for opt-out lock

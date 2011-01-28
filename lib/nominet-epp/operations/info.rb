@@ -9,7 +9,7 @@ module NominetEPP
       def info(entity, id)
         raise ArgumentError, "entity must be :domain, :contact or :account" unless [:domain, :contact, :account].include?(entity)
 
-        resp = @client.info do
+        @resp = @client.info do
           case entity
           when :domain
             domain('info') { |node, ns| node << XML::Node.new('name', id, ns) }
@@ -20,8 +20,8 @@ module NominetEPP
           end
         end
 
-        return false unless resp.success?
-        self.send(:"info_#{entity}", resp.data)
+        return false unless @resp.success?
+        self.send(:"info_#{entity}", @resp.data)
       end
 
       private

@@ -37,7 +37,7 @@ module NominetEPP
       def create(name, acct, nameservers, options = {})
         raise ArgumentError, "options allowed keys are period, first_bill, recur_bill, auto_bill, next_bill, notes" unless (options.keys - [:period, :first_bill, :recur_bill, :auto_bill, :next_bill, :notes]).empty?
 
-        resp = @client.create do
+        @resp = @client.create do
           domain('create') do |node, ns|
             node << XML::Node.new('name', name, ns)
 
@@ -55,9 +55,9 @@ module NominetEPP
           end
         end
 
-        return false unless resp.success?
+        return false unless @resp.success?
 
-        creData = resp.data.find('/domain:creData', namespaces).first
+        creData = @resp.data.find('/domain:creData', namespaces).first
         h = { :name => node_value(creData, 'domain:name'),
           :crDate => Time.parse(node_value(creData, 'domain:crDate')),
           :exDate => Time.parse(node_value(creData, 'domain:exDate')) }

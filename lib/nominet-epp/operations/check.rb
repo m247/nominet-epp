@@ -9,7 +9,7 @@ module NominetEPP
       # @return [true] the domain name is available
       # @return [Hash<String,Boolean>] availability by domain name
       def check(*names)
-        resp = @client.check do
+        @resp = @client.check do
           domain('check') do |node, ns|
             names.each do |name|
               node << XML::Node.new('name', name, ns)
@@ -17,10 +17,10 @@ module NominetEPP
           end
         end
 
-        return false unless resp.success?
+        return false unless @resp.success?
 
-        @check_limit = check_abuse_limit(resp.data)
-        results = resp.data.find('//domain:name', namespaces)
+        @check_limit = check_abuse_limit(@resp.data)
+        results = @resp.data.find('//domain:name', namespaces)
         if results.size > 1
           hash = {}
           results.each {|node| hash[node.content.strip] = (node['avail'] == '1') }
