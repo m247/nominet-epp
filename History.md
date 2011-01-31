@@ -1,3 +1,9 @@
+0.0.4 / 2011-01-31
+==================
+
+  * Operations now cache their responses, accessible through `Client#last_response`
+  * Last response messages are available through `Client#last_message`
+
 0.0.3 / 2011-01-17 
 ==================
 
