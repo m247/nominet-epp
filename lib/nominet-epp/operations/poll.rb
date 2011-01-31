@@ -2,6 +2,7 @@ module NominetEPP
   module Operations
     # EPP Poll Operation
     module Poll
+      # Error for indicating a failed poll ack response
       class AckError < RuntimeError; end
 
       # Poll the EPP server for events.
