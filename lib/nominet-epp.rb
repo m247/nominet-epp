@@ -28,6 +28,21 @@ module NominetEPP
       "#<#{self.class} #{@tag}@#{@server}>"
     end
 
+    # Returns the last EPP::Response received
+    #
+    # @return [EPP::Response] last received response
+    def last_response
+      @resp
+    end
+
+    # Returns the last EPP message received
+    #
+    # @return [String] last EPP message
+    # @see #last_response
+    def last_message
+      last_response.message
+    end
+
     # @return [Hash] Nominet Namespaces by prefixes
     def namespaces
       { :domain  => 'http://www.nominet.org.uk/epp/xml/nom-domain-2.0',
