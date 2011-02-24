@@ -104,7 +104,8 @@ module NominetEPP
         # @raise [ArgumentError] name or email key is missing
         # @return [XML::Node]
         def create_account_contact(cont)
-          raise ArgumentError, "Contact allowed keys are name, email, phone and mobile" unless (cont.keys -[:name, :email, :phone, :mobile]).empty?
+          raise ArgumentError, "cont must be a hash" unless cont.is_a?(Hash)
+          raise ArgumentError, "Contact allowed keys are name, email, phone and mobile" unless (cont.keys - [:name, :email, :phone, :mobile]).empty?
           raise ArgumentError, "Contact requires name and email keys" unless cont.has_key?(:name) && cont.has_key?(:email)
 
           contact('create') do |node, ns|
@@ -117,9 +118,12 @@ module NominetEPP
         # Create contact address
         #
         # @param [Hash] addr Address fields
+        # @param [XML::Namespace] ns XML Namespace
         # @raise [ArgumentError] invalid keys in addr
         # @return [XML::Node]
         def create_account_address(addr, ns)
+          raise ArgumentError, "addr must be a hash" unless addr.is_a?(Hash)
+          raise ArgumentError, "ns must be an xml namespace" unless ns.is_a?(XML::Namespace)
           raise ArgumentError, "Address allowed keys are street, locality, city, county, postcode, country" unless (addr.keys - [:street, :locality, :city, :county, :postcode, :country]).empty?
 
           addr = XML::Node.new('addr', nil, ns)
