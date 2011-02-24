@@ -57,7 +57,7 @@ module NominetEPP
 
         return false unless @resp.success?
 
-        creData = @resp.data.find('/domain:creData', namespaces).first
+        creData = @resp.data.find('//domain:creData', namespaces).first
         h = { :name => node_value(creData, 'domain:name'),
           :crDate => Time.parse(node_value(creData, 'domain:crDate')),
           :exDate => Time.parse(node_value(creData, 'domain:exDate')) }
