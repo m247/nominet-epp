@@ -8,15 +8,15 @@ module NominetEPP
     def domain_ns_xml(nameservers, ns)
       ns_el = XML::Node.new('ns', nil, ns)
 
-      case nameservers.class
+      case nameservers
       when String
-        ns_el << (XML::Node.new('host', nil, ns) << XML::Node.new('hostName', nameservers, ns))
+        ns_el << domain_host_xml(nameservers, ns)
       when Array
         nameservers.each do |nameserver|
           ns_el << domain_host_xml(nameserver, ns)
         end
       else
-        raise ArgumentError, "nameservers must either be a string or array of strings"
+        raise ArgumentError, "nameservers must either be a string or array"
       end
 
       ns_el
@@ -28,7 +28,7 @@ module NominetEPP
     def domain_host_xml(nameserver, ns)
       host = XML::Node.new('host', nil, ns)
 
-      case nameserver.class
+      case nameserver
       when String
         host << XML::Node.new('hostName', nameserver, ns)
       when Hash
