@@ -22,8 +22,8 @@ module NominetEPP
       # - (Integer) +:order+ --  Contacts order in the list of contacts
       #
       # @param [String] name Domain name to register
-      # @param [String] acct
-      # @param [Array] nameservers Nameservers to set for the domain
+      # @param [String, Hash] acct
+      # @param [String, Array] nameservers Nameservers to set for the domain
       # @param [Hash] options Registration options
       # @option options [String] :period
       # @option options [String] :first_bill
