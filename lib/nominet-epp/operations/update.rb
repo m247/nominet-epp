@@ -62,6 +62,62 @@ module NominetEPP
             end
           end
         end
+
+        # Generate +host:update+ payload to modify a nameserver entry
+        # ---
+        # We need to know nameserver old data as well.
+        # If we are changing the nameserver name and keeping the info the same
+        # then we do a host:chg. If we are adding an IPv{4,6} address we use
+        # the host:add wrapper, and to remove we do a host:rem. As Nominet only
+        # allow one IPv{4,6} address per nameserver we should remove the old
+        # IP address from the server before adding the one. Alternatively if
+        # Nominet will automatically drop previous address then we need only
+        # do a host:add call.
+        # +++
+        #
+        # Fields options
+        # - (Hash) +:add+ -- Addresses to add to the nameserver
+        # - (Hash) +:rem+ -- Addresses to remove from the nameserver
+        # - (String) +:chg+ -- New hostname of the nameserver
+        #
+        # Fields +:add+ and +:rem+ options
+        # - (String) +:v4+ -- IPv4 address to add or remove from the nameserver
+        # - (String) +:v6+ -- IPv6 address to add or remove from the nameserver
+        #
+        # @param [String] name Nameserver host to update
+        # @param [Hash] fields Nameserver update information
+        # @raise [ArgumentError] invalid keys, either on fields or fields[:add] or fields[:rem]
+        # @return [XML::Node] +host:update+ payload
+        def update_nameserver(name, fields = {})
+          raise ArgumentError, "allowed keys :add, :rem, :chg" unless (fields.keys - [:add, :rem, :chg]).empty?
+
+          host('update') do |node, ns|
+            node << XML::Node.new('name', name, ns)
+
+            if fields.has_key?(:add) && fields[:add].kind_of?(Hash)
+              raise ArgumentError, "allowed :add keys are :v4 and :v6" unless (fields[:add].keys - [:v4, :v6]).empty?
+              node << (add = XML::Node.new('add', nil, ns))
+              fields[:add].each do |k,v|
+                add << (n = XML::Node.new('addr', v, ns))
+                n['ip'] = k.to_s
+              end
+            end
+
+            if fields.has_key?(:rem) && fields[:rem].kind_of?(Hash)
+              raise ArgumentError, "allowed :rem keys are :v4 and :v6" unless (fields[:rem].keys - [:v4, :v6]).empty?
+              node << (rem = XML::Node.new('rem', nil, ns))
+              fields[:rem].each do |k,v|
+                rem << (n = XML::Node.new('addr', v, ns))
+                n['ip'] = k.to_s
+              end
+            end
+
+            if fields.has_key?(:chg) && fields[:chg].kind_of?(String)
+              node << (chg = XML::Node.new('chg', nil, ns))
+              chg << XML::Node.new('name', fields[:chg], ns)
+            end
+          end
+        end
     end
   end
 end
