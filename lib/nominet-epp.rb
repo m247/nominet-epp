@@ -49,7 +49,8 @@ module NominetEPP
         :account => 'http://www.nominet.org.uk/epp/xml/nom-account-2.0',
         :contact => 'http://www.nominet.org.uk/epp/xml/nom-contact-2.0',
         :tag     => 'http://www.nominet.org.uk/epp/xml/nom-tag-1.0',
-        :n       => 'http://www.nominet.org.uk/epp/xml/nom-notifications-2.0' }
+        :n       => 'http://www.nominet.org.uk/epp/xml/nom-notifications-2.0',
+        :host    => 'urn:ietf:params:xml:ns:host-1.0' }
     end
 
     # @return [Hash] Nominet Schema Locations by prefix
@@ -97,7 +98,7 @@ module NominetEPP
       def new_node(name, ns_prefix, &block)
         node = XML::Node.new(name)
         node.namespaces.namespace = ns = XML::Namespace.new(node, ns_prefix.to_s, namespaces[ns_prefix])
-        node['xsi:schemaLocation'] = schemaLocations[ns_prefix]
+        node['xsi:schemaLocation'] = schemaLocations[ns_prefix] if schemaLocations.has_key?(ns_prefix)
 
         case block.arity
         when 0
@@ -149,6 +150,14 @@ module NominetEPP
       # @see new_node
       def notification(node_name, &block)
         new_node(node_name, :n, &block)
+      end
+
+      # @param [String] node_name XML Element name
+      # @yield [node, ns] block to populate node
+      # @return [XML::Node] new node in :host namespace
+      # @see new_node
+      def host(node_name, &block)
+        new_node(node_name, :host, &block)
       end
   end
 end
