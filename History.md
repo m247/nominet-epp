@@ -1,3 +1,9 @@
+0.0.5 / 2011-02-24
+==================
+
+  * Many bug fixes in Create operation
+  * Support for using `host:update` to modify name server glue information.
+
 0.0.4 / 2011-01-31
 ==================
 
