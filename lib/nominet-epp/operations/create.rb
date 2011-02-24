@@ -86,7 +86,7 @@ module NominetEPP
 
               acct[:contacts].each_with_index do |cont, i|
                 c = XML::Node.new('contact', nil, ns)
-                c['order'] = i
+                c['order'] = i.to_s
                 node << (c << create_account_contact(cont))
               end
 
