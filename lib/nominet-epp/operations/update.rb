@@ -1,10 +1,59 @@
 module NominetEPP
   module Operations
-    # EPP Update Operation
+    # == EPP Update Operation
+    #
+    # === Domain Update
+    # The +id+ field for domain updates is the domain name to be modified.
+    #
+    # Fields options
+    # - (Hash) +:account+ -- Hash of account details to be updated
+    # - (String,Hash) +:ns+ -- Single or array of nameservers to set on the domain
+    # - (String) +:first_bill+ -- Set first-bill
+    # - (String) +:recur_bill+ -- Set recur-bill
+    # - (String) +:auto_bill+ -- Set auto-bill
+    # - (String) +:purchase_order+ -- Set purchase-oder
+    # - (String) +:notes+ -- Notes about the domain
+    # - (Boolean) +:renew_not_required+ -- Mark a domain as no longer needed
+    # - (String) +:reseller+ -- Set reseller
+    # ... etc ... any other permitted account fields
+    #
+    # === Account Update
+    # The +id+ field for account updates is the ROID identifying
+    # the account record on the remote endpoint.
+    #
+    # Fields options
+    # - (Array) +:contacts+ -- Array of contacts to create on the account
+    # - (Hash) +:addr+ -- Hash of address fields to modify on the account
+    # - (String) +:name+ -- Account holder name
+    # ... etc ... any other permitted account fields
+    #
+    # === Contact Update
+    # The +id+ field for contact updates is the ROID identifying
+    # the contact record on the remote endpoint.
+    #
+    # Fields options
+    # - (String) +:name+ -- Contacts new name
+    # - (String) +:email+ -- Contacts new email address
+    # - (String) +:phone+ -- Contacts new phone number
+    # - (String) +:mobile+ -- Contacts new mobile number
+    #
+    # === Nameserver Update
+    # The +id+ field for nameserver updates is the fully qualified
+    # hostname for the name server you wish to update.
+    #
+    # Fields options
+    # - (Hash) +:add+ -- Addresses to add to the nameserver
+    # - (Hash) +:rem+ -- Addresses to remove from the nameserver
+    # - (String) +:chg+ -- New hostname of the nameserver
+    #
+    # Fields +:add+ and +:rem+ options
+    # - (String) +:v4+ -- IPv4 address to add or remove from the nameserver
+    # - (String) +:v6+ -- IPv6 address to add or remove from the nameserver
     module Update
-      # @param [Symbol] entity Entity to update
-      # @param [String] id Domain, Account or Contact to update
+      # @param [Symbol] entity Entity to update, one of domain, account, contact or nameserver
+      # @param [String] id Domain, Account, Contact or Nameserver to update
       # @param [Hash] fields Fields to update
+      # @return [Boolean] request successful
       def update(entity, id, fields = {})
         @resp = @client.update do
           self.send(:"update_#{entity}", id, fields)
