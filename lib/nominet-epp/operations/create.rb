@@ -90,7 +90,7 @@ module NominetEPP
                 node << (c << create_account_contact(cont))
               end
 
-              node << create_account_address(acct[:addr], ns)
+              node << create_account_address(acct[:addr], ns) unless acct[:addr].nil?
             end
           else
             raise ArgumentError, "acct must be String or Hash"
