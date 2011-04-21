@@ -49,14 +49,18 @@ module NominetEPP
               node << p
             end
 
-            acct_xml = XML::Node.new('account', nil, ns)
-            acct_xml << create_account(acct, ns)
-            node << acct_xml
+            # node << XML::Node.new('auto-period', '', ns) # placeholder
+
+            node << XML::Node.new('account', nil, ns).tap do |acct_xml|
+              acct_xml << create_account(acct, ns)
+            end
 
             node << domain_ns_xml(nameservers, ns)
 
-            options.each do |key, value|
-              node << XML::Node.new(key.to_s.gsub('_', '-'), value, ns)
+            # Enforce correct sequencing of option fields
+            [:first_bill, :recur_bill, :auto_bill, :next_bill, :notes].each do |key|
+              next if options[key].nil? || options[key] == ''
+              node << XML::Node.new(key.to_s.gsub('_', '-'), options[key], ns)
             end
           end
         end
