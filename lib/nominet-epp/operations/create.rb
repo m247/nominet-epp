@@ -41,9 +41,9 @@ module NominetEPP
           domain('create') do |node, ns|
             node << XML::Node.new('name', name, ns)
 
-            if options[:period]
-              unit = options[:period][-1..1]
-              num = options[:period].to_i.to_s
+            if period = options.delete(:period)
+              unit = period[-1..1]
+              num = period.to_i.to_s
               p = XML::Node.new('period', num, ns);
               p['unit'] = unit
               node << p
