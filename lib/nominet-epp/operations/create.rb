@@ -41,7 +41,13 @@ module NominetEPP
           domain('create') do |node, ns|
             node << XML::Node.new('name', name, ns)
 
-            options[:period] && node << XML::Node.new('period', options.delete(:period), ns)
+            if options[:period]
+              unit = options[:period][-1..1]
+              num = options[:period].to_i.to_s
+              p = XML::Node.new('period', num, ns);
+              p['unit'] = unit
+              node << p
+            end
 
             acct_xml = XML::Node.new('account', nil, ns)
             acct_xml << create_account(acct, ns)
