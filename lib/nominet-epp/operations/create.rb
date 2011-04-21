@@ -90,17 +90,18 @@ module NominetEPP
           elsif acct.kind_of?(Hash)
             account('create') do |node, ns|
               node << XML::Node.new('name', acct[:name], ns)
-              node << XML::Node.new('trad-name', acct[:trad_name], ns)
+              node << XML::Node.new('trad-name', acct[:trad_name], ns) unless acct[:trad_name].nil? || acct[:trad_name] == ''
               node << XML::Node.new('type', acct[:type], ns)
+              node << XML::Node.new('co-no', acct[:co_no], ns) unless acct[:co_no].nil? || acct[:co_no] == ''
               node << XML::Node.new('opt-out', acct[:opt_out], ns)
+
+              node << create_account_address(acct[:addr], ns) unless acct[:addr].nil?
 
               acct[:contacts].each_with_index do |cont, i|
                 c = XML::Node.new('contact', nil, ns)
                 c['order'] = i.to_s
                 node << (c << create_account_contact(cont))
               end
-
-              node << create_account_address(acct[:addr], ns) unless acct[:addr].nil?
             end
           else
             raise ArgumentError, "acct must be String or Hash"
