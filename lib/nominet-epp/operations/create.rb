@@ -138,12 +138,12 @@ module NominetEPP
           raise ArgumentError, "ns must be an xml namespace" unless ns.is_a?(XML::Namespace)
           raise ArgumentError, "Address allowed keys are street, locality, city, county, postcode, country" unless (addr.keys - [:street, :locality, :city, :county, :postcode, :country]).empty?
 
-          addr = XML::Node.new('addr', nil, ns)
-          addr.each do |key, value|
-            addr << XML::Node.new(key, value, ns)
+          XML::Node.new('addr', nil, ns).tap do |a|
+            [:street, :locality, :city, :county, :postcode, :country].each do |key|
+              next if addr[key].nil? || addr[key] == ''
+              a << XML::Node.new(key, addr[key], ns)
+            end
           end
-
-          addr
         end
 
         # Collects created account information
