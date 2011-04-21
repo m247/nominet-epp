@@ -97,9 +97,9 @@ module NominetEPP
 
               node << create_account_address(acct[:addr], ns) unless acct[:addr].nil?
 
-              acct[:contacts].each_with_index do |cont, i|
+              acct[:contacts][0,3].each_with_index do |cont, i|
                 c = XML::Node.new('contact', nil, ns)
-                c['order'] = i.to_s
+                c['order'] = (i + 1).to_s # Enforce order 1-3
                 node << (c << create_account_contact(cont))
               end
             end
