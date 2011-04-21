@@ -1,3 +1,8 @@
+0.0.6 / 2011-04-21
+==================
+
+  * Fix "Command Syntax Error" response for Create operation with "2y" style periods
+
 0.0.5 / 2011-02-24
 ==================
 
