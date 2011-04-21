@@ -120,8 +120,9 @@ module NominetEPP
           raise ArgumentError, "Contact requires name and email keys" unless cont.has_key?(:name) && cont.has_key?(:email)
 
           contact('create') do |node, ns|
-            cont.each do |key, value|
-              node << XML::Node.new(key, value, ns)
+            [:name, :phone, :mobile, :email].each do |key|
+              next if cont[key].nil? || cont[key] == ''
+              node << XML::Node.new(key, cont[key], ns)
             end
           end
         end
