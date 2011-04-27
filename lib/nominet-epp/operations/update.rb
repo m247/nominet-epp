@@ -49,6 +49,13 @@ module NominetEPP
     # Fields +:add+ and +:rem+ options
     # - (String) +:v4+ -- IPv4 address to add or remove from the nameserver
     # - (String) +:v6+ -- IPv6 address to add or remove from the nameserver
+    #
+    # Example:
+    #
+    #     fields = {:chg => 'new.ns.example.com',
+    #               :add => {:v4 => '192.168.1.45', :v6 => '2001:db8::1'},
+    #               :rem => {:v4 => '192.168.1.14', :v6 => '2001:db8::b'}}
+    #
     module Update
       # @param [Symbol] entity Entity to update, one of domain, account, contact or nameserver
       # @param [String] id Domain, Account, Contact or Nameserver to update
