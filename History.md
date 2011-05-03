@@ -1,3 +1,12 @@
+0.0.8 / 2011-05-03
+==================
+
+  * Amend account:contact elements in Create operation to ensure order attribute range
+  * Fix sequencing of elements in account:addr block
+  * Fix sequencing of elements in contact:create block
+  * Fix sequencing of elements in account:create block
+  * Enforce the correct element sequencing for the domain:create operation
+
 0.0.7 / 2011-04-21
 ==================
 
