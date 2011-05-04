@@ -90,59 +90,10 @@ module NominetEPP
           elsif acct.kind_of?(Hash)
             account('create') do |node, ns|
               node << XML::Node.new('name', acct[:name], ns)
-              node << XML::Node.new('trad-name', acct[:trad_name], ns) unless acct[:trad_name].nil? || acct[:trad_name] == ''
-              node << XML::Node.new('type', acct[:type], ns)
-              node << XML::Node.new('co-no', acct[:co_no], ns) unless acct[:co_no].nil? || acct[:co_no] == ''
-              node << XML::Node.new('opt-out', acct[:opt_out], ns)
-
-              node << create_account_address(acct[:addr], ns) unless acct[:addr].nil?
-
-              acct[:contacts][0,3].each_with_index do |cont, i|
-                c = XML::Node.new('contact', nil, ns)
-                c['order'] = (i + 1).to_s # Enforce order 1-3
-                node << (c << create_account_contact(cont))
-              end
+              account_fields_xml(acct, node, ns)
             end
           else
             raise ArgumentError, "acct must be String or Hash"
-          end
-        end
-
-        # Create account contact payload
-        #
-        # @param [Hash] cont Contact fields
-        # @raise [ArgumentError] invalid contact fields
-        # @raise [ArgumentError] name or email key is missing
-        # @return [XML::Node]
-        def create_account_contact(cont)
-          raise ArgumentError, "cont must be a hash" unless cont.is_a?(Hash)
-          raise ArgumentError, "Contact allowed keys are name, email, phone and mobile" unless (cont.keys - [:name, :email, :phone, :mobile]).empty?
-          raise ArgumentError, "Contact requires name and email keys" unless cont.has_key?(:name) && cont.has_key?(:email)
-
-          contact('create') do |node, ns|
-            [:name, :phone, :mobile, :email].each do |key|
-              next if cont[key].nil? || cont[key] == ''
-              node << XML::Node.new(key, cont[key], ns)
-            end
-          end
-        end
-
-        # Create contact address
-        #
-        # @param [Hash] addr Address fields
-        # @param [XML::Namespace] ns XML Namespace
-        # @raise [ArgumentError] invalid keys in addr
-        # @return [XML::Node]
-        def create_account_address(addr, ns)
-          raise ArgumentError, "addr must be a hash" unless addr.is_a?(Hash)
-          raise ArgumentError, "ns must be an xml namespace" unless ns.is_a?(XML::Namespace)
-          raise ArgumentError, "Address allowed keys are street, locality, city, county, postcode, country" unless (addr.keys - [:street, :locality, :city, :county, :postcode, :country]).empty?
-
-          XML::Node.new('addr', nil, ns).tap do |a|
-            [:street, :locality, :city, :county, :postcode, :country].each do |key|
-              next if addr[key].nil? || addr[key] == ''
-              a << XML::Node.new(key, addr[key], ns)
-            end
           end
         end
 
