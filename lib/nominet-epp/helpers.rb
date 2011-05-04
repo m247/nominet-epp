@@ -64,7 +64,7 @@ module NominetEPP
         when :addr  # Limitation, can only handle one addr at a time
           node << addr_to_xml(fields[k], ns)
         else
-          node << generic_field_to_xml(k, fields[k], ns)
+          node << generic_field_to_xml(k, fields[k], ns) unless fields[k] == ''
         end
       end
     end
