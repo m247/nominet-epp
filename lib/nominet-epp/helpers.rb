@@ -90,7 +90,7 @@ module NominetEPP
       raise ArgumentError, "contacts must be an Array" unless contacts.is_a?(Array)
       raise ArgumentError, "ns must be an xml namespace" unless ns.is_a?(XML::Namespace)
 
-      contacts.map do |contact|
+      contacts[0,3].map do |contact|
         account_contact_to_xml(contact, ns).tap |n|
           yield n if block_given?
         end
