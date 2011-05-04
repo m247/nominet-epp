@@ -34,14 +34,14 @@ module NominetEPP
       when Hash
         host << XML::Node.new('hostName', nameserver[:name], ns)
         if nameserver[:v4]
-          n = XML::Node.new('hostAddr', nameserver[:v4], ns)
-          n['ip'] = 'v4'
-          host << n
+          host << XML::Node.new('hostAddr', nameserver[:v4], ns).tap do |n|
+            n['ip'] = 'v4'
+          end
         end
         if nameserver[:v6]
-          n = XML::Node.new('hostAddr', nameserver[:v6], ns)
-          n['ip'] = 'v6'
-          host << n
+          host << XML::Node.new('hostAddr', nameserver[:v6], ns).tap do |n|
+            n['ip'] = 'v6'
+          end
         end
       end
 
