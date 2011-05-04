@@ -1,3 +1,10 @@
+
+0.0.9 / 2011-05-04 
+==================
+
+  * Correct implementation of Update Operation for domain, account and contact to send
+    the correct sequence of XML elements
+
 0.0.8 / 2011-05-03
 ==================
 
