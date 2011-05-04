@@ -107,7 +107,7 @@ module NominetEPP
       raise ArgumentError, "ns must be an xml namespace" unless ns.is_a?(XML::Namespace)
 
       XML::Node.new('contact', nil, ns).tap do |node|
-        node['order'] = contact.delete(:order) if contact.has_key?(:order)
+        node['order'] = contact.delete(:order).to_s if contact.has_key?(:order)
         node['type'] = 'admin'
 
         node << contact_to_xml(contact)
