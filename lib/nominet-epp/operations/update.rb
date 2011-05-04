@@ -74,19 +74,23 @@ module NominetEPP
         # @param [Hash] fields Fields to update on the domain
         # @return [XML::Node] +domain:update+ payload
         def update_domain(name, fields)
+          keys = [:auto_period, :account, :ns, :first_bill, :recur_bill,
+            :auto_bill, :next_bill, :renew_not_required, :notes, :reseller]
+
           domain('update') do |node, ns|
             node << XML::Node.new('name', name, ns)
-            fields.each do |k,v|
+            keys.each do |k|
+              next if fields[k].nil?
               case k
               when :account
                 node << (d_acct = XML::Node.new('account', nil, ns))
                 d_acct << account('update') do |acct, a_ns|
-                  account_update_xml(v, acct, a_ns)
+                  account_update_xml(fields[k], acct, a_ns)
                 end
               when :ns
-                node << domain_ns_xml(v, ns)
+                node << domain_ns_xml(fields[k], ns)
               else
-                node << XML::Node.new(k.gsub('_', '-'), v, ns)
+                node << generic_field_to_xml(k, fields[k], ns) unless fields[k] == ''
               end
             end
           end
@@ -107,16 +111,9 @@ module NominetEPP
         # @param [String] roid Contact ID
         # @param [Hash] fields Fields to update on the contact
         # @raise [ArgumentError] invalid keys
-        # @return [XML::Node] +contact:update+ payload
+        # @return [XML::Node] XML +contact:update+ element
         def update_contact(roid, fields = {})
-          raise ArgumentError, "fields allowed keys name, email, phone, mobile" unless (fields.keys - [:name, :email, :phone, :mobile]).empty?
-
-          contact('update') do |node, ns|
-            node << XML::Node.new('roid', roid, ns)
-            fields.each do |k,v|
-              node << XML::Node.new(k, v, ns)
-            end
-          end
+          contact_to_xml(fields.merge(:roid => roid))
         end
 
         # Generate +host:update+ payload to modify a nameserver entry
