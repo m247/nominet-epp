@@ -118,7 +118,7 @@ module NominetEPP
       contacts = fixup_account_contacts(contacts)
 
       contacts[0,3].map do |contact|
-        account_contact_to_xml(contact, ns).tap |n|
+        account_contact_to_xml(contact, ns).tap do |n|
           yield n if block_given?
         end
       end
