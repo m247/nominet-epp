@@ -79,6 +79,31 @@ module NominetEPP
       XML::Node.new(name.to_s.gsub('_', '-'), value, ns)
     end
 
+    # Massage the contacts to ensure they have an :order parameter
+    #
+    # @param [Array<Hash>] contacts Array of contact attributes
+    # @return [Array<Hash>] Fixed array of contact attributes
+    def fixup_account_contacts(contacts)
+      if contacts.all? { |c| c.has_key? :order }
+        return contacts.sort { |a,b| a[:order].to_i <=> b[:order].to_i }
+      elsif contacts.any? { |c| c.has_key? :order }
+        unordered = contacts.map {|c| c if c[:order].nil? }.compact
+        ordered = Array.new
+        contacts.each do |c|
+          next if c[:order].nil?
+          ordered[c[:order].to_i - 1] = c
+        end
+
+        contacts = ordered.map do |i|
+          unless i.nil? then i
+          else unordered.shift
+          end
+        end + unordered
+      end
+
+      contacts.each_with_index { |c,i| c[:order] = (i+1).to_s }
+    end
+
     # Creates and array of XML::Node objects for each contact passed.
     #
     # @param [Array] contacts Array of contacts
@@ -89,6 +114,8 @@ module NominetEPP
     def account_contacts_to_xml(contacts, ns)
       raise ArgumentError, "contacts must be an Array" unless contacts.is_a?(Array)
       raise ArgumentError, "ns must be an xml namespace" unless ns.is_a?(XML::Namespace)
+
+      contacts = fixup_account_contacts(contacts)
 
       contacts[0,3].map do |contact|
         account_contact_to_xml(contact, ns).tap |n|
