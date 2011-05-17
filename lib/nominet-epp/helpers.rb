@@ -135,7 +135,6 @@ module NominetEPP
 
       XML::Node.new('contact', nil, ns).tap do |node|
         node['order'] = contact.delete(:order).to_s if contact.has_key?(:order)
-        node['type'] = 'admin'
 
         node << contact_to_xml(contact)
       end
