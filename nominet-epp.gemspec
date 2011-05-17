@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{nominet-epp}
-  s.version = "0.0.10"
+  s.version = "0.0.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Geoff Garside"]
-  s.date = %q{2011-05-04}
+  s.date = %q{2011-05-17}
   s.description = %q{Client for communicating with the Nominet EPP}
   s.email = %q{geoff@geoffgarside.co.uk}
   s.extra_rdoc_files = [
@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    ".document",
-    "History.md",
+    ".yardopts",
+    "History.rdoc",
     "LICENSE",
     "README.rdoc",
     "Rakefile",
@@ -49,10 +49,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.7.2}
   s.summary = %q{Nominet EPP (Extensible Provisioning Protocol) Client}
-  s.test_files = [
-    "test/helper.rb",
-    "test/test_nominet-epp.rb"
-  ]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
