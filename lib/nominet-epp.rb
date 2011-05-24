@@ -43,6 +43,15 @@ module NominetEPP
       last_response.message
     end
 
+    # Returns the last Nominet failData response found
+    #
+    # @note This is presently only set by certain method calls,
+    #       so it may not always be present.
+    # @return [Hash] last failData found
+    def last_error_info
+      @error_info
+    end
+
     # @return [Hash] Nominet Namespaces by prefixes
     def namespaces
       { :domain  => 'http://www.nominet.org.uk/epp/xml/nom-domain-2.0',

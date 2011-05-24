@@ -65,7 +65,12 @@ module NominetEPP
           end
         end
 
-        return false unless @resp.success?
+        unless @resp.success?
+          @error_info = {
+            :name => node_value(@resp.data, '//domain:failData/domain:name/node()'),
+            :reason => node_value(@resp.data, '//domain:failData/domain:reason/node()') }
+          return false
+        end
 
         creData = @resp.data.find('//domain:creData', namespaces).first
         h = { :name => node_value(creData, 'domain:name'),
