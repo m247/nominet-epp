@@ -1,5 +1,9 @@
 = NominetEPP History
 
+=== 0.0.12 / 2011-05-24
+
+* Capture +domain:failData+ information from +create+ operation failures.
+
 === 0.0.11 / 2011-05-17
 
 * Remove setting account:contact[type] attribute as this is not in the schema
