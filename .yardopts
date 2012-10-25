@@ -1,2 +1,4 @@
-lib/**/*.rb -
-History.rdoc LICENSE
+lib/**/*.rb
+-r README.md
+-
+HISTORY.md LICENSE
