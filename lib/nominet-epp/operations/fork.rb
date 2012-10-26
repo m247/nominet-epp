@@ -17,7 +17,7 @@ module NominetEPP
       # - (Integer) +:order+ -- Contact Order
       #
       # @param [String] account_num Account Number
-      # @param [String, ...] *names Domain names to fork from the account
+      # @param [String, ...] names Domain names to fork from the account
       # @return [false] fork failed
       # @return [Hash] new account details
       def fork(account_num, *names)

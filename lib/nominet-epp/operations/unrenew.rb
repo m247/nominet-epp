@@ -9,7 +9,7 @@ module NominetEPP
       # email will be sent to the registrant of the domain name notifying
       # them of the renewal reversal.
       #
-      # @param [String, ...] *names Domain names to unrenew
+      # @param [String, ...] names Domain names to unrenew
       # @return [false] unrenew failed
       # @return [Hash<String, Time>] hash of domains and expiry times 
       def unrenew(*names)
