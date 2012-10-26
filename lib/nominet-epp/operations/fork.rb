@@ -13,7 +13,7 @@ module NominetEPP
       # The +:contact+ hash contains the following keys
       # - (String) +:roid+ -- Contact ID
       # - (String) +:name+ -- Contact Name
-      # - (String) +:type+ -- Contact Type
+      # - (String) +:type+ -- Contact Type
       # - (Integer) +:order+ -- Contact Order
       #
       # @param [String] account_num Account Number

@@ -9,7 +9,10 @@ require File.dirname(__FILE__) + '/nominet-epp/helpers'
 module NominetEPP
   # Front end interface Client to the NominetEPP Service
   class Client
+    # Standard EPP Services to be used
     SERVICE_URNS = EPP::Client::DEFAULT_SERVICES + %w(urn:ietf:params:xml:ns:secDNS-1.1)
+
+    # Additional Nominet specific service extensions
     SERVICE_EXTENSION_URNS = %w(
       http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2
       http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0
