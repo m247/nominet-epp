@@ -19,7 +19,7 @@ module NominetEPP
 
         return false unless @resp.success?
 
-        @check_limit = check_abuse_limit(@resp.data)
+        @check_limit = check_abuse_limit(@resp.extension)
         results = @resp.data.find('//domain:name', namespaces)
         if results.size > 1
           hash = {}
@@ -31,8 +31,8 @@ module NominetEPP
       end
 
       protected
-        def check_abuse_limit(data)
-          data.find('//domain:chkData/@abuse-limit', namespaces).first.value.to_i
+        def check_abuse_limit(extension)
+          extension.find('//domain-nom-ext:chkData/@abuse-limit', namespaces).first.value.to_i
         end
     end
   end
