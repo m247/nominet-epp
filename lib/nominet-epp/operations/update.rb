@@ -62,6 +62,8 @@ module NominetEPP
       # @param [Hash] fields Fields to update
       # @return [Boolean] request successful
       def update(entity, id, fields = {})
+        raise ArgumentError, "entity #{entity} is not supported" unless self.respond_to?(:"update_#{entity}", true)
+
         resp = @client.update do
           self.send(:"update_#{entity}", id, fields)
         end
