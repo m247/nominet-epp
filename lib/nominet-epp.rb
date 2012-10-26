@@ -9,10 +9,12 @@ require File.dirname(__FILE__) + '/nominet-epp/helpers'
 module NominetEPP
   # Front end interface Client to the NominetEPP Service
   class Client
-    # Default Nominet Service URNs
-    DEFAULT_SERVICES = %w(http://www.nominet.org.uk/epp/xml/nom-domain-2.0
-      http://www.nominet.org.uk/epp/xml/nom-notifications-2.0
-      urn:ietf:params:xml:ns:host-1.0)
+    SERVICE_URNS = EPP::Client::DEFAULT_SERVICES + %w(urn:ietf:params:xml:ns:secDNS-1.1)
+    SERVICE_EXTENSION_URNS = %w(
+      http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2
+      http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0
+      http://www.nominet.org.uk/epp/xml/std-notifications-1.2
+      http://www.nominet.org.uk/epp/xml/std-handshake-1.0)
 
     # Create a new instance of NominetEPP::Client
     #
@@ -21,7 +23,8 @@ module NominetEPP
     # @param [String] server Nominet EPP Server address
     def initialize(tag, passwd, server = 'epp.nominet.org.uk')
       @tag, @server = tag, server
-      @client = EPP::Client.new(tag, passwd, server, :services => DEFAULT_SERVICES)
+      @client = EPP::Client.new(tag, passwd, server, :services => SERVICE_URNS,
+        :extensions => SERVICE_EXTENSION_URNS)
     end
 
     # @see Object#inspect
