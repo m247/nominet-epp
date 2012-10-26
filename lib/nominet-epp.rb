@@ -18,7 +18,8 @@ module NominetEPP
       http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0
       http://www.nominet.org.uk/epp/xml/std-notifications-1.2
       http://www.nominet.org.uk/epp/xml/std-handshake-1.0
-      http://www.nominet.org.uk/epp/xml/std-warning-1.1)
+      http://www.nominet.org.uk/epp/xml/std-warning-1.1
+      http://www.nominet.org.uk/epp/xml/std-release-1.0)
 
     # Create a new instance of NominetEPP::Client
     #
@@ -90,14 +91,15 @@ module NominetEPP
     include Operations::Create
     include Operations::Delete
     include Operations::Fork
+    include Operations::Handshake
     include Operations::Hello
     include Operations::Info
     include Operations::List
     include Operations::Lock
     include Operations::Merge
+    include Operations::Release
     include Operations::Poll
     include Operations::Renew
-    include Operations::Transfer
     include Operations::Unlock
     include Operations::Unrenew
     include Operations::Update
@@ -113,11 +115,12 @@ module NominetEPP
 
       # @param [String] name XML Element name
       # @param [Symbol] ns_prefix Namespace Prefix
+      # @param [Symbol] ns_name Namespace name in +namespaces+ if it doesn't match +ns_prefix+.
       # @yield [node, ns] block to populate node
       # @yieldparam [XML::Node] node XML Node to populate
       # @yieldparam [XML::Namespace] ns XML Namespace of the node
       # @return [XML::Node] newly created node
-      def new_node(name, ns_prefix, &block)
+      def new_node(name, ns_prefix, ns_name = ns_prefix, &block)
         node = XML::Node.new(name)
         node.namespaces.namespace = ns = XML::Namespace.new(node, ns_prefix.to_s, namespaces[ns_prefix])
         node['xsi:schemaLocation'] = schemaLocations[ns_prefix] if schemaLocations.has_key?(ns_prefix)
@@ -144,14 +147,6 @@ module NominetEPP
 
       # @param [String] node_name XML Element name
       # @yield [node, ns] block to populate node
-      # @return [XML::Node] new node in :account namespace
-      # @see new_node
-      def account(node_name, &block)
-        new_node(node_name, :account, &block)
-      end
-
-      # @param [String] node_name XML Element name
-      # @yield [node, ns] block to populate node
       # @return [XML::Node] new node in :contact namespace
       # @see new_node
       def contact(node_name, &block)
@@ -160,18 +155,18 @@ module NominetEPP
 
       # @param [String] node_name XML Element name
       # @yield [node, ns] block to populate node
-      # @return [XML::Node] new node in :tag namespace
-      # @see new_node
-      def tag(node_name, &block)
-        new_node(node_name, :tag, &block)
-      end
-
-      # @param [String] node_name XML Element name
-      # @yield [node, ns] block to populate node
       # @return [XML::Node] new node in :notification namespace
       # @see new_node
       def notification(node_name, &block)
-        new_node(node_name, :n, &block)
+        new_node(node_name, :n, :"std-notifications", &block)
+      end
+
+      def release(node_name, &block)
+        new_node(node_name, :r, :"std-release", &block)
+      end
+
+      def handshake(node_name, &block)
+        new_node(node_name, :h, :"std-handshake", &block)
       end
 
       # @param [String] node_name XML Element name
