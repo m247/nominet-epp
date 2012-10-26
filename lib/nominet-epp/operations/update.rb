@@ -62,11 +62,11 @@ module NominetEPP
       # @param [Hash] fields Fields to update
       # @return [Boolean] request successful
       def update(entity, id, fields = {})
-        @resp = @client.update do
+        resp = @client.update do
           self.send(:"update_#{entity}", id, fields)
         end
 
-        return @resp.success?
+        return resp.success?
       end
       private
         # Generate +domain:update+ payload

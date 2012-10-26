@@ -18,7 +18,7 @@ module NominetEPP
 
         raise ArgumentError, "period suffix must either be 'm' or 'y'" unless %w(m y).include?(unit)
 
-        @resp = @client.renew do
+        resp = @client.renew do
           domain('renew') do |node, ns|
             node << XML::Node.new('name', name, ns)
             p = XML::Node.new('period', num, ns);
@@ -27,10 +27,10 @@ module NominetEPP
           end
         end
 
-        return false unless @resp.success?
+        return false unless resp.success?
 
-        renName = node_value(@resp.data, '//domain:renData/domain:name')
-        renExp  = node_value(@resp.data, '//domain:renData/domain:exDate')
+        renName = node_value(resp.data, '//domain:renData/domain:name')
+        renExp  = node_value(resp.data, '//domain:renData/domain:exDate')
 
         raise "Renewed name #{renName} does not match #{name}" if renName != name
         return Time.parse(renExp)

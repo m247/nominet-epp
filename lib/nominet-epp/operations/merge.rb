@@ -12,7 +12,7 @@ module NominetEPP
       # @return [false] merge failed
       # @return [Response] merge succeded
       def merge(target, sources = {})
-        @resp = @client.update do
+        resp = @client.update do
           account('merge') do |node, ns|
             node << XML::Node.new('roid', target, ns)
 
@@ -32,9 +32,9 @@ module NominetEPP
           end
         end
 
-        return false unless @resp.success?
+        return false unless resp.success?
 
-        @resp  # Need to test this to see what gets returned
+        resp  # Need to test this to see what gets returned
       end
     end
   end

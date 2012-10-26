@@ -21,7 +21,7 @@ module NominetEPP
       # @return [false] fork failed
       # @return [Hash] new account details
       def fork(account_num, *names)
-        @resp = @client.update do
+        resp = @client.update do
           account('fork') do |node, ns|
             node << XML::Node.new('roid', account_num, ns)
             names.each do |name|
@@ -30,19 +30,19 @@ module NominetEPP
           end
         end
 
-        return false unless @resp.success?
+        return false unless resp.success?
 
         hash = {
-          :roid => node_value(@resp.data, '//account:creData/account:roid'),
-          :name => node_value(@resp.data, '//account:creData/account:name'),
-          :crDate => node_value(@resp.data, '//account:creData/account:crDate'),
+          :roid => node_value(resp.data, '//account:creData/account:roid'),
+          :name => node_value(resp.data, '//account:creData/account:name'),
+          :crDate => node_value(resp.data, '//account:creData/account:crDate'),
           :contact => {
-            :roid => node_value(@resp.data, '//account:creData/account:contact/contact:creData/contact:roid'),
-            :name => node_value(@resp.data, '//account:creData/account:contact/contact:creData/contact:name')
+            :roid => node_value(resp.data, '//account:creData/account:contact/contact:creData/contact:roid'),
+            :name => node_value(resp.data, '//account:creData/account:contact/contact:creData/contact:name')
           }
         }
 
-        contact = @resp.data.find('//account:creData/account:contact', namespaces).first
+        contact = resp.data.find('//account:creData/account:contact', namespaces).first
         hash[:contact][:type] = contact['type']
         hash[:contact][:order] = contact['order']
 
