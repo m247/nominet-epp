@@ -155,6 +155,9 @@ module NominetEPP
               fields[:add].each do |k,v|
                 add << (n = XML::Node.new('addr', v, ns))
                 n['ip'] = k.to_s
+
+                add << (s = XML::Node.new('status', ns))
+                s['s'] = 'clientUpdateProhibited'
               end
             end
 
