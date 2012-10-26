@@ -17,7 +17,8 @@ module NominetEPP
       http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2
       http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0
       http://www.nominet.org.uk/epp/xml/std-notifications-1.2
-      http://www.nominet.org.uk/epp/xml/std-handshake-1.0)
+      http://www.nominet.org.uk/epp/xml/std-handshake-1.0
+      http://www.nominet.org.uk/epp/xml/std-warning-1.1)
 
     # Create a new instance of NominetEPP::Client
     #
