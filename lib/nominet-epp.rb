@@ -161,10 +161,18 @@ module NominetEPP
         new_node(node_name, :n, :"std-notifications", &block)
       end
 
+      # @param [String] node_name XML Element name
+      # @yield [node, ns] block to populate node
+      # @return [XML::Node] new node in :release namespace
+      # @see new_node
       def release(node_name, &block)
         new_node(node_name, :r, :"std-release", &block)
       end
 
+      # @param [String] node_name XML Element name
+      # @yield [node, ns] block to populate node
+      # @return [XML::Node] new node in :handshake namespace
+      # @see new_node
       def handshake(node_name, &block)
         new_node(node_name, :h, :"std-handshake", &block)
       end
