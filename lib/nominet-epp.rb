@@ -29,11 +29,18 @@ module NominetEPP
       "#<#{self.class} #{@tag}@#{@server}>"
     end
 
+    # Returns the last EPP::Request sent
+    #
+    # @return [EPP::Request] last sent request
+    def last_request
+      @client._last_request
+    end
+
     # Returns the last EPP::Response received
     #
     # @return [EPP::Response] last received response
     def last_response
-      @resp
+      @client._last_response
     end
 
     # Returns the last EPP message received
