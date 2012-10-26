@@ -64,13 +64,13 @@ module NominetEPP
     end
 
     # @return [Hash] Nominet Namespaces by prefixes
-    def namespaces
-      { :domain  => 'http://www.nominet.org.uk/epp/xml/nom-domain-2.0',
-        :account => 'http://www.nominet.org.uk/epp/xml/nom-account-2.0',
-        :contact => 'http://www.nominet.org.uk/epp/xml/nom-contact-2.0',
-        :tag     => 'http://www.nominet.org.uk/epp/xml/nom-tag-1.0',
-        :n       => 'http://www.nominet.org.uk/epp/xml/nom-notifications-2.0',
-        :host    => 'urn:ietf:params:xml:ns:host-1.0' }
+    def namespaces(name = nil)
+      @namespaces ||= begin
+        service_namespaces.merge(extension_namespaces)
+      end
+
+      return @namespaces if name.nil?
+      return @namespaces[name.to_sym]
     end
 
     # @return [Hash] Nominet Schema Locations by prefix
@@ -174,6 +174,21 @@ module NominetEPP
       # @see new_node
       def host(node_name, &block)
         new_node(node_name, :host, &block)
+      end
+
+      def service_namespaces
+        SERVICE_URNS.inject({}) do |ns, urn|
+          name = urn.split(':').last.split('-',2).first.to_sym
+          ns[name] = urn
+          ns
+        end
+      end
+      def extension_namespaces
+        SERVICE_EXTENSION_URNS.inject({}) do |ns, uri|
+          name = uri.split('/').last.split('-')[0...-1].join('-').to_sym
+          ns[name] = uri
+          ns
+        end
       end
   end
 end
