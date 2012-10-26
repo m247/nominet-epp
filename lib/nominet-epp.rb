@@ -79,7 +79,9 @@ module NominetEPP
 
     # @return [Hash] Nominet Schema Locations by prefix
     def schemaLocations
-      { }
+      @schemaLocations ||= begin
+        service_schemas.merge(extension_schemas)
+      end
     end
 
     include Helpers
@@ -192,6 +194,20 @@ module NominetEPP
           name = uri.split('/').last.split('-')[0...-1].join('-').to_sym
           ns[name] = uri
           ns
+        end
+      end
+      def service_schemas
+        service_namespaces.inject({}) do |schema, ns|
+          name, urn = ns
+          schema[name] = "#{urn} #{urn.split(':').last}.xsd"
+          schema
+        end
+      end
+      def extension_schemas
+        extension_namespaces.inject({}) do |schema, ns|
+          name, uri = ns
+          schema[name] = "#{uri} #{uri.split('/').last}.xsd"
+          schema
         end
       end
   end
