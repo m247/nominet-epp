@@ -165,7 +165,7 @@ module NominetEPP
         end
         # @param [Array<XML::Node>] extensions Host extension data
         # @return [Hash]
-        def info_host_extension(extension)
+        def info_host_extension(extensions)
           {}
         end
     end
