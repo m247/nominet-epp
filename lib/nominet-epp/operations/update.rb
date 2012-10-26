@@ -119,16 +119,16 @@ module NominetEPP
         end
 
         # Generate +host:update+ payload to modify a nameserver entry
-        # ---
-        # We need to know nameserver old data as well.
-        # If we are changing the nameserver name and keeping the info the same
-        # then we do a host:chg. If we are adding an IPv{4,6} address we use
-        # the host:add wrapper, and to remove we do a host:rem. As Nominet only
-        # allow one IPv{4,6} address per nameserver we should remove the old
-        # IP address from the server before adding the one. Alternatively if
-        # Nominet will automatically drop previous address then we need only
-        # do a host:add call.
-        # +++
+        #
+        # @internal
+        #   We need to know nameserver old data as well.
+        #   If we are changing the nameserver name and keeping the info the same
+        #   then we do a host:chg. If we are adding an IPv{4,6} address we use
+        #   the host:add wrapper, and to remove we do a host:rem. As Nominet only
+        #   allow one IPv{4,6} address per nameserver we should remove the old
+        #   IP address from the server before adding the one. Alternatively if
+        #   Nominet will automatically drop previous address then we need only
+        #   do a host:add call.
         #
         # Fields options
         # - (Hash) +:add+ -- Addresses to add to the nameserver
