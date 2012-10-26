@@ -176,6 +176,7 @@ module NominetEPP
             end
           end
         end
+        alias update_host update_nameserver
     end
   end
 end
