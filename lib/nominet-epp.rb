@@ -71,7 +71,10 @@ module NominetEPP
     # @return [Hash] Nominet Namespaces by prefixes
     def namespaces(name = nil)
       @namespaces ||= begin
-        service_namespaces.merge(extension_namespaces)
+        (SERVICE_URNS + SERVICE_EXTENSION_URNS).inject({}) do |ns, urn|
+          ns[namespace_name(urn)] = urn
+          ns
+        end
       end
 
       return @namespaces if name.nil?
@@ -81,7 +84,11 @@ module NominetEPP
     # @return [Hash] Nominet Schema Locations by prefix
     def schemaLocations
       @schemaLocations ||= begin
-        service_schemas.merge(extension_schemas)
+        namespaces.inject({}) do |schema, ns|
+          name, urn = ns
+          schema[name] = "#{urn} #{schema_name(urn)}.xsd"
+          schema
+        end
       end
     end
 
@@ -185,32 +192,20 @@ module NominetEPP
         new_node(node_name, :host, &block)
       end
 
-      def service_namespaces
-        SERVICE_URNS.inject({}) do |ns, urn|
-          name = urn.split(':').last.split('-',2).first.to_sym
-          ns[name] = urn
-          ns
+      def namespace_name(urn)
+        case urn
+        when /\Aurn\:/
+          urn.split(':').last.split('-',2).first.to_sym
+        else
+          urn.split('/').last.split('-')[0...-1].join('-').to_sym
         end
       end
-      def extension_namespaces
-        SERVICE_EXTENSION_URNS.inject({}) do |ns, uri|
-          name = uri.split('/').last.split('-')[0...-1].join('-').to_sym
-          ns[name] = uri
-          ns
-        end
-      end
-      def service_schemas
-        service_namespaces.inject({}) do |schema, ns|
-          name, urn = ns
-          schema[name] = "#{urn} #{urn.split(':').last}.xsd"
-          schema
-        end
-      end
-      def extension_schemas
-        extension_namespaces.inject({}) do |schema, ns|
-          name, uri = ns
-          schema[name] = "#{uri} #{uri.split('/').last}.xsd"
-          schema
+      def schema_name(urn)
+        case urn
+        when /\Aurn\:/
+          urn.split(':').last
+        else
+          urn.split('/').last
         end
       end
   end
