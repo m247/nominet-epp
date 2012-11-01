@@ -98,18 +98,12 @@ module NominetEPP
     include Operations::Check
     include Operations::Create
     include Operations::Delete
-    include Operations::Fork
     include Operations::Handshake
     include Operations::Hello
     include Operations::Info
-    include Operations::List
-    include Operations::Lock
-    include Operations::Merge
-    include Operations::Release
     include Operations::Poll
+    include Operations::Release
     include Operations::Renew
-    include Operations::Unlock
-    include Operations::Unrenew
     include Operations::Update
 
     private
