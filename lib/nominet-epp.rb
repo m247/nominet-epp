@@ -26,11 +26,12 @@ module NominetEPP
     #
     # @param [String] tag Nominet TAG
     # @param [String] passwd Nominet TAG EPP Password
-    # @param [String] server Nominet EPP Server address
-    def initialize(tag, passwd, server = 'epp.nominet.org.uk')
-      @tag, @server = tag, server
+    # @param [String] server Nominet EPP Server address (nil forces default)
+    # @param [String] source_addr Local Address to connect from
+    def initialize(tag, passwd, server = 'epp.nominet.org.uk', source_addr = nil)
+      @tag, @server = tag, (server || 'epp.nominet.org.uk')
       @client = EPP::Client.new(tag, passwd, server, :services => SERVICE_URNS,
-        :extensions => SERVICE_EXTENSION_URNS)
+        :extensions => SERVICE_EXTENSION_URNS, :source_addr => source_addr)
     end
 
     # @see Object#inspect
