@@ -27,7 +27,7 @@ module NominetEPP
           end
 
           if resp.success?
-            return instrument 'create.parse', :entity => entity do
+            return instrument('create.parse', :entity => entity) do
               self.send(:"create_#{entity}_response", resp)
             end
           end
