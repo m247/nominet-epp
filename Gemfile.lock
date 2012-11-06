@@ -1,8 +1,15 @@
+GIT
+  remote: git://github.com/m247/epp-client.git
+  revision: 18f7d4410e334508e644bc8c91bd375a626de244
+  specs:
+    epp-client (0.0.4)
+      libxml-ruby
+
 PATH
   remote: .
   specs:
     nominet-epp (0.0.12)
-      epp-client
+      epp-client (>= 0.0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -10,11 +17,19 @@ GEM
     activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    epp-client (0.0.3)
-      libxml-ruby
+    awesome_print (1.1.0)
+    coderay (1.0.8)
     i18n (0.6.1)
     libxml-ruby (2.3.3)
+    method_source (0.8.1)
     multi_json (1.3.6)
+    pry (0.9.10)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.3.1)
+    pry-doc (0.4.4)
+      pry (>= 0.9.9.6)
+      yard (~> 0.8.1)
     redcarpet (2.2.2)
     shoulda (3.3.2)
       shoulda-context (~> 1.0.1)
@@ -22,13 +37,18 @@ GEM
     shoulda-context (1.0.1)
     shoulda-matchers (1.4.1)
       activesupport (>= 3.0.0)
+    slop (3.3.3)
     yard (0.8.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
+  epp-client!
   nominet-epp!
+  pry
+  pry-doc
   redcarpet
   shoulda
   yard
