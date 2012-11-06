@@ -4,7 +4,9 @@ module NominetEPP
     module Hello
       # @return [Boolean] hello greeting returned
       def hello
-        @client.hello  # This should be a epp-client method
+        instrument :hello do
+          @client.hello
+        end
       end
     end
   end
