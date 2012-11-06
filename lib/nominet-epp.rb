@@ -27,11 +27,13 @@ module NominetEPP
     # @param [String] tag Nominet TAG
     # @param [String] passwd Nominet TAG EPP Password
     # @param [String] server Nominet EPP Server address (nil forces default)
-    # @param [String] source_addr Local Address to connect from
-    def initialize(tag, passwd, server = 'epp.nominet.org.uk', source_addr = nil)
+    # @param [String] address_family 'AF_INET' or 'AF_INET6' or either of the
+    #                 appropriate socket constants. Will cause connections to be
+    #                 limited to this address family. Default try all addresses.
+    def initialize(tag, passwd, server = 'epp.nominet.org.uk', address_family = nil)
       @tag, @server = tag, (server || 'epp.nominet.org.uk')
       @client = EPP::Client.new(tag, passwd, server, :services => SERVICE_URNS,
-        :extensions => SERVICE_EXTENSION_URNS, :source_addr => source_addr)
+        :extensions => SERVICE_EXTENSION_URNS, :address_family => address_family)
     end
 
     # @see Object#inspect
