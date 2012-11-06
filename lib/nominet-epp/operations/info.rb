@@ -9,20 +9,27 @@ module NominetEPP
       def info(entity, id)
         raise ArgumentError, "entity must be :domain, :contact or :host" unless [:domain, :contact, :host].include?(entity)
 
-        resp = @client.info do
-          case entity
-          when :domain
-            domain('info') { |node, ns| node << XML::Node.new('name', id, ns) }
-          when :contact
-            contact('info') { |node, ns| node << XML::Node.new('id', id, ns) }
-          when :host
-            host('info') { |node, ns| node << XML::Node.new('name', id, ns) }
+        instrument "info", :entity => entity, :id => id do
+          resp = instrument "info.request", :entity => entity do
+            @client.info do
+              case entity
+              when :domain
+                domain('info') { |node, ns| node << XML::Node.new('name', id, ns) }
+              when :contact
+                contact('info') { |node, ns| node << XML::Node.new('id', id, ns) }
+              when :host
+                host('info') { |node, ns| node << XML::Node.new('name', id, ns) }
+              end
+            end
+          end
+
+          return false unless resp.success?
+
+          instrument "info.parse", :entity => entity do
+            result = self.send(:"info_#{entity}", resp.data)
+            result.merge(self.send(:"info_#{entity}_extension", resp.extension))
           end
         end
-
-        return false unless resp.success?
-        result = self.send(:"info_#{entity}", resp.data)
-        result.merge(self.send(:"info_#{entity}_extension", resp.extension))
       end
 
       private
