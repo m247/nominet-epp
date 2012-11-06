@@ -73,7 +73,13 @@ module NominetEPP
             when "infData"
               extension.find('//domain-nom-ext:infData', namespaces).first.children.reject { |n| n.empty? }.each do |node|
                 key = node.name.gsub('-', '_').to_sym
-                hash[key] = node.content.strip
+                case key
+                when :notes
+                  hash[:notes] ||= Array.new
+                  hash[:notes] << node.content.strip
+                else
+                  hash[key] = node.content.strip
+                end
               end
             when "truncated-field"
               extension.find('//std-warning:truncated-field', namespaces).each do |node|
