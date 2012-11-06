@@ -206,6 +206,10 @@ module NominetEPP
         new_node(node_name, :"contact-nom-ext", :"contact-ext", &block)
       end
 
+      # Returns the name of the given namespace
+      # @internal
+      # @param [String] urn Namespace URN or URI
+      # @return [String] the name of the given namespace
       def namespace_name(urn)
         case urn
         when /\Aurn\:/
@@ -214,6 +218,11 @@ module NominetEPP
           urn.split('/').last.split('-')[0...-1].join('-').to_sym
         end
       end
+
+      # Returns the name of the given schema
+      # @internal
+      # @param [String] urn Schema URN or URI
+      # @return [String] the name of the given schema
       def schema_name(urn)
         case urn
         when /\Aurn\:/
