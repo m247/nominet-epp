@@ -190,6 +190,22 @@ module NominetEPP
         new_node(node_name, :host, &block)
       end
 
+      # @param [String] node_name XML Element name
+      # @yield [node, ns] block to populate node
+      # @return [XML::Node] new node in :domain-ext namespace
+      # @see new_node
+      def domain_ext(node_name, &block)
+        new_node(node_name, :"domain-nom-ext", :"domain-ext", &block)
+      end
+
+      # @param [String] node_name XML Element name
+      # @yield [node, ns] block to populate node
+      # @return [XML::Node] new node in :domain-ext namespace
+      # @see new_node
+      def contact_ext(node_name, &block)
+        new_node(node_name, :"contact-nom-ext", :"contact-ext", &block)
+      end
+
       def namespace_name(urn)
         case urn
         when /\Aurn\:/
