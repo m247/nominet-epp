@@ -81,6 +81,17 @@ module NominetEPP
                   hash[key] = node.content.strip
                 end
               end
+
+              extension.find('//secDNS:infData', namespaces).each do |node|
+                next if node.empty?
+
+                hash[:ds] = node.find('secDNS:dsData', namespaces).map do |dsData|
+                  { :key_tag      => node_value(dsData, 'secDNS:keyTag'),
+                    :alg          => node_value(dsData, 'secDNS:alg'),
+                    :digest_type  => node_value(dsData, 'secDNS:digestType'),
+                    :digest       => node_value(dsData, 'secDNS:digest') }
+                end
+              end
             when "truncated-field"
               extension.find('//std-warning:truncated-field', namespaces).each do |node|
                 fieldName = node.attributes["field-name"]
