@@ -231,5 +231,21 @@ module NominetEPP
           urn.split('/').last
         end
       end
+
+      # Wrapper for ActiveSupport::Notifications if available to perform
+      # instrumentation of methods.
+      #
+      # @internal
+      # @param [String,Symbol] name Instrument name. Will be prefixed with "nominet-epp".
+      # @param [Hash] payload Extra information to be included with the instrumentation data.
+      def instrument(name, payload = {})
+        if defined?(ActiveSupport::Notifications)
+          ActiveSupport::Notifications.instrument("nominet-epp.#{name}", payload) do
+            yield
+          end
+        else
+          yield
+        end
+      end
   end
 end
