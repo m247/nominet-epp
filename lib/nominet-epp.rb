@@ -200,7 +200,7 @@ module NominetEPP
 
       # @param [String] node_name XML Element name
       # @yield [node, ns] block to populate node
-      # @return [XML::Node] new node in :domain-ext namespace
+      # @return [XML::Node] new node in :contact-ext namespace
       # @see new_node
       def contact_ext(node_name, &block)
         new_node(node_name, :"contact-nom-ext", :"contact-ext", &block)
