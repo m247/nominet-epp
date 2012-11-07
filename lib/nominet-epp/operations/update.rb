@@ -11,9 +11,11 @@ module NominetEPP
     #
     # ==== Changes +:add+ options
     # - (Hash<Symbol,String>)   +:status+      -- Adds the symbolised status with the given message to the domain
+    # - (Array<Hash>)           +:ds+          -- DNSSEC DS records to add, +:key_tag+, +:alg+, +:digest_type+ & +:digest+ required
     #
     # ==== Changes +:rem+ options
     # - (String,Array<String>)  +:status+      -- Removes the given status from the domain
+    # - (Array<Hash>,Symbol)    +:ds+          -- DNSSEC DS records to remove, or +:all+ to remove all records.
     #
     # ==== Changes +:chg+ options
     # - (String)                +:registrant+  -- Registrant ID
@@ -133,6 +135,11 @@ module NominetEPP
           changes[:rem] && changes[:rem].delete_if { |k,_| DOMAIN_EXTENSION_KEYS.include?(k) }
           changes[:chg] && changes[:chg].delete_if { |k,_| DOMAIN_EXTENSION_KEYS.include?(k) }
 
+          dnssec = {}
+          dnssec[:add] = changes[:add] && changes[:add].delete(:ds)
+          dnssec[:rem] = changes[:rem] && changes[:rem].delete(:ds)
+          dnssec[:chg] = changes[:chg] && changes[:chg].delete(:ds)
+
           addrem_order = [:ns, :contact, :status]
 
           update << domain('update') do |node, ns|
@@ -194,6 +201,49 @@ module NominetEPP
                   name = key.to_s.gsub('_','-')
                   node << XML::Node.new(name, value, ns)
                 end
+              end
+            end
+          end
+
+          unless dnssec.empty?
+            extension << secdns('update') do |node, ns|
+              if dnssec[:rem]
+                case dnssec[:rem]
+                when :all
+                  node << XML::Node.new('rem', nil, ns).tap do |n|
+                    n << XML::Node.new('all', 'true', ns)
+                  end
+                when Hash
+                  unless dnssec[:rem].empty?
+                    node << XML::Node.new('rem', nil, ns).tap do |n|
+                      dnssec[:rem].each do |ds|
+                        n << XML::Node.new('dsData', nil, ns).tap do |dsData|
+                          dsData << XML::Node.new('keyTag', ds[:key_tag], ns)
+                          dsData << XML::Node.new('alg', ds[:alg], ns)
+                          dsData << XML::Node.new('digestType', ds[:digest_type], ns)
+                          dsData << XML::Node.new('digest', ds[:digest], ns)
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+
+              if dnssec[:add] && !dnssec[:add].empty?
+                node << XML::Node.new('add', nil, ns).tap do |n|
+                  dnssec[:add].each do |ds|
+                    n << XML::Node.new('dsData', nil, ns).tap do |dsData|
+                      dsData << XML::Node.new('keyTag', ds[:key_tag], ns)
+                      dsData << XML::Node.new('alg', ds[:alg], ns)
+                      dsData << XML::Node.new('digestType', ds[:digest_type], ns)
+                      dsData << XML::Node.new('digest', ds[:digest], ns)
+                    end
+                  end
+                end
+              end
+
+              if dnssec[:chg] && !dnssec[:chg].empty?
+                # Nominet don't support maxSigLife so nothing happens here
               end
             end
           end

@@ -51,6 +51,8 @@ module NominetEPP
           extensions.delete_if { |k,_| !DOMAIN_EXTENSION_KEYS.include?(k) }
           options.delete_if { |k,_| DOMAIN_EXTENSION_KEYS.include?(k) }
 
+          dnssec = options.delete(:ds)
+
           create << domain('create') do |node, ns|
             node << XML::Node.new('name', name, ns)
 
@@ -98,6 +100,19 @@ module NominetEPP
                 else
                   name = key.to_s.gsub('_','-')
                   node << XML::Node.new(name, value, ns)
+                end
+              end
+            end
+          end
+
+          unless dnssec.nil?
+            extension << secdns('create') do |node, ns|
+              Array(dnssec).each do |ds|
+                node << XML::Node.new('dsData', nil, ns).tap do |n|
+                  n << XML::Node.new('keyTag', ds[:key_tag], ns)
+                  n << XML::Node.new('alg', ds[:alg], ns)
+                  n << XML::Node.new('digestType', ds[:digest_type], ns)
+                  n << XML::Node.new('digest', ds[:digest], ns)
                 end
               end
             end

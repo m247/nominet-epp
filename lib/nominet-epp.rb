@@ -206,6 +206,14 @@ module NominetEPP
         new_node(node_name, :"contact-nom-ext", :"contact-ext", &block)
       end
 
+      # @param [String] node_name XML Element name
+      # @yield [node, ns] block to populate node
+      # @return [XML::Node] new node in :secDNS namespace
+      # @see new_node
+      def secdns(node_name, &block)
+        new_node(node_name, :secDNS, &block)
+      end
+
       # Returns the name of the given namespace
       # @internal
       # @param [String] urn Namespace URN or URI
