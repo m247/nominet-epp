@@ -69,7 +69,7 @@ module NominetEPP
     #       so it may not always be present.
     # @return [Hash] last failData found
     def last_error_info
-      @error_info
+      @error_info || {}
     end
 
     # @return [Hash] Nominet Namespaces by prefixes
