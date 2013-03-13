@@ -30,6 +30,7 @@ GEM
     pry-doc (0.4.4)
       pry (>= 0.9.9.6)
       yard (~> 0.8.1)
+    rake (10.0.3)
     redcarpet (2.2.2)
     shoulda (3.3.2)
       shoulda-context (~> 1.0.1)
@@ -49,6 +50,7 @@ DEPENDENCIES
   nominet-epp!
   pry
   pry-doc
+  rake
   redcarpet
   shoulda
   yard

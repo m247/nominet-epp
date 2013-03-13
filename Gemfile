@@ -7,3 +7,4 @@ gem 'epp-client', :github => "m247/epp-client"
 gem 'pry'
 gem 'pry-doc'
 gem 'awesome_print'
+gem 'rake'
