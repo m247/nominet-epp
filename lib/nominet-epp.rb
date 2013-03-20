@@ -32,7 +32,7 @@ module NominetEPP
     #                 limited to this address family. Default try all addresses.
     def initialize(tag, passwd, server = 'epp.nominet.org.uk', address_family = nil)
       @tag, @server = tag, (server || 'epp.nominet.org.uk')
-      @client = EPP::Client.new(tag, passwd, server, :services => SERVICE_URNS,
+      @client = EPP::Client.new(@tag, passwd, @server, :services => SERVICE_URNS,
         :extensions => SERVICE_EXTENSION_URNS, :address_family => address_family)
     end
 
