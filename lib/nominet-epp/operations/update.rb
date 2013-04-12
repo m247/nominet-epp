@@ -339,12 +339,12 @@ module NominetEPP
 
                   case key
                   when :postal_info
-                    node << XML::Node.new('postalInfo', nil, ns).tap do |post|
+                    chg << XML::Node.new('postalInfo', nil, ns).tap do |post|
                       post['type'] = 'loc'
                       update_contact_postal_info(post, value, ns)
                     end
                   when :disclose
-                    node << XML::Node.new('disclose', nil, ns).tap do |d|
+                    chg << XML::Node.new('disclose', nil, ns).tap do |d|
                       d["flag"] = "1"
                       Array(value).each do |v|
                         d << XML::Node.new(v, ns)
@@ -355,7 +355,7 @@ module NominetEPP
                   else
                     # voice, fax, email
                     name = key.to_s.gsub('_', '-')
-                    node << XML::Node.new(name, value, ns)
+                    chg << XML::Node.new(name, value, ns)
                   end
                 end
               end
