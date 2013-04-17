@@ -415,7 +415,7 @@ module NominetEPP
         # @param [Hash] data Information to add to +node+
         # @param [XML::Namespace] ns XML Namespace to create new nodes under
         def update_contact_postal_info(node, data, ns)
-          [:name, :org, :addr].each do |key|
+          [:name, :addr].each do |key|
             value = data[key]
             next if value.nil?
 
