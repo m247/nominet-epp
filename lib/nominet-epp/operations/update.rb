@@ -175,7 +175,7 @@ module NominetEPP
 
                   case key
                   when :registrant
-                    node << XML::Node.new('registrant', value, ns)
+                    chg << XML::Node.new('registrant', value, ns)
                   when :auth_info
                     # ignored, Nominet does not support this
                   end
@@ -347,7 +347,7 @@ module NominetEPP
                     chg << XML::Node.new('disclose', nil, ns).tap do |d|
                       d["flag"] = "1"
                       Array(value).each do |v|
-                        d << XML::Node.new(v, ns)
+                        d << XML::Node.new(v, nil, ns)
                       end
                     end
                   when :auth_info
