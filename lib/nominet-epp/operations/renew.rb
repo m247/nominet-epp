@@ -16,7 +16,7 @@ module NominetEPP
         period = '2y'  # reset period to 2 years as nominet don't currently support other options
         expiry_date = Time.parse(expiry_date) if expiry_date.kind_of?(String)
 
-        unit = period[-1..1]
+        unit = period[-1,1]
         num = period.to_i.to_s
 
         raise ArgumentError, "period suffix must either be 'm' or 'y'" unless %w(m y).include?(unit)

@@ -66,7 +66,7 @@ module NominetEPP
 
               case key
               when :period
-                unit, period = value[-1..1], value.to_i.to_s
+                unit, period = value[-1,1], value.to_i.to_s
                 node << XML::Node.new('period', period, ns).tap do |n|
                   n['unit'] = unit
                 end
