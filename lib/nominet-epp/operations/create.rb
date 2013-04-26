@@ -109,10 +109,10 @@ module NominetEPP
             extension << secdns('create') do |node, ns|
               Array(dnssec).each do |ds|
                 node << XML::Node.new('dsData', nil, ns).tap do |n|
-                  n << XML::Node.new('keyTag', ds[:key_tag], ns)
-                  n << XML::Node.new('alg', ds[:alg], ns)
-                  n << XML::Node.new('digestType', ds[:digest_type], ns)
-                  n << XML::Node.new('digest', ds[:digest], ns)
+                  n << XML::Node.new('keyTag', ds[:key_tag].to_s, ns)
+                  n << XML::Node.new('alg', ds[:alg].to_s, ns)
+                  n << XML::Node.new('digestType', ds[:digest_type].to_s, ns)
+                  n << XML::Node.new('digest', ds[:digest].gsub(/\s/,''), ns)
                 end
               end
             end
