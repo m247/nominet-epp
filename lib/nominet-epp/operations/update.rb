@@ -221,7 +221,7 @@ module NominetEPP
                           dsData << XML::Node.new('keyTag', ds[:key_tag].to_s, ns)
                           dsData << XML::Node.new('alg', ds[:alg].to_s, ns)
                           dsData << XML::Node.new('digestType', ds[:digest_type].to_s, ns)
-                          dsData << XML::Node.new('digest', ds[:digest], ns)
+                          dsData << XML::Node.new('digest', ds[:digest].gsub(/\s/,''), ns)
                         end
                       end
                     end
@@ -236,7 +236,7 @@ module NominetEPP
                       dsData << XML::Node.new('keyTag', ds[:key_tag].to_s, ns)
                       dsData << XML::Node.new('alg', ds[:alg].to_s, ns)
                       dsData << XML::Node.new('digestType', ds[:digest_type].to_s, ns)
-                      dsData << XML::Node.new('digest', ds[:digest], ns)
+                      dsData << XML::Node.new('digest', ds[:digest].gsub(/\s/,''), ns)
                     end
                   end
                 end
