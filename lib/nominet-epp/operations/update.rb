@@ -218,8 +218,8 @@ module NominetEPP
                     node << XML::Node.new('rem', nil, ns).tap do |n|
                       dnssec[:rem].each do |ds|
                         n << XML::Node.new('dsData', nil, ns).tap do |dsData|
-                          dsData << XML::Node.new('keyTag', ds[:key_tag], ns)
-                          dsData << XML::Node.new('alg', ds[:alg], ns)
+                          dsData << XML::Node.new('keyTag', ds[:key_tag].to_s, ns)
+                          dsData << XML::Node.new('alg', ds[:alg].to_s, ns)
                           dsData << XML::Node.new('digestType', ds[:digest_type], ns)
                           dsData << XML::Node.new('digest', ds[:digest], ns)
                         end
@@ -233,8 +233,8 @@ module NominetEPP
                 node << XML::Node.new('add', nil, ns).tap do |n|
                   dnssec[:add].each do |ds|
                     n << XML::Node.new('dsData', nil, ns).tap do |dsData|
-                      dsData << XML::Node.new('keyTag', ds[:key_tag], ns)
-                      dsData << XML::Node.new('alg', ds[:alg], ns)
+                      dsData << XML::Node.new('keyTag', ds[:key_tag].to_s, ns)
+                      dsData << XML::Node.new('alg', ds[:alg].to_s, ns)
                       dsData << XML::Node.new('digestType', ds[:digest_type], ns)
                       dsData << XML::Node.new('digest', ds[:digest], ns)
                     end
