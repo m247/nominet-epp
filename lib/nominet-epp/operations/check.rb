@@ -56,7 +56,7 @@ module NominetEPP
               hash
             end
 
-            result.size > 1 ? result : result[0]
+            result.size > 1 ? result : result.values.first
           end
         end
       end
