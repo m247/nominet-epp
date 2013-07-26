@@ -163,7 +163,7 @@ module NominetEPP
       # @return [XML::Node] new node in :notification namespace
       # @see new_node
       def notification(node_name, &block)
-        new_node(node_name, :n, :"std-notifications", &block)
+        new_node(node_name, :"std-notifications", :n, &block)
       end
 
       # @param [String] node_name XML Element name
@@ -179,7 +179,7 @@ module NominetEPP
       # @return [XML::Node] new node in :handshake namespace
       # @see new_node
       def handshake(node_name, &block)
-        new_node(node_name, :h, :"std-handshake", &block)
+        new_node(node_name, :"std-handshake", :h, &block)
       end
 
       # @param [String] node_name XML Element name
