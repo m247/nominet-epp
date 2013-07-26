@@ -8,7 +8,7 @@ module NominetEPP
         raise ArgumentError, "entity must be :domain or :contact/:registrant" unless [:domain, :contact, :registrant].include?(entity)
 
         resp = @client.update do
-          release('release') do |node, ns|
+          _release('release') do |node, ns|
             case entity
             when :domain
               node << XML::Node.new('domainName', id, ns)

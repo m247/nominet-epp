@@ -170,8 +170,8 @@ module NominetEPP
       # @yield [node, ns] block to populate node
       # @return [XML::Node] new node in :release namespace
       # @see new_node
-      def release(node_name, &block)
-        new_node(node_name, :r, :"std-release", &block)
+      def _release(node_name, &block)
+        new_node(node_name, :"std-release", :r, &block)
       end
 
       # @param [String] node_name XML Element name
