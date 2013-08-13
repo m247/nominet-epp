@@ -35,7 +35,9 @@ module NominetEPP
           return if resp.code != 1301 || resp.msgQ['count'] == '0'
           return [resp.msgQ['id'], resp.data] unless block_given?
 
-          yield resp.data
+          result = yield resp.data
+          return if result == false
+
           raise AckError, "failed to acknowledge message #{resp.msgQ['id']}" unless ack(resp.msgQ['id'])
         end
       end
