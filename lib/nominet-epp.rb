@@ -29,7 +29,9 @@ module NominetEPP
       http://www.nominet.org.uk/epp/xml/std-notifications-1.2
       http://www.nominet.org.uk/epp/xml/std-handshake-1.0
       http://www.nominet.org.uk/epp/xml/std-warning-1.1
-      http://www.nominet.org.uk/epp/xml/std-release-1.0)
+      http://www.nominet.org.uk/epp/xml/std-release-1.0
+      http://www.nominet.org.uk/epp/xml/std-unrenew-1.0
+      http://www.nominet.org.uk/epp/xml/std-list-1.0)
 
     # Create a new instance of NominetEPP::Client
     #
