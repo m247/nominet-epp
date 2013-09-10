@@ -9,6 +9,7 @@ require File.dirname(__FILE__) + '/nominet-epp/request'
 
 require File.dirname(__FILE__) + '/nominet-epp/domain/check'
 require File.dirname(__FILE__) + '/nominet-epp/domain/delete'
+require File.dirname(__FILE__) + '/nominet-epp/domain/info'
 
 # Nominet EPP Module
 module NominetEPP
