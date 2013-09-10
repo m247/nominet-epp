@@ -5,6 +5,8 @@ require File.dirname(__FILE__) + '/nominet-epp/version'
 require File.dirname(__FILE__) + '/nominet-epp/operations'
 require File.dirname(__FILE__) + '/nominet-epp/helpers'
 
+require File.dirname(__FILE__) + '/nominet-epp/request'
+
 # Nominet EPP Module
 module NominetEPP
   # Front end interface Client to the NominetEPP Service
