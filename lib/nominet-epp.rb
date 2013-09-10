@@ -7,6 +7,8 @@ require File.dirname(__FILE__) + '/nominet-epp/helpers'
 
 require File.dirname(__FILE__) + '/nominet-epp/request'
 
+require File.dirname(__FILE__) + '/nominet-epp/domain/check'
+
 # Nominet EPP Module
 module NominetEPP
   # Front end interface Client to the NominetEPP Service
