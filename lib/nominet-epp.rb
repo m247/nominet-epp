@@ -16,6 +16,7 @@ require File.dirname(__FILE__) + '/nominet-epp/domain/renew'
 require File.dirname(__FILE__) + '/nominet-epp/domain/unrenew'
 require File.dirname(__FILE__) + '/nominet-epp/domain/update'
 require File.dirname(__FILE__) + '/nominet-epp/domain/release'
+require File.dirname(__FILE__) + '/nominet-epp/contact/check'
 
 # Nominet EPP Module
 module NominetEPP
