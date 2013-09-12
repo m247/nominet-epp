@@ -18,6 +18,7 @@ require File.dirname(__FILE__) + '/nominet-epp/domain/unrenew'
 require File.dirname(__FILE__) + '/nominet-epp/domain/update'
 
 require File.dirname(__FILE__) + '/nominet-epp/contact/check'
+require File.dirname(__FILE__) + '/nominet-epp/contact/create'
 require File.dirname(__FILE__) + '/nominet-epp/contact/delete'
 require File.dirname(__FILE__) + '/nominet-epp/contact/info'
 require File.dirname(__FILE__) + '/nominet-epp/contact/release'
