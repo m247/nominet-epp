@@ -13,6 +13,7 @@ require File.dirname(__FILE__) + '/nominet-epp/domain/delete'
 require File.dirname(__FILE__) + '/nominet-epp/domain/info'
 require File.dirname(__FILE__) + '/nominet-epp/domain/renew'
 require File.dirname(__FILE__) + '/nominet-epp/domain/unrenew'
+require File.dirname(__FILE__) + '/nominet-epp/domain/update'
 require File.dirname(__FILE__) + '/nominet-epp/domain/release'
 
 # Nominet EPP Module
