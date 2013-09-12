@@ -13,7 +13,7 @@ module NominetEPP
         @options[:auth_info] ||= {:pw => SecureRandom.hex(8) }
 
         @domain_ext = CreateExtension.new(@extensions) rescue nil
-        @secdns_ext = SecDNSExtension.new(@options.delete(:ds)) rescue nil
+        @secdns_ext = CreateSecDNSExtension.new(@options.delete(:ds)) rescue nil
 
         @command    = EPP::Domain::Create.new(@name, @options)
         @extension  = EPP::Requests::Extension.new(@domain_ext, @secdns_ext) rescue nil
@@ -66,7 +66,7 @@ module NominetEPP
       end
     end
 
-    class SecDNSExtension < RequestExtension
+    class CreateSecDNSExtension < RequestExtension
       NAMESPACE = 'urn:ietf:params:xml:ns:secDNS-1.1'
 
       def initialize(attributes)
