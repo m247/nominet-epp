@@ -12,24 +12,26 @@ module NominetEPP
 
         @options[:auth_info] ||= {:pw => SecureRandom.hex(8) }
 
-        @domain_ext = CreateExtension.new(@extensions)
-        @secdns_ext = SecDNSExtension.new(@options.delete(:ds))
+        @domain_ext = CreateExtension.new(@extensions) rescue nil
+        @secdns_ext = SecDNSExtension.new(@options.delete(:ds)) rescue nil
 
-        @command = EPP::Domain::Create.new(@name, @options)
-        @extension = EPP::Requests::Extension.new(@domain_ext, @secdns_ext)
+        @command    = EPP::Domain::Create.new(@name, @options)
+        @extension  = EPP::Requests::Extension.new(@domain_ext, @secdns_ext) rescue nil
       end
-      
+
       def namespaces
-        @command.namespaces.merge(@extension.namespaces)
+        ext_ns = @extension && @extension.namespaces || {}
+        @command.namespaces.merge(ext_ns)
       end
     end
-    
+
     class CreateExtension < RequestExtension
       KEYS = [:first_bill, :recur_bill, :auto_bill, :next_bill,
         :auto_period, :next_period, :notes, :reseller]
       NAMESPACE = 'http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2'
 
       def initialize(attributes)
+        raise ArgumentError, "must provide Hash of #{KEYS.map(&:inspect).join(", ")}" if attributes.nil? || attributes.empty?
         @attributes = attributes
         @namespaces = {}
       end
@@ -59,15 +61,16 @@ module NominetEPP
             node << x_node(name, value.to_s)
           end
         end
-        
+
         node
       end
     end
-    
+
     class SecDNSExtension < RequestExtension
       NAMESPACE = 'urn:ietf:params:xml:ns:secDNS-1.1'
 
       def initialize(attributes)
+        raise ArgumentError, "must provide Array of Hash or Hash of :key_tag, :alg, :digest_type and :digest" if attributes.nil? || attributes.empty?
         @attributes = attributes
         @namespaces = {}
       end
@@ -91,7 +94,7 @@ module NominetEPP
             dsData << x_node('digest', attributes[:digest].gsub(/\s+/, ''))
           end
         end
-        
+
         node
       end
     end
