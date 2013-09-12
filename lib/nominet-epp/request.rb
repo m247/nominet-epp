@@ -1,9 +1,14 @@
 module NominetEPP
   class Request
-    attr_reader :command, :extension, :namespaces
+    attr_reader :command, :extension
 
     def command_name
       @command_name ||= command.name
+    end
+
+    def namespaces
+      ext_ns = @extension && @extension.namespaces || {}
+      @command.namespaces.merge(ext_ns)
     end
 
     # Creates and returns a new XML node
@@ -104,6 +109,9 @@ module NominetEPP
       self
     end
 
+    def namespaces
+      @namespaces
+    end
     def set_namespaces(namespaces)
       @namespaces = namespaces
     end

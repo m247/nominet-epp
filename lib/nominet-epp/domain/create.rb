@@ -18,11 +18,6 @@ module NominetEPP
         @command    = EPP::Domain::Create.new(@name, @options)
         @extension  = EPP::Requests::Extension.new(@domain_ext, @secdns_ext) rescue nil
       end
-
-      def namespaces
-        ext_ns = @extension && @extension.namespaces || {}
-        @command.namespaces.merge(ext_ns)
-      end
     end
 
     class CreateExtension < RequestExtension
