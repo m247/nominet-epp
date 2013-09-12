@@ -8,6 +8,7 @@ require File.dirname(__FILE__) + '/nominet-epp/helpers'
 require File.dirname(__FILE__) + '/nominet-epp/request'
 
 require File.dirname(__FILE__) + '/nominet-epp/domain/check'
+require File.dirname(__FILE__) + '/nominet-epp/domain/create'
 require File.dirname(__FILE__) + '/nominet-epp/domain/delete'
 require File.dirname(__FILE__) + '/nominet-epp/domain/info'
 require File.dirname(__FILE__) + '/nominet-epp/domain/renew'
