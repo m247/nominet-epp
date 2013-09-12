@@ -24,6 +24,12 @@ require File.dirname(__FILE__) + '/nominet-epp/contact/info'
 require File.dirname(__FILE__) + '/nominet-epp/contact/release'
 require File.dirname(__FILE__) + '/nominet-epp/contact/update'
 
+require File.dirname(__FILE__) + '/nominet-epp/host/check'
+require File.dirname(__FILE__) + '/nominet-epp/host/create'
+require File.dirname(__FILE__) + '/nominet-epp/host/delete'
+require File.dirname(__FILE__) + '/nominet-epp/host/info'
+require File.dirname(__FILE__) + '/nominet-epp/host/update'
+
 # Nominet EPP Module
 module NominetEPP
   # Front end interface Client to the NominetEPP Service
