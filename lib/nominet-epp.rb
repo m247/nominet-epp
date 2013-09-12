@@ -20,6 +20,7 @@ require File.dirname(__FILE__) + '/nominet-epp/domain/update'
 require File.dirname(__FILE__) + '/nominet-epp/contact/check'
 require File.dirname(__FILE__) + '/nominet-epp/contact/delete'
 require File.dirname(__FILE__) + '/nominet-epp/contact/info'
+require File.dirname(__FILE__) + '/nominet-epp/contact/release'
 
 # Nominet EPP Module
 module NominetEPP
