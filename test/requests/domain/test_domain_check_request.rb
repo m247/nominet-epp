@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestNominetCheckRequest < Test::Unit::TestCase
+class TestNominetDomainCheckRequest < Test::Unit::TestCase
   context 'NominetEPP::Domain::Check' do
     setup do
       @request = NominetEPP::Domain::Check.new('example.co.uk', 'example.me.uk')

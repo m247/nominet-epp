@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestNominetCreateRequest < Test::Unit::TestCase
+class TestNominetDomainCreateRequest < Test::Unit::TestCase
   context 'NominetEPP::Domain::Create' do
     context 'no extensions' do
       setup do

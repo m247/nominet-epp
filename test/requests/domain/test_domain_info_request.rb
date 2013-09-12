@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestNominetInfoRequest < Test::Unit::TestCase
+class TestNominetDomainInfoRequest < Test::Unit::TestCase
   context 'NominetEPP::Domain::Info' do
     setup do
       @request = NominetEPP::Domain::Info.new('example.co.uk')

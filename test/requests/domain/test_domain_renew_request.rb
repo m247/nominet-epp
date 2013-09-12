@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestNominetRenewRequest < Test::Unit::TestCase
+class TestNominetDomainRenewRequest < Test::Unit::TestCase
   context 'NominetEPP::Domain::Renew' do
     setup do
       @time    = Time.now.utc

@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestNominetUpdateRequest < Test::Unit::TestCase
+class TestNominetDomainUpdateRequest < Test::Unit::TestCase
   context 'NominetEPP::Domain::Update' do
     context 'no extensions' do
       setup do

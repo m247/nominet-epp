@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestNominetListRequest < Test::Unit::TestCase
+class TestNominetDomainListRequest < Test::Unit::TestCase
   context 'NominetEPP::Domain::Info' do
     context 'expiry' do
       setup do

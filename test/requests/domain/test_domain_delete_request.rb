@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestNominetDeleteRequest < Test::Unit::TestCase
+class TestNominetDomainDeleteRequest < Test::Unit::TestCase
   context 'NominetEPP::Domain::Delete' do
     setup do
       @request = NominetEPP::Domain::Delete.new('example.co.uk')

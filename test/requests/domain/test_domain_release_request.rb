@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestNominetReleaseRequest < Test::Unit::TestCase
+class TestNominetDomainReleaseRequest < Test::Unit::TestCase
   context 'NominetEPP::Domain::Release' do
     setup do
       @time    = Time.now.utc
