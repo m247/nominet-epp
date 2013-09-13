@@ -12,14 +12,22 @@ module NominetEPP
     def prepare_request(type, request, extension = nil)
       @client.__send__(:"#{type}_prepare", request, extension)
     end
+    def load_response(xml)
+      @client.__send__(:load_response, xml)
+    end
   end
 end
 
 class Test::Unit::TestCase
   def load_xml(name)
-    xml_path = File.expand_path("../fixtures/responses/#{name}.xml", __FILE__)
+    xml_path = File.expand_path("../support/responses/#{name}.xml", __FILE__)
     File.read(xml_path)
   end
+  def load_response(name)
+    xml = load_xml(name)
+    test_client.load_response(xml)
+  end
+  
   def load_schema(name)
     xsd_path = File.expand_path("../support/schemas/#{name}.xsd", __FILE__)
     xsd_doc  = XML::Document.file(xsd_path)
@@ -49,8 +57,11 @@ class Test::Unit::TestCase
     @namespaces = Hash[*request.namespaces.map { |k,ns| [k, ns.href] }.flatten]
   end
 
+  def test_client
+    @test_client ||= NominetEPP::Client.new('TEST', 'testing')
+  end
+
   def prepare_request(name = @request.command_name, request = @request)
-    @client ||= NominetEPP::Client.new('TEST', 'testing')
-    @client.prepare_request(name, request.command, request.extension)
+    test_client.prepare_request(name, request.command, request.extension)
   end
 end
