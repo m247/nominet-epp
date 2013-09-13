@@ -39,6 +39,9 @@ require File.dirname(__FILE__) + '/nominet-epp/responses/domain/renew_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/domain/unrenew_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/domain/update_response'
 
+require File.dirname(__FILE__) + '/nominet-epp/responses/host/delete_response'
+require File.dirname(__FILE__) + '/nominet-epp/responses/host/update_response'
+
 # Nominet EPP Module
 module NominetEPP
   # Front end interface Client to the NominetEPP Service
