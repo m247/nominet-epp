@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1000">
+      <msg>Command completed successfully</msg>
+    </result>
+    <resData>
+      <contact:creData xmlns:contact="urn:ietf:params:xml:ns:contact-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0 contact-1.0.xsd">
+        <contact:id>UK-4398495</contact:id>
+        <contact:crDate>2013-09-13T15:48:52</contact:crDate>
+      </contact:creData>
+    </resData>
+    <extension>
+      <warning:ignored-field xmlns:warning="http://www.nominet.org.uk/epp/xml/std-warning-1.1" field-name="contact:authInfo" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-warning-1.1 std-warning-1.1.xsd">
+        Field 'authInfo' found; this field has been ignored.
+      </warning:ignored-field>
+    </extension>
+    <trID>
+      <clTRID>TESTING-000048</clTRID>
+      <svTRID>268720</svTRID>
+    </trID>
+  </response>
+</epp>

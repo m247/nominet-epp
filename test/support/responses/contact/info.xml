@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1000">
+      <msg>Command completed successfully</msg>
+    </result>
+    <resData>
+      <contact:infData xmlns:contact="urn:ietf:params:xml:ns:contact-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0 contact-1.0.xsd">
+        <contact:id>EAXXMK1FW0YZTABD</contact:id>
+        <contact:roid>50643904-UK</contact:roid>
+        <contact:status s="ok"/>
+        <contact:postalInfo type="loc">
+          <contact:name>Mary Smith</contact:name>
+          <contact:org>Simple Registrant-TESTING</contact:org>
+          <contact:addr>
+            <contact:street>2 Test Street</contact:street>
+            <contact:city>Test City</contact:city>
+            <contact:sp>Testshire</contact:sp>
+            <contact:pc>TE57 1NG</contact:pc>
+            <contact:cc>GB</contact:cc>
+          </contact:addr>
+        </contact:postalInfo>
+        <contact:voice>+44.1234567890</contact:voice>
+        <contact:email>mary.smith@ariel-testing.co.uk</contact:email>
+        <contact:clID>TESTING</contact:clID>
+        <contact:crID>psamathe@nominet</contact:crID>
+        <contact:crDate>2013-09-13T00:09:32</contact:crDate>
+      </contact:infData>
+    </resData>
+    <extension>
+      <contact-nom-ext:infData xmlns:contact-nom-ext="http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0 contact-nom-ext-1.0.xsd">
+        <contact-nom-ext:trad-name>Simple Registrant Trading Ltd</contact-nom-ext:trad-name>
+        <contact-nom-ext:type>LTD</contact-nom-ext:type>
+        <contact-nom-ext:co-no>12345678</contact-nom-ext:co-no>
+        <contact-nom-ext:opt-out>N</contact-nom-ext:opt-out>
+      </contact-nom-ext:infData>
+      <warning:truncated-field xmlns:warning="http://www.nominet.org.uk/epp/xml/std-warning-1.1" field-name="contact:crID" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-warning-1.1 std-warning-1.1.xsd">
+        Full entry is 'psamathe@nominet.org.uk'.
+      </warning:truncated-field>
+    </extension>
+    <trID>
+      <clTRID>TESTING-000008</clTRID>
+      <svTRID>231790</svTRID>
+    </trID>
+  </response>
+</epp>

@@ -39,6 +39,13 @@ require File.dirname(__FILE__) + '/nominet-epp/responses/domain/renew_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/domain/unrenew_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/domain/update_response'
 
+require File.dirname(__FILE__) + '/nominet-epp/responses/contact/check_response'
+require File.dirname(__FILE__) + '/nominet-epp/responses/contact/create_response'
+require File.dirname(__FILE__) + '/nominet-epp/responses/contact/delete_response'
+require File.dirname(__FILE__) + '/nominet-epp/responses/contact/info_response'
+require File.dirname(__FILE__) + '/nominet-epp/responses/contact/release_response'
+require File.dirname(__FILE__) + '/nominet-epp/responses/contact/update_response'
+
 require File.dirname(__FILE__) + '/nominet-epp/responses/host/check_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/host/create_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/host/delete_response'
