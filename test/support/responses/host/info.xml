@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1000">
+      <msg>Command completed successfully</msg>
+    </result>
+    <resData>
+      <host:infData xmlns:host="urn:ietf:params:xml:ns:host-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:host-1.0 host-1.0.xsd">
+        <host:name>ns1.beatrice-testing.co.uk.</host:name>
+        <host:roid>842571BCC03D52A533751E1C1E66547A-UK</host:roid>
+        <host:status s="ok"/>
+        <host:status s="linked"/>
+        <host:addr ip="v4">1.2.3.4</host:addr>
+        <host:addr ip="v6">0001:0002:0003:0004:0005:0006:0007:0008</host:addr>
+        <host:clID>TESTING</host:clID>
+        <host:crID>NOMINET</host:crID>
+        <host:crDate>2013-09-13T00:09:33</host:crDate>
+      </host:infData>
+    </resData>
+    <trID>
+      <clTRID>TESTING-000030</clTRID>
+      <svTRID>264570</svTRID>
+    </trID>
+  </response>
+</epp>
