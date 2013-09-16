@@ -7,11 +7,11 @@ require File.dirname(__FILE__) + '/nominet-epp/helpers'
 
 require File.dirname(__FILE__) + '/nominet-epp/request'
 
+require File.dirname(__FILE__) + '/nominet-epp/requests/custom/list'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/check'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/create'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/delete'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/info'
-require File.dirname(__FILE__) + '/nominet-epp/requests/domain/list'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/release'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/renew'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/unrenew'

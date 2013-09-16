@@ -1,5 +1,5 @@
 module NominetEPP
-  module Domain
+  module Custom
     class List < CustomRequest
       NAMESPACE = 'http://www.nominet.org.uk/epp/xml/std-list-1.0'
 

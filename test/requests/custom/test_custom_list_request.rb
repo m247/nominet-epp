@@ -1,10 +1,10 @@
 require 'helper'
 
-class TestNominetDomainListRequest < Test::Unit::TestCase
-  context 'NominetEPP::Domain::Info' do
+class TestNominetCustomListRequest < Test::Unit::TestCase
+  context 'NominetEPP::Custom::List' do
     context 'expiry' do
       setup do
-        @request = NominetEPP::Domain::List.new('expiry', '2013-09')
+        @request = NominetEPP::Custom::List.new('expiry', '2013-09')
         @xml     = prepare_request.to_xml
 
         namespaces_from_request
@@ -23,7 +23,7 @@ class TestNominetDomainListRequest < Test::Unit::TestCase
     end
     context 'registrations' do
       setup do
-        @request = NominetEPP::Domain::List.new('registration', '2013-09')
+        @request = NominetEPP::Custom::List.new('registration', '2013-09')
         @xml     = prepare_request.to_xml
 
         namespaces_from_request
