@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0    epp-1.0.xsd">
+  <response>
+    <result code="1301">
+      <msg>Command completed successfully; ack to dequeue</msg>
+    </result>
+    <msgQ count="4" id="123456">
+      <qDate>2005-10-06T10:29:30Z</qDate>
+      <msg>Registrar Change Notification</msg>
+    </msgQ>
+    <resData>
+      <n:rcData xmlns:n="http://www.nominet.org.uk/epp/xml/std-notifications-1.0" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-notifications-1.0          std-notifications-1.0.xsd">
+        <n:orig>p@automaton-example.org.uk</n:orig>
+        <n:registrarTag>EXAMPLE</n:registrarTag>
+        <n:domainListData xmlns:domain="urn:ietf:params:xml:ns:domain-1.0" noDomains="2" xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0           domain-1.0.xsd">
+          <domain:infData>
+            <domain:name>auto-example1.co.uk</domain:name>
+            <domain:roid>65876854-UK</domain:roid>
+            <domain:ns>
+              <domain:hostObj>ns0.epp-example.co.uk</domain:hostObj>
+              <domain:hostObj>ns1.epp-example.co.uk</domain:hostObj>
+            </domain:ns>
+            <domain:clID>EXAMPLE-TAG</domain:clID>
+            <domain:crID>example@epp-exam</domain:crID>
+            <domain:crDate>2005-06-03T12:00:00</domain:crDate>
+            <domain:exDate>2007-06-03T12:00:00</domain:exDate>
+          </domain:infData>
+          <domain:infData>
+            <domain:name>epp-example2.co.uk</domain:name>
+            <domain:roid>568957896-UK</domain:roid>
+            <domain:clID>EXAMPLE-TAG</domain:clID>
+            <domain:crID>example@epp-exa</domain:crID>
+            <domain:crDate>2005-06-03T12:00:00</domain:crDate>
+            <domain:exDate>2007-06-03T12:00:00</domain:exDate>
+          </domain:infData>
+        </n:domainListData>
+        <contact:infData xmlns:contact="urn:ietf:params:xml:ns:contact-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0           contact-1.0.xsd">
+          <contact:id>ST96503FG</contact:id>
+          <contact:roid>5876578-UK</contact:roid>
+          <contact:status s="ok"/>
+          <contact:postalInfo type="loc">
+            <contact:name>Mr R Strant</contact:name>
+            <contact:org>reg company</contact:org>
+            <contact:addr>
+              <contact:street>2102 High Street</contact:street>
+              <contact:city>Oxford</contact:city>
+              <contact:sp>Oxon</contact:sp>
+              <contact:pc>OX1 1QQ</contact:pc>
+              <contact:cc>GB</contact:cc>
+            </contact:addr>
+          </contact:postalInfo>
+          <contact:voice>+44.1865123456</contact:voice>
+          <contact:email>r.strant@epp-example.co.uk</contact:email>
+          <contact:clID>TEST</contact:clID>
+          <contact:crID>domains@epp-exam</contact:crID>
+          <contact:crDate>1999-04-03T22:00:00.0Z</contact:crDate>
+          <contact:upID>domains@isp.com</contact:upID>
+          <contact:upDate>1999-12-03T09:00:00.0Z</contact:upDate>
+        </contact:infData>
+      </n:rcData>
+    </resData>
+    <trID>
+      <clTRID>ABC-12345</clTRID>
+      <svTRID>123456</svTRID>
+    </trID>
+  </response>
+</epp>

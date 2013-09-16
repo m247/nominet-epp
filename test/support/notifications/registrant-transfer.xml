@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0   epp-1.0.xsd">
+  <response>
+    <result code="1301">
+      <msg>Command completed successfully; ack to dequeue</msg>
+    </result>
+    <msgQ count="4" id="123456">
+      <qDate>2007-10-06T10:29:30Z</qDate>
+      <msg>Registrant Transfer Notification</msg>
+    </msgQ>
+    <resData>
+      <n:trnData xmlns:n="http://www.nominet.org.uk/epp/xml/std-notifications-1.0" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-notifications-1.0         std-notifications-1.0.xsd">
+        <n:orig>p@automaton-example.org.uk</n:orig>
+        <n:accountId>58658458</n:accountId>
+        <n:oldAccountId>596859</n:oldAccountId>
+        <n:domainListData xmlns:domain="urn:ietf:params:xml:ns:domain-1.0" noDomains="2" xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0           domain-1.0.xsd">
+          <n:domainName>epp-example1.co.uk</n:domainName>
+          <n:domainName>epp-example2.co.uk</n:domainName>
+        </n:domainListData>
+        <contact:infData xmlns:contact="urn:ietf:params:xml:ns:contact-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0           contact-1.0.xsd">
+          <contact:id>ST68956589R4</contact:id>
+          <contact:roid>123456-UK</contact:roid>
+          <contact:status s="ok"/>
+          <contact:postalInfo type="loc">
+            <contact:name>Mr R. Strant</contact:name>
+            <contact:addr>
+              <contact:street>2102 High Street</contact:street>
+              <contact:city>Oxford</contact:city>
+              <contact:sp>Oxon</contact:sp>
+              <contact:pc>OX1 1QQ</contact:pc>
+              <contact:cc>GB</contact:cc>
+            </contact:addr>
+          </contact:postalInfo>
+          <contact:email>example@epp-example1.co.uk</contact:email>
+          <contact:clID>TEST</contact:clID>
+          <contact:crID>TEST</contact:crID>
+          <contact:crDate>1999-04-03T22:00:00.0Z</contact:crDate>
+          <contact:upID>domains@isp.com</contact:upID>
+          <contact:upDate>1999-12-03T09:00:00.0Z</contact:upDate>
+        </contact:infData>
+      </n:trnData>
+    </resData>
+    <trID>
+      <clTRID>ABC-12345</clTRID>
+      <svTRID>123456</svTRID>
+    </trID>
+  </response>
+</epp>
