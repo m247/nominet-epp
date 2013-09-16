@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: nom-root-tag-1.0.xsd 29448 2009-09-29 16:19:02Z anthonyk $ -->
+<schema targetNamespace="http://www.nominet.org.uk/epp/xml/nom-root-all"
+    xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+    xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+
+    <!--
+    Import standard element types.
+    -->
+    <import namespace="urn:ietf:params:xml:ns:epp-1.0" schemaLocation="epp-1.0.xsd"/>
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" schemaLocation="eppcom-1.0.xsd"/>
+
+    <!--
+    Import our own schemas
+    -->
+    <import namespace="http://www.nominet.org.uk/epp/xml/nom-tag-1.0" schemaLocation="nom-tag-1.0.xsd"/>
+
+    <annotation>
+        <documentation>
+            Nominet tag-list schema
+        </documentation>
+    </annotation>
+
+    <!--
+    End of schema.
+    -->
+</schema>
+
+

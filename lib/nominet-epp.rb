@@ -9,6 +9,8 @@ require File.dirname(__FILE__) + '/nominet-epp/request'
 
 require File.dirname(__FILE__) + '/nominet-epp/requests/custom/list'
 require File.dirname(__FILE__) + '/nominet-epp/requests/custom/handshake'
+require File.dirname(__FILE__) + '/nominet-epp/requests/custom/tag_list'
+
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/check'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/create'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/delete'
@@ -33,6 +35,8 @@ require File.dirname(__FILE__) + '/nominet-epp/requests/host/update'
 
 require File.dirname(__FILE__) + '/nominet-epp/responses/custom/list_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/custom/handshake_response'
+require File.dirname(__FILE__) + '/nominet-epp/responses/custom/tag_list_response'
+
 require File.dirname(__FILE__) + '/nominet-epp/responses/domain/check_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/domain/create_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/domain/delete_response'
