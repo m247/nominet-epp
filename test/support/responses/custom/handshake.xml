@@ -1,0 +1,24 @@
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1000">
+      <msg>Command completed successfully</msg>
+    </result>
+    <resData>
+      <h:hanData
+       xmlns:h="http://www.nominet.org.uk/epp/xml/std-handshake-1.0"
+       xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-handshake-1.0 std-handshake-1.0.xsd">
+        <h:caseId>6</h:caseId>
+        <h:domainListData noDomains="2">
+          <h:domainName>example1.co.uk</h:domainName>
+          <h:domainName>example2.co.uk</h:domainName>
+        </h:domainListData>
+      </h:hanData>
+    </resData>
+    <trID>
+      <clTRID>EPP-ABC-12345</clTRID>
+      <svTRID>104239</svTRID>
+    </trID>
+  </response>
+</epp>
