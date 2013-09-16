@@ -28,8 +28,13 @@ class TestNominetDomainInfoResponse < Test::Unit::TestCase
     end
 
     should 'have nameservers' do
-      expected = %w(ns1.ophelia-testing.co.uk)
+      expected = [ {'name' => 'ns1.ophelia-testing.co.uk' } ]
       assert_equal expected, @info_response.nameservers
+    end
+
+    should 'have hosts' do
+      expected = %w(ns1.ophelia-testing.co.uk)
+      assert_equal expected, @info_response.hosts
     end
 
     should 'have client_id' do

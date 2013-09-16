@@ -10,7 +10,13 @@ module NominetEPP
       end
 
       def nameservers
-        @nameservers ||= @response.nameservers.map { |ns| ns.sub(/\.$/,'') }
+        @nameservers ||= @response.nameservers.each do |ns|
+          ns['name'] = ns['name'].sub(/\.$/,'')
+        end
+      end
+      
+      def hosts
+        @hosts ||= @response.hosts.map { |ns| ns.sub(/\.$/,'') }
       end
 
       def reg_status
