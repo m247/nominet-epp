@@ -49,10 +49,44 @@ module NominetEPP
           end
         end
       end
+      def parse_domain_ns(data)
+        data.children.map do |node|
+          case node.name
+          when 'hostObj'
+            node.content.strip
+          end
+        end.compact
+      end
+      def parse_domain_infData(data)
+        parsed = {}
+        data.children.each do |node|
+          case node.name
+          when 'name'
+            parsed[:name] = node.content.strip
+          when 'roid'
+            parsed[:roid] = node.content.strip
+          when 'ns'
+            parsed[:nameservers] = parse_domain_ns(node)
+          when 'clID'
+            parsed[:client_id] = node.content.strip
+          when 'crID'
+            parsed[:creator_id] = node.content.strip
+          when 'crDate'
+            parsed[:created_date] = Time.parse(node.content.strip)
+          when 'exDate'
+            parsed[:expiration_date] = Time.parse(node.content.strip)
+          end
+        end
+        parsed
+      end
       def parse_n_domainListData(data)
-        data.children.map do |n|
-          content = n.content.strip
-          content == "" ? nil : content
+        data.children.map do |node|
+          case node.name
+          when 'domainName'
+            node.content.strip
+          when 'infData'
+            OpenStruct.new(parse_domain_infData(node))
+          end
         end.compact
       end
       def parse_n_relData(data)
@@ -111,6 +145,8 @@ module NominetEPP
             parsed[:status] = node['s'].to_s
           when 'postalInfo'
             parsed[:postal_info] = parse_contact_postalInfo(node)
+          when 'voice'
+            parsed[:voice] = node.content.strip
           when 'email'
             parsed[:email] = node.content.strip
           when 'clID'
@@ -166,6 +202,20 @@ module NominetEPP
             @parsed[:id] = node.content.strip
           when 'roid'
             @parsed[:roid] = node.content.strip
+          end
+        end
+      end
+      def parse_n_rcData(data)
+        data.children.each do |node|
+          case node.name
+          when 'orig'
+            @parsed[:originator] = node.content.strip
+          when 'registrarTag'
+            @parsed[:registrar_tag] = node.content.strip
+          when 'domainListData'
+            @parsed[:domains] = parse_n_domainListData(node)
+          when 'infData'
+            @parsed[:contact] = OpenStruct.new(parse_contact_infData(node))
           end
         end
       end
