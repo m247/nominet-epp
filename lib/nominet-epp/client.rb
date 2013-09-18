@@ -132,10 +132,12 @@ module NominetEPP
 
     def poll
       while res = @client.poll
-        return if res.code != 1301 || res.msgQ['count'] == '0'
-        return [res.msgQ['id'], res.data] unless block_given?
+        res = Notification.new(res)
 
-        result = yield resp.data
+        return if res.code != 1301 || res.msgQ['count'] == '0'
+        return [res.msgQ['id'], res] unless block_given?
+
+        result = yield res
         return if result == false
 
         raise AckError, "failed to acknowledge #{res.msgQ['id']}" unless @client.ack(res.msgQ['id'])
