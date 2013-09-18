@@ -47,5 +47,20 @@ module NominetEPP
           end
         end
       end
+      def parse_n_relData(data)
+        data.children.each do |node|
+          case node.name
+          when 'accountId'
+            @parsed[:account_id] = node.content.strip
+            @parsed[:account_moved?] = node['moved'] == 'Y'
+          when 'from'
+            @parsed[:from] = node.content.strip
+          when 'registrarTag'
+            @parsed[:registrar_tag] = node.content.strip
+          when 'domainListData'
+            @parsed[:domains] = data.children.map { |n| n.content.strip }
+          end
+        end
+      end
   end
 end
