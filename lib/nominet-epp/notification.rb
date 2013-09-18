@@ -6,7 +6,8 @@ module NominetEPP
       'http://www.nominet.org.uk/epp/xml/nom-abuse-feed-1.0' => 'abuse',
       'http://www.nominet.org.uk/epp/xml/std-notifications-1.0' => 'n',
       'http://www.nominet.org.uk/epp/xml/std-notifications-1.1' => 'n',
-      'http://www.nominet.org.uk/epp/xml/std-notifications-1.2' => 'n' }
+      'http://www.nominet.org.uk/epp/xml/std-notifications-1.2' => 'n',
+      'http://www.nominet.org.uk/epp/xml/nom-notifications-2.1' => 'n' }
 
     def initialize(response)
       raise ArgumentError, "must be an EPP::Response" unless response.kind_of?(EPP::Response)
@@ -79,6 +80,16 @@ module NominetEPP
           content = n.content.strip
           content == "" ? nil : content
         end.compact
+      end
+      def parse_n_contactDelData(data)
+        data.children.each do |node|
+          case node.name
+          when 'contactId'
+            @parsed[:id] = node.content.strip
+          when 'roid'
+            @parsed[:roid] = node.content.strip
+          end
+        end
       end
   end
 end
