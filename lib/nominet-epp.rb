@@ -7,6 +7,7 @@ require File.dirname(__FILE__) + '/nominet-epp/helpers'
 
 require File.dirname(__FILE__) + '/nominet-epp/client'
 require File.dirname(__FILE__) + '/nominet-epp/request'
+require File.dirname(__FILE__) + '/nominet-epp/notification'
 
 require File.dirname(__FILE__) + '/nominet-epp/requests/custom/list'
 require File.dirname(__FILE__) + '/nominet-epp/requests/custom/handshake'
