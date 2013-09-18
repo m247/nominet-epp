@@ -1,3 +1,4 @@
+require 'ostruct'
 module NominetEPP
   class Notification
     NAMESPACE_URIS = {
@@ -48,6 +49,12 @@ module NominetEPP
           end
         end
       end
+      def parse_n_domainListData(data)
+        data.children.map do |n|
+          content = n.content.strip
+          content == "" ? nil : content
+        end.compact
+      end
       def parse_n_relData(data)
         data.children.each do |node|
           case node.name
@@ -75,11 +82,82 @@ module NominetEPP
           end
         end
       end
-      def parse_n_domainListData(data)
-        data.children.map do |n|
-          content = n.content.strip
-          content == "" ? nil : content
-        end.compact
+      def parse_n_trnData(data)
+        data.children.each do |node|
+          case node.name
+          when 'orig'
+            @parsed[:originator] = node.content.strip
+          when 'accountId'
+            @parsed[:account_id] = node.content.strip
+          when 'oldAccountId'
+            @parsed[:old_account_id] = node.content.strip
+          when 'domainListData'
+            @parsed[:domains] = parse_n_domainListData(node)
+          when 'infData'
+            @parsed[:contact] = OpenStruct.new(parse_contact_infData(node))
+          end
+        end
+      end
+      def parse_contact_infData(data)
+        parsed = {}
+        data.children.each do |node|
+          next if node.empty?
+          case node.name
+          when 'id'
+            parsed[:id] = node.content.strip
+          when 'roid'
+            parsed[:roid] = node.content.strip
+          when 'status'
+            parsed[:status] = node['s'].to_s
+          when 'postalInfo'
+            parsed[:postal_info] = parse_contact_postalInfo(node)
+          when 'email'
+            parsed[:email] = node.content.strip
+          when 'clID'
+            parsed[:client_id] = node.content.strip
+          when 'crID'
+            parsed[:creator_id] = node.content.strip
+          when 'crDate'
+            parsed[:created_date] = Time.parse(node.content.strip)
+          when 'upID'
+            parsed[:updator_id] = node.content.strip
+          when 'upDate'
+            parsed[:updated_date] = Time.parse(node.content.strip)
+          end
+        end
+        parsed
+      end
+      def parse_contact_postalInfo(data)
+        parsed = {}
+        data.children.each do |node|
+          case node.name
+          when 'name'
+            parsed[:name] = node.content.strip
+          when 'org'
+            parsed[:org] = node.content.strip
+          when 'addr'
+            parsed[:addr] = parse_contact_addr(node)
+          end
+        end
+        parsed
+      end
+      def parse_contact_addr(data)
+        parsed = {}
+        data.children.each do |node|
+          case node.name
+          when 'street'
+            parsed[:street] = node.content.strip
+          when 'city'
+            parsed[:city] = node.content.strip
+          when 'sp'
+            parsed[:sp] = node.content.strip
+          when 'pc'
+            parsed[:pc] = node.content.strip
+          when 'cc'
+            parsed[:cc] = node.content.strip
+          end
+        end
+        parsed
       end
       def parse_n_contactDelData(data)
         data.children.each do |node|
