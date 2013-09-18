@@ -58,9 +58,27 @@ module NominetEPP
           when 'registrarTag'
             @parsed[:registrar_tag] = node.content.strip
           when 'domainListData'
-            @parsed[:domains] = data.children.map { |n| n.content.strip }
+            @parsed[:domains] = parse_n_domainListData(node)
           end
         end
+      end
+      def parse_n_suspData(data)
+        data.children.each do |node|
+          case node.name
+          when 'reason'
+            @parsed[:reason] = node.content.strip
+          when 'cancelDate'
+            @parsed[:cancellation_date] = Time.parse(node.content.strip)
+          when 'domainListData'
+            @parsed[:domains] = parse_n_domainListData(node)
+          end
+        end
+      end
+      def parse_n_domainListData(data)
+        data.children.map do |n|
+          content = n.content.strip
+          content == "" ? nil : content
+        end.compact
       end
   end
 end
