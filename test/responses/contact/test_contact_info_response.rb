@@ -27,6 +27,25 @@ class TestNominetContactInfoResponse < Test::Unit::TestCase
       assert_equal '50643904-UK', @info_response.roid
     end
 
+    should 'have postal info' do
+      expected = { :name => "Mary Smith",
+        :org  => "Simple Registrant-TESTING",
+        :addr => {
+          :street => "2 Test Street",
+          :city => "Test City",
+          :sp => "Testshire",
+          :pc => "TE57 1NG",
+          :cc => "GB" }}
+      assert_equal expected, @info_response.postal_info
+    end
+
+    should 'have voice' do
+      assert_equal '+44.1234567890', @info_response.voice
+    end
+    should 'have email' do
+      assert_equal 'mary.smith@ariel-testing.co.uk', @info_response.email
+    end
+
     should 'have client_id' do
       assert_equal 'TESTING', @info_response.client_id
     end
