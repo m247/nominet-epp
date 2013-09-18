@@ -18,6 +18,45 @@ module NominetEPP
       parse_response
     end
 
+    def type
+      @type ||= begin
+        case msgQ_msg
+        when /Account Details Change/i
+          :account_change
+        when /Contact deleted/i
+          :contact_deleted
+        when /DQ Workflow process/i
+          :data_quality
+        when /Domain Activity/i
+          :abuse_feed
+        when /Domain name Cancellation/i
+          :domain_cancelled
+        when /Domains Released/i
+          :domains_released
+        when /Domains Suspended/i
+          :domains_suspended
+        when /Host cancellation/i
+          :host_cancellation
+        when /Referral Accepted/i
+          :referral_accepted
+        when /Referral Rejected/i
+          :referral_rejected
+        when /Registrant Transfer/i
+          :registrant_transfer
+        when /Registrar Change Authorisation Request/i
+          :handshake_request
+        when /Registrar Change Handshake Rejected/i
+          :handshake_rejected
+        when /Registrar Change Notification/
+          :registrar_change
+        end
+      end
+    end
+
+    def msgQ_msg
+      @msgQ_msg ||= @response.msgQ.find('e:msg').first.content.strip
+    end
+
     def method_missing(method, *args, &block)
       return @parsed[method] if @parsed.has_key?(method)
       return super unless @response.respond_to?(method)

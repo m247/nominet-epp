@@ -9,6 +9,10 @@ class TestNominetHandshakeRejectedNotification < Test::Unit::TestCase
     end
     subject { @notification }
 
+    should 'have type' do
+      assert_equal :handshake_rejected, subject.type
+    end
+
     should 'have account ID' do
       assert_equal '1243654', subject.account_id
     end

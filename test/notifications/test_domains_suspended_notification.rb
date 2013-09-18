@@ -9,6 +9,10 @@ class TestNominetDomainsSuspendedNotification < Test::Unit::TestCase
     end
     subject { @notification }
 
+    should 'have type' do
+      assert_equal :domains_suspended, subject.type
+    end
+
     should 'have reason' do
       assert_equal 'Data Quality', subject.reason
     end

@@ -9,6 +9,10 @@ class TestNominetContactDeletedNotification < Test::Unit::TestCase
     end
     subject { @notification }
 
+    should 'have type' do
+      assert_equal :contact_deleted, subject.type
+    end
+
     should 'have contact id' do
       assert_equal 'EPPID0003', subject.id
     end

@@ -9,6 +9,10 @@ class TestNominetDomainCancelledNotification < Test::Unit::TestCase
     end
     subject { @notification }
 
+    should 'have type' do
+      assert_equal :domain_cancelled, subject.type
+    end
+
     should 'have domain name' do
       assert_equal 'epp-example1.co.uk', subject.name
     end

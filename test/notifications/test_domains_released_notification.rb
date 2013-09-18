@@ -9,6 +9,10 @@ class TestNominetDomainsReleasedNotification < Test::Unit::TestCase
     end
     subject { @notification }
 
+    should 'have type' do
+      assert_equal :domains_released, subject.type
+    end
+
     should 'have account ID' do
       assert_equal '12345', subject.account_id
     end

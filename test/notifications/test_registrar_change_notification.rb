@@ -9,6 +9,10 @@ class TestNominetRegistrarChangeNotification < Test::Unit::TestCase
     end
     subject { @notification }
 
+    should 'have type' do
+      assert_equal :registrar_change, subject.type
+    end
+
     should 'have originator' do
       assert_equal 'p@automaton-example.org.uk', subject.originator
     end
