@@ -45,6 +45,12 @@ class TestNominetRegistrantTransferNotification < Test::Unit::TestCase
     should 'have contact email' do
       assert_equal 'example@epp-example1.co.uk', subject.contact.email
     end
+    should 'have nil voice' do
+      assert_equal nil, subject.contact.voice
+    end
+    should 'have nil fax' do
+      assert_equal nil, subject.contact.fax
+    end
     should 'have contact client id' do
       assert_equal 'TEST', subject.contact.client_id
     end
