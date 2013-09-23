@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
 
   gem.extra_rdoc_files = %w(LICENSE README.md HISTORY.md)
 
-  gem.add_dependency 'epp-client', '>= 0.0.4'
+  gem.add_dependency 'epp-client', '>= 0.1.0'
 
   gem.add_development_dependency 'shoulda'
   gem.add_development_dependency 'yard'
