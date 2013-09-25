@@ -144,6 +144,10 @@ module NominetEPP
       end
     end
 
+    def ack(msgID)
+      @client.ack(msgID)
+    end
+
     def release(entity, name, tag)
       entity = :contact if entity == 'registrant' || entity == :registrant
       check_entity! entity
