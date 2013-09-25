@@ -6,6 +6,8 @@ module NominetEPP
         @response = EPP::Host::CreateResponse.new(response)
       end
 
+      undef :to_s
+
       def name
         @name ||= @response.name.sub(/\.$/, '')
       end

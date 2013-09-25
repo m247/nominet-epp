@@ -9,6 +9,8 @@ module NominetEPP
         ext_inf_data
       end
 
+      undef :to_s
+
       def name
         @response.id
       end

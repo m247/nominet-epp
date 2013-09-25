@@ -18,6 +18,8 @@ module NominetEPP
       parse_response
     end
 
+    undef :to_s
+
     def type
       @type ||= begin
         case msgQ_msg

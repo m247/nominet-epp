@@ -6,6 +6,8 @@ module NominetEPP
         @response = response
       end
 
+      undef :to_s
+
       def expires?(name)
         expired[name]
       end
@@ -18,8 +20,6 @@ module NominetEPP
       def respond_to_missing?(method, include_private)
         @response.respond_to?(method, include_private)
       end
-
-      undef :to_s
 
       protected
         def expired

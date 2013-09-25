@@ -6,6 +6,8 @@ module NominetEPP
         @response = EPP::Host::CheckResponse.new(response)
       end
 
+      undef :to_s
+
       def method_missing(method, *args, &block)
         return super unless @response.respond_to?(method)
         @response.send(method, *args, &block)
