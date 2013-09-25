@@ -6,7 +6,7 @@ module NominetEPP
         @response = response
       end
 
-      undef :to_s
+      undef to_s
 
       def case_id
         @case_id ||= @response.data.find('//h:caseId', namespaces).first.content.strip

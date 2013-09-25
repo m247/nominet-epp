@@ -6,7 +6,7 @@ module NominetEPP
         @response = EPP::Domain::CheckResponse.new(response)
       end
 
-      undef :to_s
+      undef to_s
 
       def abuse_limit
         @response.extension.find('//domain-nom-ext:chkData/@abuse-limit').first.value.to_i

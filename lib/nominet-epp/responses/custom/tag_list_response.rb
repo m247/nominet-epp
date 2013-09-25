@@ -6,7 +6,7 @@ module NominetEPP
         @response = response
       end
 
-      undef :to_s
+      undef to_s
 
       def tags
         @tags ||= parse_infdata

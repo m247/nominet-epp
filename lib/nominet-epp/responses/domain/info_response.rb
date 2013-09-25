@@ -9,7 +9,7 @@ module NominetEPP
         ext_inf_data
       end
 
-      undef :to_s
+      undef to_s
 
       def nameservers
         @nameservers ||= @response.nameservers.each do |ns|

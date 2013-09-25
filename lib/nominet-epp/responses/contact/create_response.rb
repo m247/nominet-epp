@@ -6,7 +6,7 @@ module NominetEPP
         @response = EPP::Contact::CreateResponse.new(response)
       end
 
-      undef :to_s
+      undef to_s
 
       def name
         @response.id
