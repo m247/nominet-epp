@@ -81,7 +81,7 @@ module NominetEPP
         def ext_inf_data
           @secDNS_infData = []
           @domain_infData = {}
-          Array(@response.extension).each do |node|
+          [@response.extension].flatten.each do |node|
             next unless node.name == 'infData'
             node.find('//domain-ext:infData', namespaces).each do |infData|
               infData.children.each do |child|
@@ -112,7 +112,7 @@ module NominetEPP
         end
         def parse_truncated
           @truncated = {}
-          Array(@response.extension).each do |node|
+          [@response.extension].flatten.each do |node|
             next unless node.name == 'truncated-field'
             fieldName = node.attributes["field-name"]
             ns, field = fieldName.split(":", 2)
