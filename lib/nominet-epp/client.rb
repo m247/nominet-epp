@@ -212,145 +212,148 @@ module NominetEPP
           yield
         end
       end
-  end
 
-  module OldAPI
-    def check(entity, *names)
-      res = super
+    # OldAPI
+    public
+      alias_method :new_check, :check
+      alias_method :new_create, :create
+      alias_method :new_delete, :delete
+      alias_method :new_release, :release
+      alias_method :new_renew, :renew
+      alias_method :new_update, :update
+      alias_method :new_info, :info
+    
+      def check(entity, *names)
+        res = new_check(entity, *names)
 
-      if res.respond_to?(:abuse_limit)
-        @check_limit = res.abuse_limit
-      end
-
-      return res.available?(names.first) if names.length == 1
-
-      names.inject({}) do |hash, name|
-        hash[name] = res.available?(name)
-        hash
-      end
-    end
-    def create(entity, name, attributes = {})
-      res = super
-
-      if res.success?
-        case entity
-        when :domain, 'domain'
-          { :name => res.name,
-            :crDate => res.creation_date,
-            :exDate => res.expiration_date }
-        when :contact, 'contact'
-          { :name => res.id,
-            :crDate => res.creation_date }
-        when :host, 'host'
-          { :name => res.id,
-            :crDate => res.creation_date }
+        if res.respond_to?(:abuse_limit)
+          @check_limit = res.abuse_limit
         end
-      else
-        @error_info = { :name => res.message, :reason => resp.error_reason }
-        return false
+
+        return res.available?(names.first) if names.length == 1
+
+        names.inject({}) do |hash, name|
+          hash[name] = res.available?(name)
+          hash
+        end
       end
-    end
-    def delete(entity, name)
-      res = super
-      res.success?
-    end
-    def release(entity, name, tag)
-      res = super
+      def create(entity, name, attributes = {})
+        res = new_create(entity, name, attributes)
 
-      case res.code
-      when 1000
-        { :result => true }
-      when 1001
-        { :result => :handshake }
-      else
-        false
+        if res.success?
+          case entity
+          when :domain, 'domain'
+            { :name => res.name,
+              :crDate => res.creation_date,
+              :exDate => res.expiration_date }
+          when :contact, 'contact'
+            { :name => res.id,
+              :crDate => res.creation_date }
+          when :host, 'host'
+            { :name => res.id,
+              :crDate => res.creation_date }
+          end
+        else
+          @error_info = { :name => res.message, :reason => resp.error_reason }
+          return false
+        end
       end
-    end
-    def renew(name, expiry_date, period = '2y')
-      res = super
-
-      return false unless res.success?
-
-      raise "Renewed name #{res.name} does not match #{name}" if res.name != name
-      return res.expiration_date
-    end
-    def update(entity, name, changes = {})
-      res = super
-      res.success?
-    end
-
-    def info(entity, name)
-      res = super
-
-      return false unless res.success?
-      return self.send(:"info_#{entity}", res)
-    end
-    def info_domain(res)
-      nameservers = res.nameservers.map do |ns|
-        h = { :name => ns['name'] }
-        h[:v4] = ns['ipv4'] if ns['ipv4']
-        h[:v6] = ns['ipv6'] if ns['ipv6']
-        h
+      def delete(entity, name)
+        res = new_delete(entity, name)
+        res.success?
       end
+      def release(entity, name, tag)
+        res = new_release(entity, name, tag)
 
-      {
-        :name => res.name,
-        :roid => res.roid,
-        :registrant => res.registrant,
-        :ns => nameservers,
-        :host => res.hosts,
-        :clID => res.client_id,
-        :crID => res.creator_id,
-        :crDate => res.created_date,
-        :exDate => res.expiration_date,
-        :reg_status => res.reg_status,
-        :first_bill => res.first_bill,
-        :recur_bill => res.recur_bill,
-        :auto_bill  => res.auto_bill,
-        :auto_period => res.auto_period,
-        :next_bill  => res.next_bill,
-        :next_period => res.next_period,
-        :renew_not_required => res.renew_not_required,
-        :notes => res.notes,
-        :reseller => res.reseller,
-        :ds => res.ds
-      }
-    end
-    def info_contact(res)
-      {
-        :id => res.id,
-        :roid => res.roid,
-        :status => res.status[0],
-        :postal_info => res.postal_info,
-        :voice => res.voice,
-        :email => res.email,
-        :clID => res.client_id,
-        :crID => res.creator_id,
-        :crDate => res.created_date,
-        :type => res.type,
-        :trad_name => res.trad_name,
-        :co_no => res.co_no,
-        :opt_out => res.opt_out
-      }
-    end
-    def info_host(res)
-      addrs = res.addresses.try(:dup) || {}
-      addrs[:v4] = addrs['ipv4']
-      addrs[:v6] = addrs['ipv6']
+        case res.code
+        when 1000
+          { :result => true }
+        when 1001
+          { :result => :handshake }
+        else
+          false
+        end
+      end
+      def renew(name, expiry_date, period = '2y')
+        res = new_renew(name, expiry_date, period)
 
-      {
-        :name => res.name,
-        :roid => res.roid,
-        :status => res.status[0],
-        :clID => res.client_id,
-        :crID => res.creator_id,
-        :crDate => res.created_date,
-        :addr => addrs
-      }
-    end
-  end
-  
-  class Client
-    include OldAPI
-  end
+        return false unless res.success?
+
+        raise "Renewed name #{res.name} does not match #{name}" if res.name != name
+        return res.expiration_date
+      end
+      def update(entity, name, changes = {})
+        res = new_update(entity, name, changes)
+        res.success?
+      end
+      def info(entity, name)
+        res = new_info(entity, name)
+
+        return false unless res.success?
+        return self.send(:"old_info_#{entity}", res)
+      end
+      def old_info_domain(res)
+        nameservers = res.nameservers.map do |ns|
+          h = { :name => ns['name'] }
+          h[:v4] = ns['ipv4'] if ns['ipv4']
+          h[:v6] = ns['ipv6'] if ns['ipv6']
+          h
+        end
+
+        {
+          :name => res.name,
+          :roid => res.roid,
+          :registrant => res.registrant,
+          :ns => nameservers,
+          :host => res.hosts,
+          :clID => res.client_id,
+          :crID => res.creator_id,
+          :crDate => res.created_date,
+          :exDate => res.expiration_date,
+          :reg_status => res.reg_status,
+          :first_bill => res.first_bill,
+          :recur_bill => res.recur_bill,
+          :auto_bill  => res.auto_bill,
+          :auto_period => res.auto_period,
+          :next_bill  => res.next_bill,
+          :next_period => res.next_period,
+          :renew_not_required => res.renew_not_required,
+          :notes => res.notes,
+          :reseller => res.reseller,
+          :ds => res.ds
+        }
+      end
+      def old_info_contact(res)
+        {
+          :id => res.id,
+          :roid => res.roid,
+          :status => res.status[0],
+          :postal_info => res.postal_info,
+          :voice => res.voice,
+          :email => res.email,
+          :clID => res.client_id,
+          :crID => res.creator_id,
+          :crDate => res.created_date,
+          :type => res.type,
+          :trad_name => res.trad_name,
+          :co_no => res.co_no,
+          :opt_out => res.opt_out
+        }
+      end
+      def old_info_host(res)
+        addrs = res.addresses.try(:dup) || {}
+        addrs[:v4] = addrs['ipv4']
+        addrs[:v6] = addrs['ipv6']
+
+        {
+          :name => res.name,
+          :roid => res.roid,
+          :status => res.status[0],
+          :clID => res.client_id,
+          :crID => res.creator_id,
+          :crDate => res.created_date,
+          :addr => addrs
+        }
+      end
+  end  
 end
