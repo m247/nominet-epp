@@ -18,6 +18,7 @@ module NominetEPP
       parse_response
     end
 
+    undef id
     undef to_s
 
     def type
