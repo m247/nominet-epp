@@ -18,7 +18,7 @@ module NominetEPP
       parse_response
     end
 
-    undef id
+    undef id if defined?(id)
     undef to_s
 
     def type

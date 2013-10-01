@@ -9,7 +9,7 @@ module NominetEPP
         ext_inf_data
       end
 
-      undef id
+      undef id if defined?(id)
 
       def name
         @response.id
