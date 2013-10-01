@@ -9,7 +9,7 @@ PATH
   remote: .
   specs:
     nominet-epp (0.0.12)
-      epp-client (>= 0.0.4)
+      epp-client (>= 0.1.0)
 
 GEM
   remote: https://rubygems.org/
