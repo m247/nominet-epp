@@ -1,15 +1,13 @@
 module NominetEPP
   module Contact
-    class InfoResponse
+    class InfoResponse < BasicResponse
       def initialize(response)
         raise ArgumentError, "must be an EPP::Response" unless response.kind_of?(EPP::Response)
-        @response = EPP::Contact::InfoResponse.new(response)
+        super EPP::Contact::InfoResponse.new(response)
 
         parse_truncated
         ext_inf_data
       end
-
-      undef to_s
 
       def name
         @response.id
@@ -42,10 +40,6 @@ module NominetEPP
         return super unless @response.respond_to?(method)
         return @truncated[method.to_s] if @truncated.has_key?(method.to_s) # only do truncated if response would handle it
         @response.send(method, *args, &block)
-      end
-
-      def respond_to_missing?(method, include_private)
-        @response.respond_to?(method, include_private)
       end
 
       def namespaces

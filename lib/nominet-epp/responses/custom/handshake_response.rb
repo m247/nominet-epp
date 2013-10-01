@@ -1,12 +1,10 @@
 module NominetEPP
   module Custom
-    class HandshakeResponse
+    class HandshakeResponse < BasicResponse
       def initialize(response)
         raise ArgumentError, "must be an EPP::Response" unless response.kind_of?(EPP::Response)
-        @response = response
+        super
       end
-
-      undef to_s
 
       def case_id
         @case_id ||= @response.data.find('//h:caseId', namespaces).first.content.strip
@@ -18,15 +16,6 @@ module NominetEPP
 
       def namespaces
         { 'h' => 'http://www.nominet.org.uk/epp/xml/std-handshake-1.0' }
-      end
-
-      def method_missing(method, *args, &block)
-        return super unless @response.respond_to?(method)
-        @response.send(method, *args, &block)
-      end
-
-      def respond_to_missing?(method, include_private)
-        @response.respond_to?(method, include_private)
       end
 
       protected

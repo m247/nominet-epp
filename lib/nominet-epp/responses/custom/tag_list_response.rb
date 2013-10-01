@@ -1,12 +1,10 @@
 module NominetEPP
   module Custom
-    class TagListResponse
+    class TagListResponse < BasicResponse
       def initialize(response)
         raise ArgumentError, "must be an EPP::Response" unless response.kind_of?(EPP::Response)
-        @response = response
+        super
       end
-
-      undef to_s
 
       def tags
         @tags ||= parse_infdata
@@ -14,15 +12,6 @@ module NominetEPP
 
       def namespaces
         { 'tag' => 'http://www.nominet.org.uk/epp/xml/nom-tag-1.0' }
-      end
-
-      def method_missing(method, *args, &block)
-        return super unless @response.respond_to?(method)
-        @response.send(method, *args, &block)
-      end
-
-      def respond_to_missing?(method, include_private)
-        @response.respond_to?(method, include_private)
       end
 
       protected

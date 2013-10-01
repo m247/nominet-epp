@@ -35,6 +35,8 @@ require File.dirname(__FILE__) + '/nominet-epp/requests/host/delete'
 require File.dirname(__FILE__) + '/nominet-epp/requests/host/info'
 require File.dirname(__FILE__) + '/nominet-epp/requests/host/update'
 
+require File.dirname(__FILE__) + '/nominet-epp/responses/response'
+
 require File.dirname(__FILE__) + '/nominet-epp/responses/custom/list_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/custom/handshake_response'
 require File.dirname(__FILE__) + '/nominet-epp/responses/custom/tag_list_response'
