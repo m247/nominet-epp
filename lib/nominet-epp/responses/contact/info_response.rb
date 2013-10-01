@@ -9,7 +9,9 @@ module NominetEPP
         ext_inf_data
       end
 
-      undef id unless RUBY_VERSION >= "1.9"
+      def id
+        @response.id
+      end
 
       def name
         @response.id
