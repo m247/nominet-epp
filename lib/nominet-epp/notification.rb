@@ -18,7 +18,7 @@ module NominetEPP
       parse_response
     end
 
-    undef id if defined?(id)
+    undef id unless RUBY_VERSION >= "1.9"
     undef to_s
 
     def type
