@@ -17,7 +17,7 @@ class TestNominetCustomTagListResponse < Test::Unit::TestCase
 
     should 'have tags' do
       expected = %w(EXAMPLE-TAG EXAMPLE2-TAG)
-      names = @tag_list_response.tags.keys
+      names = @tag_list_response.tags.keys.sort
 
       assert_equal expected, names
     end
