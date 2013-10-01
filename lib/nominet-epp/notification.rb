@@ -1,6 +1,12 @@
 require 'ostruct'
 module NominetEPP
   class Notification
+    unless RUBY_VERSION >= "1.9"
+      class OpenStruct < ::OpenStruct
+        undef id
+      end
+    end
+    
     NAMESPACE_URIS = {
       'urn:ietf:params:xml:ns:domain-1.0' => 'domain',
       'urn:ietf:params:xml:ns:contact-1.0' => 'contact',
@@ -69,10 +75,9 @@ module NominetEPP
       @parsed.has_key?(method) || @response.respond_to?(method, include_private)
     end
     
+    undef id unless RUBY_VERSION >= "1.9"
+    
     unless RUBY_VERSION >= "1.9.2"
-      def id
-        @parsed[:id]
-      end
       def respond_to?(method, include_private = false)
         respond_to_missing?(method, include_private) || super
       end
