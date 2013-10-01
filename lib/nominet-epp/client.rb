@@ -309,6 +309,7 @@ module NominetEPP
           :clID => res.client_id,
           :crID => res.creator_id,
           :crDate => res.created_date,
+          :upDate => res.updated_date,
           :exDate => res.expiration_date,
           :reg_status => res.reg_status,
           :first_bill => res.first_bill,
