@@ -7,7 +7,7 @@ module NominetEPP
         undef type
       end
     end
-    
+
     NAMESPACE_URIS = {
       'urn:ietf:params:xml:ns:domain-1.0' => 'domain',
       'urn:ietf:params:xml:ns:contact-1.0' => 'contact',
@@ -15,7 +15,8 @@ module NominetEPP
       'http://www.nominet.org.uk/epp/xml/std-notifications-1.0' => 'n',
       'http://www.nominet.org.uk/epp/xml/std-notifications-1.1' => 'n',
       'http://www.nominet.org.uk/epp/xml/std-notifications-1.2' => 'n',
-      'http://www.nominet.org.uk/epp/xml/nom-notifications-2.1' => 'n' }
+      'http://www.nominet.org.uk/epp/xml/nom-notifications-2.1' => 'n',
+      'http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0' => 'contact_ext' }
 
     def initialize(response)
       raise ArgumentError, "must be an EPP::Response" unless response.kind_of?(EPP::Response)
@@ -23,6 +24,7 @@ module NominetEPP
       @parsed   = {}
 
       parse_response
+      parse_extension
     end
 
     undef to_s
@@ -75,9 +77,9 @@ module NominetEPP
     def respond_to_missing?(method, include_private)
       @parsed.has_key?(method) || @response.respond_to?(method, include_private)
     end
-    
+
     undef id unless RUBY_VERSION >= "1.9"
-    
+
     unless RUBY_VERSION >= "1.9.2"
       def respond_to?(method, include_private = false)
         respond_to_missing?(method, include_private) || super
@@ -95,6 +97,17 @@ module NominetEPP
         method = :"parse_#{ns}_#{name}"
         if self.respond_to?(method, true)
           return self.send(method, @response.data)
+        end
+      end
+      def parse_extension
+        [@response.extension].flatten.compact.each do |extension|
+          ns   = NAMESPACE_URIS[extension.namespaces.namespace.href]
+          name = extension.name
+
+          method = :"parse_#{ns}_#{name}"
+          if self.respond_to?(method, true)
+            return self.send(method, extension)
+          end
         end
       end
 
@@ -275,6 +288,17 @@ module NominetEPP
             @parsed[:domains] = parse_n_domainListData(node)
           when 'infData'
             @parsed[:contact] = OpenStruct.new(parse_contact_infData(node))
+          end
+        end
+      end
+
+      def parse_contact_ext_infData(ext)
+        ext.children.each do |node|
+          case node.name
+          when 'opt-out'
+            @parsed[:contact].opt_out = node.content.strip == 'Y'
+          else
+            @parsed[:contact].send("#{node.name}=", node.content.strip)
           end
         end
       end
