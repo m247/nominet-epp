@@ -41,8 +41,9 @@ class TestNominetContactUpdateRequest < Test::Unit::TestCase
       should 'set email for change' do
         assert_equal "enoch.root@test.host", xpath_find('//contact:chg/contact:email')
       end
-      should 'set organisation for change' do
-        assert_equal "Epiphyte", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:org')
+      should 'not set organisation for change' do
+        # assert_equal "Epiphyte", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:org')
+        assert !xpath_exists?('//contact:chg/contact:postalInfo[@type="loc"]/contact:org')
       end
       should 'set name for change' do
         assert_equal "Enoch Root", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:name')

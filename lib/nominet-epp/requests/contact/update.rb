@@ -12,6 +12,9 @@ module NominetEPP
         changes[:rem] && changes[:rem].delete_if { |k,_| UpdateExtension::KEYS.include?(k) }
         changes[:chg] && changes[:chg].delete_if { |k,_| UpdateExtension::KEYS.include?(k) }
 
+        # Changing the organisation is not permitted by Nominet
+        changes[:chg] && changes[:chg][:postal_info] && changes[:chg][:postal_info].delete(:org)
+
         @contact_ext = UpdateExtension.new(extensions) rescue nil
 
         @command    = EPP::Contact::Update.new(name, changes)
