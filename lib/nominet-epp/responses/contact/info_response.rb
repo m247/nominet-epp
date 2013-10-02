@@ -54,7 +54,7 @@ module NominetEPP
       protected
         def ext_inf_data
           @contact_infData = {}
-          [@response.extension].flatten.each do |node|
+          [@response.extension].flatten.compact.each do |node|
             next unless node.name == 'infData'
             node.find('//contact-ext:infData', namespaces).each do |infData|
               infData.children.each do |child|
@@ -73,7 +73,7 @@ module NominetEPP
         end
         def parse_truncated
           @truncated = {}
-          [@response.extension].flatten.each do |node|
+          [@response.extension].flatten.compact.each do |node|
             next unless node.name == 'truncated-field'
             fieldName = node.attributes["field-name"]
             ns, field = fieldName.split(":", 2)
