@@ -51,14 +51,14 @@ module NominetEPP
     #
     # @return [EPP::Request] last sent request
     def last_request
-      @client._last_request
+      @client.last_request
     end
 
     # Returns the last EPP::Response received
     #
     # @return [EPP::Response] last received response
     def last_response
-      @client._last_response
+      @client.last_response
     end
 
     # Returns the last EPP message received
