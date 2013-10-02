@@ -4,6 +4,7 @@ module NominetEPP
     unless RUBY_VERSION >= "1.9"
       class OpenStruct < ::OpenStruct
         undef id
+        undef type
       end
     end
     
