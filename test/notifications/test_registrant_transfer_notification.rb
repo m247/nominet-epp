@@ -26,6 +26,9 @@ class TestNominetRegistrantTransferNotification < Test::Unit::TestCase
       expected = %w(epp-example1.co.uk epp-example2.co.uk)
       assert_equal expected, subject.domains
     end
+    should 'have contact type' do
+      assert_equal 'IND', subject.contact.type
+    end
     should 'have contact id' do
       assert_equal 'ST68956589R4', subject.contact.id
     end
@@ -50,6 +53,9 @@ class TestNominetRegistrantTransferNotification < Test::Unit::TestCase
     end
     should 'have nil fax' do
       assert_equal nil, subject.contact.fax
+    end
+    should 'have opt out' do
+      assert_equal true, subject.contact.opt_out
     end
     should 'have contact client id' do
       assert_equal 'TEST', subject.contact.client_id
