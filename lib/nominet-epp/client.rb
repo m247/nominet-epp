@@ -343,8 +343,11 @@ module NominetEPP
       end
       def old_info_host(res)
         addrs = res.addresses.try(:dup) || {}
-        addrs[:v4] = addrs['ipv4']
-        addrs[:v6] = addrs['ipv6']
+        addrs[:v4] = addrs.delete('ipv4')
+        addrs[:v6] = addrs.delete('ipv6')
+
+        addrs[:v4] = addrs[:v4][0] if addrs[:v4].kind_of?(Array)
+        addrs[:v6] = addrs[:v6][0] if addrs[:v6].kind_of?(Array)
 
         {
           :name => res.name,
