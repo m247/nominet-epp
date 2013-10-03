@@ -16,15 +16,18 @@ module NominetEPP
       'http://www.nominet.org.uk/epp/xml/std-notifications-1.1' => 'n',
       'http://www.nominet.org.uk/epp/xml/std-notifications-1.2' => 'n',
       'http://www.nominet.org.uk/epp/xml/nom-notifications-2.1' => 'n',
-      'http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0' => 'contact_ext' }
+      'http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0' => 'contact_ext',
+      'http://www.nominet.org.uk/epp/xml/std-warning-1.1' => 'warning' }
 
     def initialize(response)
       raise ArgumentError, "must be an EPP::Response" unless response.kind_of?(EPP::Response)
       @response = response
       @parsed   = {}
 
-      parse_response
-      parse_extension
+      if response.code == 1301
+        parse_response
+        parse_extension
+      end
     end
 
     undef to_s
@@ -92,7 +95,7 @@ module NominetEPP
     protected
       def parse_response
         ns   = NAMESPACE_URIS[@response.data.namespaces.namespace.href]
-        name = @response.data.name
+        name = @response.data.name.gsub('-', '_')
 
         method = :"parse_#{ns}_#{name}"
         if self.respond_to?(method, true)
@@ -102,7 +105,7 @@ module NominetEPP
       def parse_extension
         [@response.extension].flatten.compact.each do |extension|
           ns   = NAMESPACE_URIS[extension.namespaces.namespace.href]
-          name = extension.name
+          name = extension.name.gsub('-', '_')
 
           method = :"parse_#{ns}_#{name}"
           if self.respond_to?(method, true)
@@ -300,6 +303,16 @@ module NominetEPP
           else
             @parsed[:contact].send("#{node.name}=", node.content.strip)
           end
+        end
+      end
+      
+      def parse_warning_truncated_field(ext)
+        field_name = ext['field-name']
+        value = ext.content.strip
+        
+        case field_name
+        when /:crID$/, /:upID$/
+          return
         end
       end
   end
