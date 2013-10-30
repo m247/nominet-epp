@@ -254,7 +254,7 @@ module NominetEPP
               :crDate => res.creation_date }
           end
         else
-          @error_info = { :name => res.message, :reason => resp.error_reason }
+          @error_info = { :name => res.message, :reason => res.error_reason }
           return false
         end
       end
