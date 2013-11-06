@@ -116,6 +116,8 @@ module NominetEPP
 
       def parse_n_cancData(data)
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'domainName'
             @parsed[:name] = node.content.strip
@@ -126,6 +128,8 @@ module NominetEPP
       end
       def parse_domain_ns(data)
         data.children.map do |node|
+          next if node.empty?
+
           case node.name
           when 'hostObj'
             node.content.strip
@@ -135,6 +139,8 @@ module NominetEPP
       def parse_domain_infData(data)
         parsed = {}
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'name'
             parsed[:name] = node.content.strip
@@ -156,6 +162,8 @@ module NominetEPP
       end
       def parse_n_domainListData(data)
         data.children.map do |node|
+          next if node.empty?
+
           case node.name
           when 'domainName'
             node.content.strip
@@ -166,6 +174,8 @@ module NominetEPP
       end
       def parse_n_relData(data)
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'accountId'
             @parsed[:account_id] = node.content.strip
@@ -181,6 +191,8 @@ module NominetEPP
       end
       def parse_n_suspData(data)
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'reason'
             @parsed[:reason] = node.content.strip
@@ -193,6 +205,8 @@ module NominetEPP
       end
       def parse_n_trnData(data)
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'orig'
             @parsed[:originator] = node.content.strip
@@ -211,6 +225,7 @@ module NominetEPP
         parsed = {}
         data.children.each do |node|
           next if node.empty?
+
           case node.name
           when 'id'
             parsed[:id] = node.content.strip
@@ -241,6 +256,8 @@ module NominetEPP
       def parse_contact_postalInfo(data)
         parsed = {}
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'name'
             parsed[:name] = node.content.strip
@@ -255,6 +272,8 @@ module NominetEPP
       def parse_contact_addr(data)
         parsed = {}
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'street'
             parsed[:street] = node.content.strip
@@ -272,6 +291,8 @@ module NominetEPP
       end
       def parse_n_contactDelData(data)
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'contactId'
             @parsed[:id] = node.content.strip
@@ -282,6 +303,8 @@ module NominetEPP
       end
       def parse_n_rcData(data)
         data.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'orig'
             @parsed[:originator] = node.content.strip
@@ -297,6 +320,8 @@ module NominetEPP
 
       def parse_contact_ext_infData(ext)
         ext.children.each do |node|
+          next if node.empty?
+
           case node.name
           when 'opt-out'
             @parsed[:contact].opt_out = node.content.strip == 'Y'
