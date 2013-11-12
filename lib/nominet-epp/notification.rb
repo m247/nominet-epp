@@ -322,6 +322,8 @@ module NominetEPP
         ext.children.each do |node|
           next if node.empty?
 
+          @parsed[:contact] ||= OpenStruct.new
+
           case node.name
           when 'opt-out'
             @parsed[:contact].opt_out = node.content.strip == 'Y'
