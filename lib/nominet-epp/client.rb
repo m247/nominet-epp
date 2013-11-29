@@ -114,7 +114,7 @@ module NominetEPP
       end
 
       mod = module_for_type(entity)
-      req = mod::Delete.new(name, attributes)
+      req = mod::Delete.new(name)
       res = @client.delete(req.command, req.extension)
 
       mod::DeleteResponse.new(res)
