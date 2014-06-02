@@ -27,14 +27,14 @@ class Test::Unit::TestCase
     xml = load_xml(name)
     test_client.load_response(xml)
   end
-  
+
   def load_schema(name)
     xsd_path = File.expand_path("../support/schemas/#{name}.xsd", __FILE__)
     xsd_doc  = XML::Document.file(xsd_path)
     XML::Schema.document(xsd_doc)
   end
   def schema
-    @schema ||= load_schema('nom-root-std-1.0.6')
+    @schema ||= load_schema('nom-root-std-1.0.7')
   end
   def xpath_find(query)
     n = @xml.find(query, @namespaces).first

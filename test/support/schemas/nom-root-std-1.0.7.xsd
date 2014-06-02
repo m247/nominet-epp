@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: nom-root-std-1.0.6.xsd 47553 2012-11-28 13:52:45Z judyb $ -->
+<!-- $Id: nom-root-std-1.0.7.xsd 55523 2014-03-28 11:57:03Z matthews $ -->
 <schema targetNamespace="urn:ietf:params:xml:ns:dummy-1.0"
     xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
     xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
@@ -31,6 +31,7 @@
     <import namespace="http://www.nominet.org.uk/epp/xml/std-list-1.0" schemaLocation="std-list-1.0.xsd"/>
     <import namespace="http://www.nominet.org.uk/epp/xml/std-locks-1.0" schemaLocation="std-locks-1.0.xsd"/>
     <import namespace="http://www.nominet.org.uk/epp/xml/std-unrenew-1.0" schemaLocation="std-unrenew-1.0.xsd"/>
+    <import namespace="http://www.nominet.org.uk/epp/xml/nom-direct-rights-1.0" schemaLocation="nom-direct-rights-1.0.xsd"/>
 
     <annotation>
         <documentation>
