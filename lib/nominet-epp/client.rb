@@ -14,7 +14,8 @@ module NominetEPP
       http://www.nominet.org.uk/epp/xml/std-warning-1.1
       http://www.nominet.org.uk/epp/xml/std-release-1.0
       http://www.nominet.org.uk/epp/xml/std-unrenew-1.0
-      http://www.nominet.org.uk/epp/xml/std-list-1.0)
+      http://www.nominet.org.uk/epp/xml/std-list-1.0
+      http://www.nominet.org.uk/epp/xml/nom-direct-rights-1.0)
 
     # Create a new instance of NominetEPP::Client
     #
@@ -222,7 +223,7 @@ module NominetEPP
       alias_method :new_renew, :renew
       alias_method :new_update, :update
       alias_method :new_info, :info
-    
+
       def check(entity, *names)
         res = new_check(entity, *names)
 
@@ -359,5 +360,5 @@ module NominetEPP
           :addr => addrs
         }
       end
-  end  
+  end
 end

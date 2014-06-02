@@ -29,4 +29,28 @@ class TestNominetDomainCheckResponse < Test::Unit::TestCase
       assert_equal 49997, @check_response.abuse_limit
     end
   end
+
+  context 'NominetEPP::Domain::Check with Domain Rights' do
+    setup do
+      @check_response = NominetEPP::Domain::CheckResponse.new(load_response('domain/check-direct-rights'))
+    end
+
+    should 'be successful' do
+      assert @check_response.success?
+      assert_equal 1000, @check_response.code
+    end
+
+    should 'have message' do
+      assert_equal 'Command completed successfully', @check_response.message
+    end
+
+    should 'list adriana-available.uk as available' do
+      assert @check_response.available?('adriana-available.uk')
+      assert !@check_response.unavailable?('adriana-available.uk')
+    end
+
+    should 'show adriana-available.co.uk as Right of Registration' do
+      assert_equal 'adriana-available.co.uk', @check_response.right_of_registration
+    end
+  end
 end
