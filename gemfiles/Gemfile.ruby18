@@ -1,0 +1,13 @@
+source 'https://rubygems.org'
+
+# Specify your gem's dependencies in nominet-epp.gemspec
+gemspec :path => '../'
+
+gem 'rake'
+gem 'activesupport', '~> 3.2.14'
+gem 'epp-client', :github => "m247/epp-client"
+
+group :test do
+  gem 'shoulda-matchers', '~> 1.5.6'
+  gem 'shoulda'
+end

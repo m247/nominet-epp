@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0    epp-1.0.xsd">
+  <response>
+    <result code="1301">
+      <msg>Command completed successfully; ack to dequeue</msg>
+    </result>
+    <msgQ count="2" id="1">
+      <qDate>2008-04-30T13:39:13Z</qDate>
+      <msg>Host cancellation notification</msg>
+    </msgQ>
+    <resData>
+      <n:hostCancData xmlns:n="http://www.nominet.org.uk/epp/xml/std-notifications-1.1" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-notifications-1.1          std-notifications-1.1.xsd">
+        <n:hostListData noHosts="2">
+          <n:hostObj>ns0.example.co.uk.</n:hostObj>
+          <n:hostObj>ns1.example.co.uk.</n:hostObj>
+        </n:hostListData>
+        <n:domainListData noDomains="2">
+          <n:domainName>example-a.co.uk</n:domainName>
+          <n:domainName>example-b.co.uk</n:domainName>
+        </n:domainListData>
+      </n:hostCancData>
+    </resData>
+    <trID>
+      <clTRID>EPP-ABC-12345</clTRID>
+      <svTRID>203355</svTRID>
+    </trID>
+  </response>
+</epp>

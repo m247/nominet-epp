@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1301">
+      <msg>Command completed successfully; ack to dequeue</msg>
+    </result>
+    <msgQ count="4" id="123456">
+      <qDate>2005-10-06T10:29:30Z</qDate>
+      <msg>Account Details Change Notification</msg>
+    </msgQ>
+    <resData>
+      <contact:infData xmlns:contact="urn:ietf:params:xml:ns:contact-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0 contact-1.0.xsd">
+        <contact:id>CMyContactID</contact:id>
+        <contact:roid>548965487-UK</contact:roid>
+        <contact:status s="ok"/>
+        <contact:postalInfo type="loc">
+          <contact:name>Mr Jones</contact:name>
+          <contact:org>Company.</contact:org>
+          <contact:addr>
+            <contact:street>High Street</contact:street>
+            <contact:city>Oxford</contact:city>
+            <contact:pc>OX1 1AH</contact:pc>
+            <contact:cc>GB</contact:cc>
+          </contact:addr>
+        </contact:postalInfo>
+        <contact:voice>+44.1865658754</contact:voice>
+        <contact:email>example@epp-example.org.uk</contact:email>
+        <contact:clID>EXAMPLE-TAG</contact:clID>
+        <contact:crID>n/a</contact:crID>
+        <contact:crDate>2007-05-12T12:44:00Z</contact:crDate>
+        <contact:upDate>2008-06-12T06:46:00Z</contact:upDate>
+      </contact:infData>
+    </resData>
+    <trID>
+      <clTRID>ABC-12345</clTRID>
+      <svTRID>123456</svTRID>
+    </trID>
+  </response>
+</epp>

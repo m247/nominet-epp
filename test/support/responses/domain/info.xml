@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1000">
+      <msg>Command completed successfully</msg>
+    </result>
+    <resData>
+      <domain:infData xmlns:domain="urn:ietf:params:xml:ns:domain-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd">
+        <domain:name>ophelia-testing.co.uk</domain:name>
+        <domain:roid>114112-UK</domain:roid>
+        <domain:registrant>EAXXMK1FW0YZTABD</domain:registrant>
+        <domain:ns>
+          <domain:hostObj>ns1.ophelia-testing.co.uk.</domain:hostObj>
+        </domain:ns>
+        <domain:host>ns1.ophelia-testing.co.uk.</domain:host>
+        <domain:clID>TESTING</domain:clID>
+        <domain:crID>psamathe@nominet</domain:crID>
+        <domain:crDate>2012-09-13T00:09:32</domain:crDate>
+        <domain:exDate>2014-09-13T00:09:32</domain:exDate>
+      </domain:infData>
+    </resData>
+    <extension>
+      <domain-nom-ext:infData xmlns:domain-nom-ext="http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2 domain-nom-ext-1.2.xsd">
+        <domain-nom-ext:reg-status>Registered until expiry date.</domain-nom-ext:reg-status>
+        <domain-nom-ext:first-bill>th</domain-nom-ext:first-bill>
+        <domain-nom-ext:recur-bill>th</domain-nom-ext:recur-bill>
+      </domain-nom-ext:infData>
+      <secDNS:infData xmlns:secDNS="urn:ietf:params:xml:ns:secDNS-1.1" xsi:schemaLocation="urn:ietf:params:xml:ns:secDNS-1.1 secDNS-1.1.xsd">
+        <secDNS:dsData>
+          <secDNS:keyTag>12345</secDNS:keyTag>
+          <secDNS:alg>5</secDNS:alg>
+          <secDNS:digestType>1</secDNS:digestType>
+          <secDNS:digest>38EC35D5B3A34B44C39B38EC35D5B3A34B44C39B</secDNS:digest>
+        </secDNS:dsData>
+      </secDNS:infData>
+      <warning:truncated-field xmlns:warning="http://www.nominet.org.uk/epp/xml/std-warning-1.1" field-name="domain:crID" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-warning-1.1 std-warning-1.1.xsd">
+        Full entry is 'psamathe@nominet.org.uk'.
+      </warning:truncated-field>
+    </extension>
+    <trID>
+      <clTRID>TESTING-000006</clTRID>
+      <svTRID>231332</svTRID>
+    </trID>
+  </response>
+</epp>

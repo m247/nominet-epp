@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: nom-tag-1.0.xsd 25596 2009-03-11 14:58:12Z judyb $ -->
+  <schema targetNamespace="http://www.nominet.org.uk/epp/xml/nom-tag-1.0"
+    xmlns:tag="http://www.nominet.org.uk/epp/xml/nom-tag-1.0"
+    xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+    xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+    
+    <!-- Import common element types.  -->
+    <!-- <import namespace="urn:ietf:params:xml:ns:epp-1.0" schemaLocation="epp-1.0.xsd"/> -->
+    
+    <annotation>
+      <documentation>
+        Extensible Provisioning Protocol v1.0
+        schema for tag info.
+      </documentation>
+    </annotation>
+    
+    <!-- Child elements found in EPP commands.  -->
+    <element name="list" type="tag:listType"/>
+    <element name="listData" type="tag:listDataType"/>
+    
+    <complexType name="listDataType">
+      <sequence>
+        <element name="infData" type="tag:infDataType" maxOccurs="unbounded"/>
+      </sequence>
+    </complexType>
+    
+    <complexType name="infDataType">
+      <sequence>
+        <element name="registrar-tag" type="tag:registrarTagType"/>
+        <element name="name" type="tag:nameType"/>
+        <element name="trad-name" type="tag:tradNameType" minOccurs="0"/>
+        <element name="handshake" type="tag:handshakeType"/>
+      </sequence>
+    </complexType>
+    
+    <simpleType name="registrarTagType">
+      <restriction base="token">
+        <maxLength value="16"/>
+        <pattern value="[A-Z|0-9|\-]*"/>
+      </restriction>
+    </simpleType>
+    <simpleType name="nameType">
+      <restriction base="token">
+        <maxLength value="255"/>
+      </restriction>
+    </simpleType>
+    
+    <simpleType name="tradNameType">
+      <restriction base="token">
+        <maxLength value="255"/>
+      </restriction>
+    </simpleType>
+    
+    <simpleType name="handshakeType">
+      <restriction base="token">
+        <enumeration value="Y"/>
+        <enumeration value="N"/>
+      </restriction>
+    </simpleType>
+    
+    <simpleType name="listType">
+      <restriction base="token">
+        <maxLength value="0"/>
+      </restriction>
+    </simpleType>
+    
+  </schema>
+  

@@ -1,2 +1,8 @@
-lib/**/*.rb -
-History.rdoc LICENSE
+lib/**/*.rb
+--tag internal
+--hide-tag internal
+--private
+--protected
+-r README.md
+-
+HISTORY.md LICENSE

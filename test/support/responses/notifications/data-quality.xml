@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1301">
+      <msg>Command completed successfully; ack to dequeue</msg>
+    </result>
+    <msgQ count="1" id="123456">
+      <qDate>2012-09-05T11:00:39Z</qDate>
+      <msg>DQ Workflow process commenced notification</msg>
+    </msgQ>
+    <resData>
+      <n:processData xmlns:n="http://www.nominet.org.uk/epp/xml/std-notifications-1.2" stage="initial" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-notifications-1.2          std-notifications-1.2.xsd">
+        <contact:infData xmlns:contact="urn:ietf:params:xml:ns:contact-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:contact-1.0 contact-1.0.xsd">
+          <contact:id>E2CD4B4D83DB0857</contact:id>
+          <contact:roid>100590-UK</contact:roid>
+          <contact:status s="ok"/>
+          <contact:postalInfo type="loc">
+            <contact:name>contact 32</contact:name>
+            <contact:org>account-name 32</contact:org>
+            <contact:addr>
+              <contact:street>street 32</contact:street>
+              <contact:city>city x</contact:city>
+              <contact:sp>n/a</contact:sp>
+              <contact:pc>NW32 1ZZ</contact:pc>
+              <contact:cc>GB</contact:cc>
+            </contact:addr>
+          </contact:postalInfo>
+          <contact:email>email 32</contact:email>
+          <contact:clID>TEST</contact:clID>
+          <contact:crID>test@automaton</contact:crID>
+          <contact:crDate>2009-08-06T17:52:21</contact:crDate>
+          <contact:upID>test@automaton</contact:upID>
+          <contact:upDate>2012-09-04T11:04:40</contact:upDate>
+        </contact:infData>
+        <n:processType>DQ Workflow</n:processType>
+        <n:suspendDate>2012-09-26T10:59:11</n:suspendDate>
+        <n:cancelDate>2012-10-17T10:59:15</n:cancelDate>
+        <n:domainListData noDomains="1">
+          <n:domainName>epp-example1.co.uk</n:domainName>
+        </n:domainListData>
+      </n:processData>
+    </resData>
+    <extension>
+      <warning:truncated-field xmlns:warning="http://www.nominet.org.uk/epp/xml/std-warning-1.1" field-name="contact:upID" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/std-warning-1.1          std-warning-1.1.xsd">
+        Full entry is 'test@nominet.org.uk'.
+      </warning:truncated-field>
+    </extension>
+    <trID>
+      <clTRID>EPP-ABC-12345</clTRID>
+      <svTRID>123456</svTRID>
+    </trID>
+  </response>
+</epp>

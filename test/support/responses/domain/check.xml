@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1000">
+      <msg>Command completed successfully</msg>
+    </result>
+    <resData>
+      <domain:chkData xmlns:domain="urn:ietf:params:xml:ns:domain-1.0" xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd">
+        <domain:cd>
+          <domain:name avail="0">adriana-unavailable.co.uk</domain:name>
+        </domain:cd>
+        <domain:cd>
+          <domain:name avail="1">adriana-available.co.uk</domain:name>
+        </domain:cd>
+      </domain:chkData>
+    </resData>
+    <extension>
+      <domain-nom-ext:chkData xmlns:domain-nom-ext="http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2" abuse-limit="49997" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2 domain-nom-ext-1.2.xsd"/>
+    </extension>
+    <trID>
+      <clTRID>NOMINETEPP-000004</clTRID>
+      <svTRID>212343</svTRID>
+    </trID>
+  </response>
+</epp>
