@@ -1,15 +1,15 @@
 GIT
   remote: git://github.com/m247/epp-client.git
-  revision: 9ab879430521705da2243b28d3d4c22163079d41
+  revision: a07e51fefcc2a68a317cf1200d4d80ce0b7dbfe0
   specs:
-    epp-client (0.1.0)
+    epp-client (1.0.0)
       libxml-ruby
 
 PATH
   remote: .
   specs:
-    nominet-epp (0.0.12)
-      epp-client (>= 0.1.0)
+    nominet-epp (1.0.0)
+      epp-client (~> 1.0.0)
 
 GEM
   remote: https://rubygems.org/
