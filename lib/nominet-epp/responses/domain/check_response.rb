@@ -32,6 +32,7 @@ module NominetEPP
 
             node.find('//nom-direct-rights:chkData', namespaces).each do |chkData|
               @right_of_registration = chkData.find('nom-direct-rights:ror').first.content.strip
+              @right_of_registration = nil if @right_of_registration == ""
             end
           end
         end

@@ -16,6 +16,9 @@
     </resData>
     <extension>
       <domain-nom-ext:chkData xmlns:domain-nom-ext="http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2" abuse-limit="49997" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2 domain-nom-ext-1.2.xsd"/>
+      <nom-direct-rights:chkData xmlns:nom-direct-rights="http://www.nominet.org.uk/epp/xml/nom-direct-rights-1.0" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/nom-direct-rights-1.0 nom-direct-rights-1.0.xsd">
+        <nom-direct-rights:ror/>
+      </nom-direct-rights:chkData>
     </extension>
     <trID>
       <clTRID>NOMINETEPP-000004</clTRID>

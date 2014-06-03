@@ -28,6 +28,10 @@ class TestNominetDomainCheckResponse < Test::Unit::TestCase
     should 'have an abuse limit' do
       assert_equal 49997, @check_response.abuse_limit
     end
+
+    should 'have nil right of registration' do
+      assert_nil @check_response.right_of_registration
+    end
   end
 
   context 'NominetEPP::Domain::Check with Domain Rights' do
