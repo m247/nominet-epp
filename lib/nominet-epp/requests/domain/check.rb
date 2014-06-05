@@ -3,10 +3,11 @@ module NominetEPP
     class Check < Request
       def initialize(*names)
         rights = names.last.is_a?(Hash) ? names.pop : nil
+        names  = names.compact # handle nil being passed for rights
 
         @command = EPP::Domain::Check.new(*names)
 
-        if rights
+        if rights && !rights.empty?
           raise ArgumentError, "cannot check direct rights on more than one name" if names.count > 1
           @rights_ext = DirectRightsExtension.new(rights)
           @extension  = EPP::Requests::Extension.new(@rights_ext) rescue nil
