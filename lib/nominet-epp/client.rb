@@ -252,10 +252,10 @@ module NominetEPP
               :crDate => res.creation_date,
               :exDate => res.expiration_date }
           when :contact, 'contact'
-            { :name => res.id,
+            { :name => res.name,
               :crDate => res.creation_date }
           when :host, 'host'
-            { :name => res.id,
+            { :name => res.name,
               :crDate => res.creation_date }
           end
         else
