@@ -245,7 +245,7 @@ module NominetEPP
       def create(entity, name, attributes = {})
         res = new_create(entity, name, attributes)
 
-        if res.success?
+        if res.success? || res.pending?
           case entity
           when :domain, 'domain'
             { :name => res.name,
