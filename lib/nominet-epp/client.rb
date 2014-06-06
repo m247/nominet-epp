@@ -22,13 +22,17 @@ module NominetEPP
     # @param [String] tag Nominet TAG
     # @param [String] passwd Nominet TAG EPP Password
     # @param [String] server Nominet EPP Server address (nil forces default)
-    # @param [String] address_family 'AF_INET' or 'AF_INET6' or either of the
-    #                 appropriate socket constants. Will cause connections to be
-    #                 limited to this address family. Default try all addresses.
-    def initialize(tag, passwd, server = 'epp.nominet.org.uk', address_family = nil)
+    # @param [Hash]   options Options
+    # @option options [String] :address_family 'AF_INET' or 'AF_INET6' or either of the
+    #                          appropriate socket constants. Will cause connections to be
+    #                          limited to this address family. Default try all addresses.
+    # @option options [OpenSSL::SSL::SSLContext] :ssl_context For client certificate auth
+    def initialize(tag, passwd, server = 'epp.nominet.org.uk', options = {})
+      options = {:address_family => options} unless options.kind_of?(Hash) # maintain backwards compatibility with old method signature
+      options = options.merge(:services => SERVICE_URNS, :extensions => SERVICE_EXTENSION_URNS)
+
       @tag, @server = tag, (server || 'epp.nominet.org.uk')
-      @client = EPP::Client.new(@tag, passwd, @server, :services => SERVICE_URNS,
-        :extensions => SERVICE_EXTENSION_URNS, :address_family => address_family)
+      @client = EPP::Client.new(@tag, passwd, @server, options)
     end
 
     # @see Object#inspect
