@@ -251,6 +251,11 @@ module NominetEPP
             parsed[:updated_date] = Time.parse(node.content.strip)
           end
         end
+        
+        if @parsed.nil? || @parsed.empty?
+          @parsed = parsed
+        end
+        
         parsed
       end
       def parse_contact_postalInfo(data)

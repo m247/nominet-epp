@@ -31,6 +31,12 @@
         <contact:upDate>2008-06-12T06:46:00Z</contact:upDate>
       </contact:infData>
     </resData>
+    <extension>
+      <contact-nom-ext:infData xmlns:contact-nom-ext="http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0" xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0 contact-nom-ext-1.0.xsd">
+        <contact-nom-ext:type>IND</contact-nom-ext:type>
+        <contact-nom-ext:opt-out>N</contact-nom-ext:opt-out>
+      </contact-nom-ext:infData>
+    </extension>
     <trID>
       <clTRID>ABC-12345</clTRID>
       <svTRID>123456</svTRID>
