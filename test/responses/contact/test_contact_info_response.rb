@@ -76,4 +76,26 @@ class TestNominetContactInfoResponse < Test::Unit::TestCase
       assert_equal false, @info_response.opt_out
     end
   end
+  context 'NominetEPP::Contact::Info' do
+    setup do
+      @info_response = NominetEPP::Contact::InfoResponse.new(load_response('contact/info-streets'))
+    end
+
+    should 'be successful' do
+      assert @info_response.success?
+      assert_equal 1000, @info_response.code
+    end
+
+    should 'have postal info' do
+      expected = { :name => "Mary Smith",
+        :org  => "Simple Registrant-TESTING",
+        :addr => {
+          :street => "Test Suite\n2 Test Street",
+          :city => "Test City",
+          :sp => "Testshire",
+          :pc => "TE57 1NG",
+          :cc => "GB" }}
+      assert_equal expected, @info_response.postal_info
+    end
+  end
 end
