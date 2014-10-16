@@ -60,6 +60,65 @@ class TestNominetContactUpdateRequest < Test::Unit::TestCase
         assert !xpath_exists?('//epp:extension'), "should not have extension element"
       end
     end
+    context 'multiple streets' do
+      setup do
+        @time    = Time.now.utc
+        @request = NominetEPP::Contact::Update.new('sh8013',
+          :chg => {
+            :voice       => "+44.1234567890",
+            :email       => "enoch.root@test.host",
+            :postal_info => {
+              :org       => "Epiphyte",
+              :name      => "Enoch Root",
+              :addr      => {
+                :street  => "Test Suite\n1 Test Avenue",
+                :city    => "Testington",
+                :sp      => "Testshire",
+                :pc      => "TE57 1NG",
+                :cc      => "GB" }}})
+        @xml     = prepare_request.to_xml
+
+        namespaces_from_request
+      end
+
+      should 'validate against schema' do
+        assert @xml.validate_schema(schema)
+      end
+
+      should 'have update element' do
+        assert xpath_exists?('//contact:update'), "should have update element"
+      end
+
+      should 'have name element' do
+        assert_equal 'sh8013', xpath_find('//contact:id')
+      end
+
+      should 'set voice for change' do
+        assert_equal "+44.1234567890", xpath_find('//contact:chg/contact:voice')
+      end
+      should 'set email for change' do
+        assert_equal "enoch.root@test.host", xpath_find('//contact:chg/contact:email')
+      end
+      should 'not set organisation for change' do
+        # assert_equal "Epiphyte", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:org')
+        assert !xpath_exists?('//contact:chg/contact:postalInfo[@type="loc"]/contact:org')
+      end
+      should 'set name for change' do
+        assert_equal "Enoch Root", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:name')
+      end
+      should 'set address for change' do
+        assert_equal "Test Suite", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:addr/contact:street[1]')
+        assert_equal "1 Test Avenue", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:addr/contact:street[2]')
+        assert_equal "Testington", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:addr/contact:city')
+        assert_equal "Testshire", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:addr/contact:sp')
+        assert_equal "TE57 1NG", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:addr/contact:pc')
+        assert_equal "GB", xpath_find('//contact:chg/contact:postalInfo[@type="loc"]/contact:addr/contact:cc')
+      end
+
+      should 'not have extension element' do
+        assert !xpath_exists?('//epp:extension'), "should not have extension element"
+      end
+    end
     context 'nominet extensions' do
       setup do
         @time    = Time.now.utc
