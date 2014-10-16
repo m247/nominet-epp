@@ -38,5 +38,12 @@ class TestNominetDomainRenewRequest < Test::Unit::TestCase
         end
       end
     end
+    context 'period = 11y' do
+      should 'raise argument error' do
+        assert_raises ArgumentError do
+          NominetEPP::Domain::Renew.new('example.co.uk', Time.now, '11y')
+        end
+      end
+    end
   end
 end

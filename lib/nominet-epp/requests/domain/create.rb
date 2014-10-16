@@ -15,6 +15,8 @@ module NominetEPP
         @domain_ext = CreateExtension.new(@extensions) rescue nil
         @secdns_ext = CreateSecDNSExtension.new(@options.delete(:ds)) rescue nil
 
+        validate_period(options[:period])
+
         @command    = EPP::Domain::Create.new(@name, @options)
         @extension  = EPP::Requests::Extension.new(@domain_ext, @secdns_ext) rescue nil
       end

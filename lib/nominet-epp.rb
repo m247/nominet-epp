@@ -13,6 +13,7 @@ require File.dirname(__FILE__) + '/nominet-epp/requests/custom/list'
 require File.dirname(__FILE__) + '/nominet-epp/requests/custom/handshake'
 require File.dirname(__FILE__) + '/nominet-epp/requests/custom/tag_list'
 
+require File.dirname(__FILE__) + '/nominet-epp/requests/domain/request'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/check'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/create'
 require File.dirname(__FILE__) + '/nominet-epp/requests/domain/delete'
