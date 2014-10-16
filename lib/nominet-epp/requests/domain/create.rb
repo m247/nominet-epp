@@ -15,6 +15,11 @@ module NominetEPP
         @domain_ext = CreateExtension.new(@extensions) rescue nil
         @secdns_ext = CreateSecDNSExtension.new(@options.delete(:ds)) rescue nil
 
+        # Handle Nominet not accepting 120m correctly
+        if @options[:period] == '120m'
+          @options[:period] = '10y'
+        end
+
         @command    = EPP::Domain::Create.new(@name, @options)
         @extension  = EPP::Requests::Extension.new(@domain_ext, @secdns_ext) rescue nil
       end
