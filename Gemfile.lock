@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    nominet-epp (1.0.0)
+    nominet-epp (2.0.0)
       epp-client (~> 2.1.0)
 
 GEM
